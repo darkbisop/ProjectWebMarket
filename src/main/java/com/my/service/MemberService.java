@@ -11,4 +11,7 @@ public interface MemberService {
 
     // 아이디 중복 검사
     int idCheck(String memberId) throws Exception;
+
+    // 로그인
+    MemberVO memberLogin(MemberVO memberVO) throws Exception;
 }

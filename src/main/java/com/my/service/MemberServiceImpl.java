@@ -22,4 +22,10 @@ public class MemberServiceImpl implements MemberService {
     public int idCheck(String memberId) {
         return memberMapper.idCheck(memberId);
     }
+
+    // 로그인
+    @Override
+    public MemberVO memberLogin(MemberVO memberVO) {
+        return memberMapper.memberLogin(memberVO);
+    }
 }

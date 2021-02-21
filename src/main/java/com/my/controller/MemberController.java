@@ -2,6 +2,8 @@ package com.my.controller;
 
 import java.util.Random;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.my.model.MemberVO;
 import com.my.service.MemberService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping(value = "/member")
@@ -51,6 +54,23 @@ public class MemberController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public void loginGET() {
         logger.info("This is Login Page");
+    }
+
+    /* 로그인 */
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public String loginPOST(HttpServletRequest request, MemberVO memberVO, RedirectAttributes attr) throws Exception {
+        HttpSession session = request.getSession();
+        MemberVO member = memberService.memberLogin(memberVO);
+
+        if (member == null) {
+            int result = 0;
+            attr.addFlashAttribute("result", result);
+            return "redirect:/member/login";
+        }
+
+        session.setAttribute("member", member);
+
+        return "redirect:/main";
     }
 
     // 아이디 중복 검사

@@ -29,7 +29,7 @@
                 // 입력값 변수
                 const id = $(".id_input").val();
                 const pw = $(".pw_input").val();
-                const pwCk = $(".pwck_input").val();
+                const pwCk = $(".pwCheck_input").val();
                 const name = $(".user_input").val();
                 const mail = $(".mail_input").val();
                 const addr = $(".address_input_3").val();
@@ -44,7 +44,7 @@
                 }
 
                 /* 비밀번호 유효성 검사 */
-                if (pw == "") {
+                if (pw === "") {
                     $(".final_pw_check").css("display", "block");
                     pwCheck = false;
                 } else {
@@ -53,7 +53,7 @@
                 }
 
                 /* 비밀번호 확인 유효성 검사 */
-                if (pwCk == "") {
+                if (pwCk === "") {
                     $(".final_pwck_check").css("display", "block");
                     pwConfirmCheck = false;
                 } else {
@@ -62,7 +62,7 @@
                 }
 
                 /* 이름 유효성 검사 */
-                if (name == "") {
+                if (name === "") {
                     $(".final_name_check").css("display", "block");
                     nameCheck = false;
                 } else {
@@ -71,7 +71,7 @@
                 }
 
                 /* 이메일 유효성 검사 */
-                if (mail == "") {
+                if (mail === "") {
                     $(".final_mail_check").css("display", "block");
                     mailCheck = false;
                 } else {
@@ -80,7 +80,7 @@
                 }
 
                 /* 주소 유효성 검사 */
-                if (addr == "") {
+                if (addr === "") {
                     $(".final_addr_check").css("display", "block");
                     addrCheck = false;
                 } else {
@@ -98,7 +98,7 @@
             });
 
             // 아이디 중복 검사
-            $(".id_input").on("propertychange change keyup paste input", function() {
+            $(".id_input").on("properties change keyup paste input", function() {
                 const memberId = $(".id_input").val();
                 const data = {memberId: memberId};
 
@@ -129,7 +129,7 @@
             });
 
             $(function() {
-                $(".id_input").keyup(function (e){
+                $(".id_input").keyup(function(){
                     const content = $(this).val();
                     //$(this).height(((content.split('\n').length + 1) * 0.5) + 'em');
                     $('#counter').html(content.length + '/20');
@@ -144,10 +144,10 @@
             });
 
             /* 비밀번호 유효성 검사 */
-            $(".pw_input").on("propertychange change keyup paste input", function() {
-                var pw = $(".pw_input").val();
+            $(".pw_input").on("properties change keyup paste input", function() {
+                const pw = $(".pw_input").val();
 
-                if (pw == "") {
+                if (pw === "") {
                     $(".final_pw_check").css("display", "block");
                 } else {
                     $(".final_pw_check").css("display", "none");
@@ -155,44 +155,68 @@
             });
 
             /* 비밀번호 확인 일치 유효성 검사 */
-            $(".pwck_input").on("propertychange change keyup paste input", function() {
-                var pw = $(".pw_input").val();
-                var pwck = $(".pwck_input").val();
+            $(".pwCheck_input").on("properties change keyup paste input", function() {
+                const pw = $(".pw_input").val();
+                const pwck = $(".pwCheck_input").val();
 
-                if (pwck == "") {
-                    $(".final_pwck_check").css("display", "block");
-                    $(".pwck_input_re_2").css("display", "none");
+                if (pwck === "") {
+                    $(".final_pwCheck_check").css("display", "block");
+                    $(".pwCheck_input_re_2").css("display", "none");
                 } else {
-                    $(".final_pwck_check").css("display", "none");
+                    $(".final_pwCheck_check").css("display", "none");
 
-                    if (pw == pwck) {
-                        $(".pwck_input_re_1").css("display", "block");
-                        $(".pwck_input_re_2").css("display", "none");
+                    if (pw === pwck) {
+                        $(".pwCheck_input_re_1").css("display", "block");
+                        $(".pwCheck_input_re_2").css("display", "none");
                         pwConfirmCorrectCheck = true;
                     } else {
-                        $(".pwck_input_re_2").css("display", "block");
-                        $(".pwck_input_re_1").css("display", "none");
+                        $(".pwCheck_input_re_2").css("display", "block");
+                        $(".pwCheck_input_re_1").css("display", "none");
                         pwConfirmCorrectCheck = false;
                     }
                 }
             });
 
             /* 이름 유효성 검사 */
-            $(".user_input").on("propertychange change keyup paste input", function() {
-                var name = $(".user_input").val();
+            $(".user_input").on("properties change keyup paste input", function() {
+                const name = $(".user_input").val();
 
-                if (name == "") {
+                if (name === "") {
                     $(".final_name_check").css("display", "block");
                 } else {
                     $(".final_name_check").css("display", "none");
                 }
             });
 
+            /* 이메일 유효성 검사 */
+            $(".mail_input").on("properties change keyup paste input", function() {
+                const mail = $(".mail_input").val();
+
+
+                if (mail === "") {
+                    $(".final_mail_check").css("display", "block");
+                } else {
+                    $(".final_mail_check").css("display", "none");
+                }
+            });
+
             /* 이메일 인증번호 전송 */
             $(".mail_check_button").click(function() {
-                var email = $(".mail_input").val();
-                var checkBox = $(".mail_check_input");
-                var boxWrap = $(".mail_check_input_box");
+                const email = $(".mail_input").val();
+                const checkBox = $(".mail_check_input");
+                const boxWrap = $(".mail_check_input_box");
+                const warnMsg = $(".mail_input_box_warn");
+
+                if (mailFormCheck(email)) {
+                    warnMsg.html("인증번호 전송이 완료 되었습니다. 이메일을 확인해주세요.");
+                    warnMsg.css("display", "block");
+                    warnMsg.css("color", "grey");
+                } else {
+                    warnMsg.html("올바르지 못한 이메일 형식 입니다.");
+                    warnMsg.css("display", "block");
+                    warnMsg.css("color", "red");
+                    return false;
+                }
 
                 $.ajax({
                     type: "get",
@@ -207,10 +231,10 @@
 
             /* 인증번호 비교 */
             $(".mail_check_input").blur(function() {
-                var inputCode = $(".mail_check_input").val();
-                var checkResult = $("#mail_check_input_box_warn");
+                const inputCode = $(".mail_check_input").val();
+                const checkResult = $("#mail_check_input_box_warn");
 
-                if (inputCode == code) {
+                if (inputCode === code) {
                     checkResult.html("인증번호가 일치 합니다");
                     checkResult.attr("class", "correct");
                     mailNumCheck = true;
@@ -221,22 +245,11 @@
                 }
             })
 
-            /* 이메일 유효성 검사 */
-            $(".mail_input").on("propertychange change keyup paste input", function() {
-                var mail = $(".mail_input").val();
-
-                if (mail == "") {
-                    $(".final_mail_check").css("display", "block");
-                } else {
-                    $(".final_mail_check").css("display", "none");
-                }
-            });
-
             /* 주소 유효성 검사 */
-            $(".address_input_3").on("propertychange change keyup paste input", function() {
-                var addr = $(".address_input_3").val();
+            $(".address_input_3").on("properties change keyup paste input", function() {
+                const addr = $(".address_input_3").val();
 
-                if (addr == "") {
+                if (addr === "") {
                     $(".final_addr_check").css("display", "block");
                 } else {
                     $(".final_addr_check").css("display", "none");
@@ -245,14 +258,21 @@
 
         });
 
+        /* 입력 이메일 형식 유효성 검사 */
+        function mailFormCheck(email) {
+            let form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+
+            return form.test(email);
+        }
+
         /* API 주소 연동 */
         function searchAddress() {
             new daum.Postcode({
                 oncomplete: function(data) {
                     // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                     // 내려오는 변수가 값이 없는 경우 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                    var addr = ''; 			// 주소변수
-                    var extraAddr = '';		// 참고항목 변수
+                    let addr = ''; 			// 주소변수
+                    let extraAddr = '';		// 참고항목 변수
 
                     // 사용자가 선택한 주소 타입에 따라 해당 주소값을 가져온다.
                     if (data.userSelectedType === 'R') {		// 사용자가 도로명 주소를 선택했을 경우
@@ -323,14 +343,14 @@
                 <span class="final_pw_check">Please input your Password</span>
             </div>
 
-            <div class="pwck_wrap">
-                <div class="pwck_name">confirm Password</div>
-                <div class="pwck_input_box">
-                    <input class="pwck_input">
+            <div class="pwCheck_wrap">
+                <div class="pwCheck_name">confirm Password</div>
+                <div class="pwCheck_input_box">
+                    <input class="pwCheck_input">
                 </div>
-                <span class="final_pwck_check">Please input your Password Confirm</span>
-                <span class="pwck_input_re_1">correct password confirm</span>
-                <span class="pwck_input_re_2">discord password confirm</span>
+                <span class="final_pwCheck_check">Please input your Password Confirm</span>
+                <span class="pwCheck_input_re_1">correct password confirm</span>
+                <span class="pwCheck_input_re_2">discord password confirm</span>
             </div>
 
             <div class="user_wrap">
@@ -347,6 +367,7 @@
                     <input class="mail_input" name="memberMail">
                 </div>
                 <span class="final_mail_check">Please input your E-mail</span>
+                <span class="mail_input_box_warn"></span>
 
                 <div class="mail_check_wrap">
                     <div class="mail_check_input_box" id="mail_check_input_box_false">
