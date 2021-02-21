@@ -11,6 +11,7 @@ public class BookController {
 
     private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 
+    // 메인화면
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public void mainPageGET() {
         logger.info("MainPage Moving");
