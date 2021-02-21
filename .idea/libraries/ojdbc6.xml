@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="ojdbc6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../다운로드/ojdbc6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../다운로드/mybatis-3.5.6/mybatis-3.5.6/mybatis-3.5.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../다운로드/ojdbc6-11.2.0.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
