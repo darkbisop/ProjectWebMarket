@@ -15,6 +15,7 @@
 
     <!-- 로그인 -->
     <select id="memberLogin" resultType="com.my.model.MemberVO">
-        select memberid, membername, adminck, money, point from book_member where memberid = #{memberId} and memberPw = #{memberPw}
+        select memberId, memberPw, memberName, adminCk, money, point from book_member where memberId = #{memberId}
+        <!-- select memberid, membername, adminck, money, point from book_member where memberid = #{memberId} and memberPw = #{memberPw} -->
     </select>
 </mapper>

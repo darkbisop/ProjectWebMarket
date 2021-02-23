@@ -1,8 +1,10 @@
 package com.my.controller;
 
+import java.io.PrintWriter;
 import java.util.Random;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +35,9 @@ public class MemberController {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     // 회원가입 페이지 이동
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
     public void signUpGET() {
@@ -43,11 +49,18 @@ public class MemberController {
     public String signUpPOST(MemberVO memberVO) throws Exception {
         logger.info("signUp진입");
 
+        String pw = "";
+        String encodePw = "";
+
+        pw = memberVO.getMemberPw();
+        encodePw = passwordEncoder.encode(pw);
+        memberVO.setMemberPw(encodePw);
+
         memberService.memberSignUp(memberVO);
 
         logger.info("signUp service success");
 
-        return "redirect:/main";
+        return "redirect:/member/login";
     }
 
     // 로그인 페이지 이동
@@ -58,17 +71,37 @@ public class MemberController {
 
     /* 로그인 */
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String loginPOST(HttpServletRequest request, MemberVO memberVO, RedirectAttributes attr) throws Exception {
+    public String loginPOST(HttpServletRequest request, MemberVO memberVO, RedirectAttributes rttr) throws Exception {
         HttpSession session = request.getSession();
+        String pw = "";
+        String encodePw = "";
+
         MemberVO member = memberService.memberLogin(memberVO);
 
         if (member == null) {
-            int result = 0;
-            attr.addFlashAttribute("result", result);
+            rttr.addFlashAttribute("result", 0);
             return "redirect:/member/login";
         }
 
-        session.setAttribute("member", member);
+        pw = memberVO.getMemberPw();
+        encodePw = member.getMemberPw();
+
+        if (passwordEncoder.matches(pw, encodePw)) {
+            member.setMemberPw("");
+            session.setAttribute("member", member);
+            return "redirect:/main";
+        } else {
+            rttr.addFlashAttribute("result", 0);
+            return "redirect:/member/login";
+        }
+    }
+
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    public String logoutMainGET(HttpServletRequest request) throws Exception {
+        logger.info("logout Method 진입");
+
+        HttpSession session = request.getSession();
+        session.invalidate();
 
         return "redirect:/main";
     }

@@ -1,6 +1,6 @@
 @charset "UTF-8"; *{ margin: 0; padding:0; }
 /* 화면 전체 렙 */
-.wrapper{ width: 1900px; }
+.wrapper{ width: 100%; }
 /* content 랩 */
 .wrap{ width : 800px; margin: auto; }
 /* 페이지 제목 */
