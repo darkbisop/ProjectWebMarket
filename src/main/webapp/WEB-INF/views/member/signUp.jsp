@@ -92,7 +92,7 @@
                 if (idCheck && overlapIdCheck && pwCheck && pwConfirmCheck && nameCheck && mailCheck && mailNumCheck && addrCheck) {
                     $("#signUp_form").attr("action", "/member/signUp")
                     $("#signUp_form").submit();
-                    alert("회원이 되신것을 축하 합니다! 5000 포인트를 선물로 드립니다!\n로그인 페이지로 이동합니다.");
+                    alert("회원이 되신것을 축하 합니다! 5000 포인트를 선물로 드립니다!");
                 }
 
                 return false;

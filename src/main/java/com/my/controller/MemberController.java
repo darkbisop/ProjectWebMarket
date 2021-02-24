@@ -1,6 +1,5 @@
 package com.my.controller;
 
-import java.io.PrintWriter;
 import java.util.Random;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -46,11 +45,11 @@ public class MemberController {
 
     // 회원가입
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-    public String signUpPOST(MemberVO memberVO) throws Exception {
+    public String signUpPOST(MemberVO memberVO, HttpServletRequest request) throws Exception {
         logger.info("signUp진입");
 
-        String pw = "";
-        String encodePw = "";
+        String pw;
+        String encodePw;
 
         pw = memberVO.getMemberPw();
         encodePw = passwordEncoder.encode(pw);
@@ -60,7 +59,10 @@ public class MemberController {
 
         logger.info("signUp service success");
 
-        return "redirect:/member/login";
+        HttpSession session = request.getSession();
+        MemberVO member = memberService.memberLogin(memberVO);
+        session.setAttribute("member", member);
+        return "redirect:/main";
     }
 
     // 로그인 페이지 이동
@@ -73,8 +75,8 @@ public class MemberController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String loginPOST(HttpServletRequest request, MemberVO memberVO, RedirectAttributes rttr) throws Exception {
         HttpSession session = request.getSession();
-        String pw = "";
-        String encodePw = "";
+        String pw;
+        String encodePw;
 
         MemberVO member = memberService.memberLogin(memberVO);
 
@@ -134,7 +136,6 @@ public class MemberController {
         logger.info("인증번호 : " + checkNum);
 
         String setFrom = "darkbisop@naver.com";
-        String toMail = email;
         String title = " 회원가입 인증 이메일 입니다";
         String content = "홈페이지를 방문해주셔서 감사합니다." + "<br<br>"
                 + "인증번호는 " + checkNum + "입니다." + "<br>";
@@ -143,7 +144,7 @@ public class MemberController {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
             helper.setFrom(setFrom);
-            helper.setTo(toMail);
+            helper.setTo(email);
             helper.setSubject(title);
             helper.setText(content, true);
             mailSender.send(message);
@@ -152,8 +153,6 @@ public class MemberController {
             e.printStackTrace();
         }
 
-        String num = Integer.toString(checkNum);
-
-        return num;
+        return Integer.toString(checkNum);
     }
 }
