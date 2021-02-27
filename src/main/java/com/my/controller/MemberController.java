@@ -1,25 +1,28 @@
 package com.my.controller;
 
+import java.security.*;
 import java.util.Random;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.my.model.MemberVO;
 import com.my.service.MemberService;
+import com.my.model.RSA;
+import com.my.util.RSAUtil;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -36,6 +39,9 @@ public class MemberController {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RSAUtil rsaUtil;
 
     // 회원가입 페이지 이동
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
@@ -66,15 +72,51 @@ public class MemberController {
     }
 
     // 로그인 페이지 이동
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public void loginGET() {
-        logger.info("This is Login Page");
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String loginGET(HttpSession session, Model model) throws Exception {
+
+        PrivateKey key = (PrivateKey)session.getAttribute("__RSAPrivateKey__");
+
+        if (key != null) {
+            session.removeAttribute("__RSAPrivateKey__");
+        }
+
+        RSA rsa = rsaUtil.createRSA();
+        model.addAttribute("modulus", rsa.getModulus());
+        model.addAttribute("exponent", rsa.getExponent());
+        session.setAttribute("__RSAPrivateKey__", rsa.getPrivateKey());
+
+        return "member/login";
     }
 
     /* 로그인 */
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String loginPOST(HttpServletRequest request, MemberVO memberVO, RedirectAttributes rttr) throws Exception {
-        HttpSession session = request.getSession();
+    public String loginPOST(HttpServletRequest request, MemberVO memberVO, HttpSession session, RedirectAttributes rttr) throws Exception {
+        logger.info("Login Processing");
+
+        // 세션에 저장된 개인키를 불러온다
+        PrivateKey privateKey = (PrivateKey)session.getAttribute("__RSAPrivateKey__");
+        if (privateKey == null) {
+            rttr.addFlashAttribute("resultMsg", "비정상적인 접근");
+            return "redirect:/member/login";
+        }
+
+        session.removeAttribute("__RSAPrivateKey__");
+
+       try {
+           String email = rsaUtil.getDecryptTest(privateKey, memberVO.getMemberId());
+           memberVO.setMemberId(email);
+           String password = rsaUtil.getDecryptTest(privateKey, memberVO.getMemberPw());
+
+           memberVO.setMemberPw(password);
+       } catch (Exception e) {
+           rttr.addFlashAttribute("resultMsg", "비정상적인 접근");
+           return "redirect:/member/login";
+       }
+        MemberVO member = memberService.memberLogin(memberVO);
+        session.setAttribute("member", member);
+        return "redirect:/main";
+        /*HttpSession session = request.getSession();
         String pw;
         String encodePw;
 
@@ -95,7 +137,7 @@ public class MemberController {
         } else {
             rttr.addFlashAttribute("result", 0);
             return "redirect:/member/login";
-        }
+        }*/
     }
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)
