@@ -54,12 +54,12 @@ public class MemberController {
     public String signUpPOST(MemberVO memberVO, HttpServletRequest request) throws Exception {
         logger.info("signUp진입");
 
-        String pw;
+      /*  String pw;
         String encodePw;
 
         pw = memberVO.getMemberPw();
         encodePw = passwordEncoder.encode(pw);
-        memberVO.setMemberPw(encodePw);
+        memberVO.setMemberPw(encodePw);*/
 
         memberService.memberSignUp(memberVO);
 

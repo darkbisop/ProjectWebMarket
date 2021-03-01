@@ -3,9 +3,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Insert title here</title>
     <link rel="stylesheet" href="/resources/css/member/signUp.css">
-    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/resources/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/dist/css/adminlte.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script type="text/javascript">
@@ -112,11 +117,11 @@
                         data: data,
                         success : function(result) {
                             if (result !== "fail") {
-                                $(".id_input_re_1").css("display", "inline-block");
+                                $(".id_input_re_1").css("display", "block");
                                 $(".id_input_re_2").css("display", "none");
                                 overlapIdCheck = true;
                             } else {
-                                $(".id_input_re_2").css("display", "inline-block");
+                                $(".id_input_re_2").css("display", "block");
                                 $(".id_input_re_1").css("display", "none");
                                 overlapIdCheck = false;
                             }
@@ -210,12 +215,14 @@
 
                 if (mailFormCheck(email)) {
                     warnMsg.html("인증번호 전송이 완료 되었습니다. 이메일을 확인해주세요.");
+                    warnMsg.css("font-size", "11px");
                     warnMsg.css("display", "block");
                     warnMsg.css("color", "grey");
                 } else {
                     warnMsg.html("올바르지 못한 이메일 형식 입니다.");
                     warnMsg.css("display", "block");
                     warnMsg.css("color", "red");
+                    warnMsg.css("font-size", "11px");
                     return false;
                 }
 
@@ -316,105 +323,162 @@
         }
     </script>
 </head>
-<body>
-<div class="wrapper">
-    <form id="signUp_form" method="post">
-        <div class="wrap">
-            <div class="subject">
-                <span>SignUp</span>
-            </div>
+<body class="hold-transition register-page">
+<div class="register-box">
+    <div class="register-logo">
+        <a href="../../index2.html"><b>Admin</b>LTE</a>
+    </div>
 
-            <div class="id_wrap">
-                <div class="id_name">ID <span style="color:#aaa" id="counter">(0 / 최대 20자)</span></div>
-                <div class="id_input_box">
-                    <label>
-                        <input class="id_input" name="memberId" placeholder="ID는 20글자까지 가능합니다">
-                    </label>
+    <div class="card">
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">Register a new membership</p>
+
+            <form id="signUp_form" method="post">
+                <!-- 아이디 -->
+                <span style="color:#aaa" id="counter">(0 / 최대 20자)</span>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fa fa-user"></span>
+                        </div>
+                    </div>
+                    <input type="text" name="memberId" class="form-control id_input" placeholder="ID" required autofocus>
+                    <span class="id_input_re_1">This is available to use</span>
+                    <span class="id_input_re_2">This is already to exist</span>
+                    <span class="final_id_check">Please input your ID</span>
                 </div>
-                <span class="id_input_re_1">This is available to use</span>
-                <span class="id_input_re_2">This is already to exist</span>
-                <span class="final_id_check">Please input your ID</span>
-            </div>
 
-            <div class="pw_wrap">
-                <div class="pw_name">password</div>
-                <div class="pw_input_box">
-                    <input class="pw_input" name="memberPw">
+                <!-- 비밀번호 -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                    <input type="password" name="memberPw" class="form-control pw_input" placeholder="Password" required autofocus>
+                    <span class="final_pw_check">Please input your Password</span>
                 </div>
-                <span class="final_pw_check">Please input your Password</span>
-            </div>
 
-            <div class="pwCheck_wrap">
-                <div class="pwCheck_name">confirm Password</div>
-                <div class="pwCheck_input_box">
-                    <input class="pwCheck_input">
+                <!-- 비밀번호 확인 -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                    <input type="password" class="form-control pwCheck_input" placeholder="Retype password" required autofocus>
+                    <span class="final_pwCheck_check">Please input your Password Confirm</span>
+                    <span class="pwCheck_input_re_1">correct password confirm</span>
+                    <span class="pwCheck_input_re_2">discord password confirm</span>
                 </div>
-                <span class="final_pwCheck_check">Please input your Password Confirm</span>
-                <span class="pwCheck_input_re_1">correct password confirm</span>
-                <span class="pwCheck_input_re_2">discord password confirm</span>
-            </div>
 
-            <div class="user_wrap">
-                <div class="user_name">Name</div>
-                <div class="user_input_box">
-                    <input class="user_input" name="memberName">
+                <!-- 이름 -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                    <input type="text" name="memberName" class="form-control user_input" placeholder="Full name" required autofocus>
+                    <span class="final_name_check">Please input your name</span>
                 </div>
-                <span class="final_name_check">Please input your name</span>
-            </div>
 
-            <div class="mail_wrap">
-                <div class="mail_name">E-mail</div>
-                <div class="mail_input_box">
-                    <input class="mail_input" name="memberMail">
+                <!-- 이메일 -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                    <input type="email" name="memberMail" class="form-control mail_input" placeholder="Email" required autofocus>
+                    <div class="input-group-prepend mail_check_button">
+                        <button class="btn btn-outline-secondary" type="button">Submit</button>
+                    </div>
+                    <span class="final_mail_check">Please input your E-mail</span>
+                    <span class="mail_input_box_warn"></span>
                 </div>
-                <span class="final_mail_check">Please input your E-mail</span>
-                <span class="mail_input_box_warn"></span>
 
-                <div class="mail_check_wrap">
+                <!-- 이메일 확인 -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fa fa-envelope-open"></span>
+                        </div>
+                    </div>
                     <div class="mail_check_input_box" id="mail_check_input_box_false">
-                        <input class="mail_check_input" disabled="disabled">
                     </div>
-
-                    <div class="mail_check_button">
-                        <span>인증번호 전송</span>
-                    </div>
-                    <div class="clearfix"></div>
+                    <input class="form-control mail_check_input" placeholder="Confirm Number" disabled="disabled" required autofocus>
                     <span id="mail_check_input_box_warn"></span>
                 </div>
-            </div>
 
-            <div class="address_wrap">
-                <div class="address_name">Address</div>
-                <div class="address_input_1_wrap">
-                    <div class="address_input_1_box">
-                        <input class="address_input_1" name="memberAddr1" readonly="readonly">
+                <!-- 주소1 -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fa fa-home"></span>
+                        </div>
                     </div>
-
-                    <div class="address_button" onclick="searchAddress()">
-                        <span>Find Address</span>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-
-                <div class="address_input_2_wrap">
-                    <div class="address_input_2_box">
-                        <input class="address_input_2" name="memberAddr2" readonly="readonly">
+                    <input type="text" class="form-control address_input_1" name="memberAddr1" placeholder="Address1" readonly="readonly" required autofocus>
+                    <div class="input-group-prepend address_button" onclick="searchAddress()">
+                        <button class="btn btn-outline-secondary" type="button">Find Addr</button>
                     </div>
                 </div>
 
-                <div class="address_input_3_wrap">
-                    <div class="address_input_3_box">
-                        <input class="address_input_3" name="memberAddr3" readonly="readonly">
+                <!-- 주소2 -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fa fa-home"></span>
+                        </div>
                     </div>
+                    <input type="text" class="form-control address_input_2" name="memberAddr2" placeholder="Address2" readonly="readonly" required autofocus>
                 </div>
-                <span class="final_addr_check">Please input your address</span>
+
+                <!-- 주소3 -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fa fa-home"></span>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control address_input_3" name="memberAddr3" placeholder="Address3" readonly="readonly" required autofocus>
+                    <span class="final_addr_check">Please input your address</span>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                            <label for="agreeTerms">
+                                I agree to the <a href="#">terms</a>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="button" class="btn btn-primary btn-block signUp_button">Register</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="#" class="btn btn-block btn-primary">
+                    <i class="fab fa-facebook mr-2"></i>
+                    Sign up using Facebook
+                </a>
+                <a href="#" class="btn btn-block btn-danger">
+                    <i class="fab fa-google-plus mr-2"></i>
+                    Sign up using Google+
+                </a>
             </div>
 
-            <div class="signUp_button_wrap">
-                <input type="button" class="signUp_button" value="signUp">
-            </div>
+            <a href="/member/login" class="text-center">I already have a membership</a>
         </div>
-    </form>
+        <!-- /.form-box -->
+    </div><!-- /.card -->
 </div>
 </body>
+<script src="/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/resources/dist/js/adminlte.min.js"></script>
 </html>

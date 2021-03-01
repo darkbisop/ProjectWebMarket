@@ -14,6 +14,7 @@ public class MemberServiceImpl implements MemberService {
     // 회원가입
     @Override
     public void memberSignUp(MemberVO memberVO) {
+
         memberMapper.memberSignUp(memberVO);
     }
 
@@ -26,6 +27,7 @@ public class MemberServiceImpl implements MemberService {
     // 로그인
     @Override
     public MemberVO memberLogin(MemberVO memberVO) {
+
         return memberMapper.memberLogin(memberVO);
     }
 }
