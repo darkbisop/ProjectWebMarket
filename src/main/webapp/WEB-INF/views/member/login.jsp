@@ -5,43 +5,81 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.80.0">
     <meta charset="UTF-8">
-    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/resources/css/signin.css" rel="stylesheet">
     <title>Insert title here</title>
-    <%--<link rel="stylesheet" href="/resources/css/member/login.css?after">--%>
-    <%--<link rel="shortcut icon" href="#">--%>
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/resources/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/dist/css/adminlte.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/RSA/jsbn.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/RSA/rsa.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/RSA/prng4.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/RSA/rng.js"></script>
 </head>
-<body class="text-center">
-<main class="form-signin">
-    <form action="${pageContext.request.contextPath}/member/login" method="post" id="loginForm">
-        <img class="mb-4" src="${pageContext.request.contextPath}/resources/css/bootstrap-logo.svg" alt="" width="72" height="57">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <b>Admin</b>LTE</a>
+        </div>
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
 
-        <label for="memberId" class="visually-hidden">ID</label>
-        <input type="text" id="memberId" name="memberId" class="form-control" placeholder="ID" required autofocus>
+                <form action="/member/login.do" method="post" id="loginForm">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <span class="fa fa-user"></span>
+                            </div>
+                        </div>
+                        <input type="text" id="memberId" name="memberId" class="form-control" placeholder="ID" required autofocus>
+                    </div>
 
-        <label for="memberPw" class="visually-hidden">Password</label>
-        <input type="password" id="memberPw" name="memberPw" class="form-control" placeholder="Password" required>
-       <%-- <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>--%>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2021-2021</p>
-    </form>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        <input type="password" id="memberPw" name="memberPw" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Remember Me</label>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="social-auth-links text-center mb-3">
+                    <p>- OR -</p>
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                    </a>
+                </div>
+
+                <p class="mb-1">
+                    <a href="#">I forgot my password</a>
+                </p>
+                <p class="mb-0">
+                    <a href="${pageContext.request.contextPath}/member/signUp" class="text-center">Register a new membership</a>
+                </p>
+            </div>
+        </div>
+    </div>
 
     <!-- 실제 서버로 전송되는 form -->
-    <form action="${pageContext.request.contextPath}/member/login" method="post" id="hiddenForm">
+    <form action="/member/login.do" method="post" id="hiddenForm">
         <input type="hidden" name="memberId" />
         <input type="hidden" name="memberPw" />
     </form>
@@ -69,6 +107,5 @@
             $("#hiddenForm").submit();
         });
     </script>
-</main>
 </body>
 </html>

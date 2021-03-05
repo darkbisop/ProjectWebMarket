@@ -24,6 +24,13 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <bean id="adminInterceptor" class="com.my.interceptor.AdminInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <context:component-scan base-package="com.my.controller" />
 
 

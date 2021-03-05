@@ -9,38 +9,22 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="/resources/css/main.css?after">
 </head>
-
-
 <body>
 <div class="wrapper">
     <div class="wrap">
         <div class="top_gnb_area">
             <ul class="list">
-                <c:if test="${member == null}">
-                    <li>
-                        <a href="/member/login">Login</a>
-                    </li>
-
-                    <li>
-                        <a href="/member/signUp">Sign Up</a>
-                    </li>
-                </c:if>
-
                 <c:if test="${member != null}">
                     <c:if test="${member.adminCk == 1}">
-                        <li><a href="/admin/main">관리자 페이지</a> </li>
+                        <li><a href="/admin/product/resister">상품 등록</a> </li>
+                        <li>
+                            <a id="gnb_logout_button">Logout</a>
+                        </li>
+                        <li>
+                            장바구니
+                        </li>
                     </c:if>
-                    <li>
-                        <a id="gnb_logout_button">Logout</a>
-                    </li>
-
-                    <li>
-                        장바구니
-                    </li>
                 </c:if>
-
-
-                <li>고객센터</li>
             </ul>
         </div>
 
@@ -54,19 +38,13 @@
             </div>
 
             <div class="login_area">
-                <!-- 로그인 하지 않았을때 -->
-                <c:if test="${member == null}">
-                    <div class="login_button"><a href="/member/login">Login</a></div>
-                    <span><a href="/member/signUp">SignUp</a></span>
-                </c:if>
-
                 <!-- 로그인 했을때 -->
                 <c:if test="${member != null}">
                     <div class="login_success_area">
                         <span>회원 : ${member.memberName}</span>
                         <span>충전금액 : <fmt:formatNumber value = "${member.money}" pattern="\#,###,##" /></span>
                         <span>포인트 : <fmt:formatNumber value = "${member.point}" pattern="\#,###" /></span>
-                        <%--<a href="/member/logout.do">Logout</a>--%>
+                            <%--<a href="/member/logout.do">Logout</a>--%>
                     </div>
                 </c:if>
             </div>
@@ -95,5 +73,3 @@
         });
     });
 </script>
-</body>
-</html>
