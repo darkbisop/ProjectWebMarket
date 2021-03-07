@@ -16,7 +16,7 @@
             <ul class="list">
                 <c:if test="${member != null}">
                     <c:if test="${member.adminCk == 1}">
-                        <li><a href="/admin/product/resister">상품 등록</a> </li>
+                        <li><a href="/admin/product/register">상품 등록</a> </li>
                         <li>
                             <a id="gnb_logout_button">Logout</a>
                         </li>

@@ -1,6 +1,7 @@
 package com.my.controller;
 
 import com.my.model.CategoryVO;
+import com.my.model.ProductVO;
 import com.my.service.AdminService;
 import com.mysql.cj.xdevapi.JsonArray;
 import net.sf.json.JSONArray;
@@ -30,12 +31,19 @@ public class AdminController {
     }
 
     // 상품등록
-    @RequestMapping(value = "/product/resister", method = RequestMethod.GET)
-    public void productResisterGET(Model model) throws Exception {
-        logger.info("Product Resister");
+    @RequestMapping(value = "/product/register", method = RequestMethod.GET)
+    public void productRegisterGET(Model model) throws Exception {
+        logger.info("Product Register");
 
         List<CategoryVO> category;
         category = adminService.category();
         model.addAttribute("category", JSONArray.fromObject(category));
+    }
+
+    @RequestMapping(value = "/product/register.do", method = RequestMethod.POST)
+    public String productRegisterPOST(ProductVO productVO) throws Exception {
+        adminService.register(productVO);
+
+        return "redirect:/admin/main";
     }
 }

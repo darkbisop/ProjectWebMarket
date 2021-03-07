@@ -3,23 +3,55 @@
 <head>
     <title>Title</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .input_Area { margin:10px 0; }
+        select { width:80px; }
+        label { display:inline-block; width:70px; padding:5px; }
+        label[for='productDescription'] { display:block; }
+        input { width:150px; }
+        textarea#productDescription { width:400px; height:180px; }
+    </style>
 </head>
 <body>
 <div id="container">
     <h2>상품등록</h2>
 
-    <form role="form" method="post" autocomplete="off">
+    <form role="form" action="/admin/product/register.do" method="post" autocomplete="off">
         <label>1차 분류</label>
         <label>
-            <select id="category1" name="category1">
+            <select id="category1">
                 <option value="">전체</option>
             </select>
         </label>
 
         <label>2차 분류</label>
-        <select id="category2" name="category2">
+        <select id="category2" name="categoryCode">
             <option value="">전체</option>
         </select>
+
+        <div class="input_Area">
+            <label for="productName">상품명</label>
+            <input type="text" id="productName" name="productName" />
+        </div>
+
+        <div class="input_Area">
+            <label for="productPrice">상품 가격</label>
+            <input type="text" id="productPrice" name="productPrice" />
+        </div>
+
+        <div class="input_Area">
+            <label for="productStock">상품수량</label>
+            <input type="text" id="productStock" name="productStock" />
+        </div>
+
+        <div class="input_Area">
+            <label for="productDescription">상품소개</label>
+            <textarea rows="5" cols="50" id="productDescription" name="productDescription"></textarea>
+        </div>
+
+        <div class="input_Area">
+            <button type="submit" id="register_Btn" class="btn btn-primary">등록</button>
+        </div>
     </form>
 </div>
 
@@ -63,7 +95,7 @@
         $("#category1 option:selected").each(function () {
             const val = $(this).val();
             console.log(val);
-            cate2Select.append("<option value=''>ALL</option>")
+            cate2Select.append("<option value='" + val + "'>ALL</option>")
 
             for (let i = 0; i < cate2Arr.length; i++) {
                 if (val === cate2Arr[i].categoryCodeRef) {

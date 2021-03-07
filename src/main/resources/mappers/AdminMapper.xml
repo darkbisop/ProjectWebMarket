@@ -6,4 +6,9 @@
     <select id="category" resultType="com.my.model.CategoryVO">
         select *from product_category order by depth asc;
     </select>
+
+    <insert id="register">
+        insert into product (productName, categoryCode, productPrice, productStock, productDescription, regdate)
+                    values (#{productName}, #{categoryCode}, #{productPrice}, #{productStock}, #{productDescription}, sysdate())
+    </insert>
 </mapper>
