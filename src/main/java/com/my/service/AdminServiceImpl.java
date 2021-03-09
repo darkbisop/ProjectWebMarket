@@ -14,13 +14,27 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     AdminMapper adminMapper;
 
+    /* 상품 카테고리 */
     @Override
     public List<CategoryVO> category() throws Exception {
         return adminMapper.category();
     }
 
+    /* 상품 등록 */
     @Override
     public void register(ProductVO productVO) throws Exception {
         adminMapper.register(productVO);
+    }
+
+    /* 상품 목록 */
+    @Override
+    public List<ProductVO> productList() throws Exception {
+        return adminMapper.productList();
+    }
+
+    /* 상품 조회 */
+    @Override
+    public ProductVO productView(int num) throws Exception {
+        return adminMapper.productView(num);
     }
 }

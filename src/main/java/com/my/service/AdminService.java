@@ -9,7 +9,15 @@ import java.util.List;
 @Repository
 public interface AdminService {
 
+    /* 상품 카테고리 */
     List<CategoryVO> category() throws Exception;
 
+    /* 상품 등록 */
     void register(ProductVO productVO) throws Exception;
+
+    /* 상품 목록 */
+    List<ProductVO> productList() throws Exception;
+
+    /* 상품 조회 */
+    ProductVO productView(int num) throws Exception;
 }

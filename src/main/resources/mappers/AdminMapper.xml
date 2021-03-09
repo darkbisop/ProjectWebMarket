@@ -3,12 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.my.mapper.AdminMapper">
+
+    <!-- 상품 카테고리 -->
     <select id="category" resultType="com.my.model.CategoryVO">
         select *from product_category order by depth asc;
     </select>
 
+    <!-- 상품 등록 -->
     <insert id="register">
         insert into product (productName, categoryCode, productPrice, productStock, productDescription, regdate)
                     values (#{productName}, #{categoryCode}, #{productPrice}, #{productStock}, #{productDescription}, sysdate())
     </insert>
+
+    <!-- 상품 목록 -->
+    <select id="productList" resultType="com.my.model.ProductVO">
+        select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName, productPrice, productStock, productDescription, regdate
+        from product p inner join product_category c on p.categoryCode = c.categoryCode order by p.productNum desc
+    </select>
+
+    <!-- 상품 조회 -->
+    <select id="productView" resultType="com.my.model.ProductVO">
+        select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName, productPrice, productStock, productDescription, regdate
+        from product p inner join product_category c on p.categoryCode = c.categoryCode where p.productNum = #{productNum}
+    </select>
 </mapper>

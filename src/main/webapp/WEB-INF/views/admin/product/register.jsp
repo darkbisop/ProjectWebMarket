@@ -16,18 +16,20 @@
 <div id="container">
     <h2>상품등록</h2>
 
-    <form role="form" action="/admin/product/register.do" method="post" autocomplete="off">
+    <form role="form" action="${pageContext.request.contextPath}/admin/product/register.do" method="post" autocomplete="off">
         <label>1차 분류</label>
         <label>
-            <select id="category1">
+            <select id="category1" name="">
                 <option value="">전체</option>
             </select>
         </label>
 
         <label>2차 분류</label>
-        <select id="category2" name="categoryCode">
-            <option value="">전체</option>
-        </select>
+        <label>
+            <select id="category2" name="categoryCode">
+                <option value="">전체</option>
+            </select>
+        </label>
 
         <div class="input_Area">
             <label for="productName">상품명</label>

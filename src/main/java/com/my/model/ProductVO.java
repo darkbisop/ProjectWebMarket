@@ -4,8 +4,11 @@ import java.util.Date;
 
 public class ProductVO {
 
+    private int productNum;
     private String productName;
     private String categoryCode;
+    private String categoryName;
+    private String categoryCodeRef;
     private int productPrice;
     private int productStock;
     private String productDescription;
@@ -19,8 +22,6 @@ public class ProductVO {
     public void setProductNum(int productNum) {
         this.productNum = productNum;
     }
-
-    private int productNum;
 
     public String getProductName() {
         return productName;
@@ -36,6 +37,22 @@ public class ProductVO {
 
     public void setCategoryCode(String categoryCode) {
         this.categoryCode = categoryCode;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getCategoryCodeRef() {
+        return categoryCodeRef;
+    }
+
+    public void setCategoryCodeRef(String categoryCodeRef) {
+        this.categoryCodeRef = categoryCodeRef;
     }
 
     public int getProductPrice() {
