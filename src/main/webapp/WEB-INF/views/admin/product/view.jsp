@@ -15,20 +15,21 @@
 </head>
 <body>
 <div id="container">
-    <h2>상품등록</h2>
+    <h2>상품 상세정보</h2>
 
     <form role="form" action="${pageContext.request.contextPath}/admin/product/view" method="post" autocomplete="off">
 
+        <input type="hidden" name="n" value="${product.productNum}" />
         <label>1차 분류</label><span class="result1"></span>
         <label>2차 분류</label><span class="result2"></span>
         <label>
-            <select id="category1" name="category1">
+            <select id="category1">
                 <option value="">전체</option>
             </select>
         </label>
 
         <label>
-            <select id="category2" name="category2">
+            <select id="category2">
                 <option value="">전체</option>
             </select>
         </label>
@@ -59,8 +60,8 @@
         </div>
 
         <div class="input_Area">
-            <button type="button" class="btn btn-warning">수정</button>
-            <button type="button" class="btn btn-danger">삭제</button>
+            <button type="submit" class="update_Btn btn-warning">수정</button>
+            <button type="submit" class="delete_Btn btn-danger">삭제</button>
         </div>
     </form>
 </div>
@@ -100,6 +101,24 @@
     $('.result2').text($("#category2 option:selected").text());
     document.getElementById("category1").style.display = "none";
     document.getElementById("category2").style.display = "none";
+
+    const formObj = $("form[role='form']");
+    $(".update_Btn").click(function() {
+        formObj.attr("action", "/admin/product/update");
+        formObj.attr("method", "get");
+        formObj.submit();
+    });
+
+    $(".delete_Btn").click(function() {
+        const con = confirm("정말로 삭제하시겠습니까?");
+
+        if (con) {
+            formObj.attr("action", "/admin/product/delete");
+            formObj.submit();
+        }
+        alert("게시글을 삭제하였습니다.");
+    });
+
 </script>
 </body>
 </html>

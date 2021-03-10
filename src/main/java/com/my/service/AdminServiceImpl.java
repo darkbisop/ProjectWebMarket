@@ -37,4 +37,16 @@ public class AdminServiceImpl implements AdminService {
     public ProductVO productView(int num) throws Exception {
         return adminMapper.productView(num);
     }
+
+    /* 상품 수정 */
+    @Override
+    public void productUpdate(ProductVO productVO) throws Exception {
+        adminMapper.productUpdate(productVO);
+    }
+
+    /* 상품 삭제 */
+    @Override
+    public void productDelete(int num) throws Exception {
+        adminMapper.productDelete(num);
+    }
 }

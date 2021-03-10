@@ -57,14 +57,43 @@ public class AdminController {
 
     /* 상품 조회 */
     @RequestMapping(value = "/product/view", method = RequestMethod.GET)
-    public void productViewGET(@RequestParam("n") int Num, Model model) throws Exception {
+    public void productViewGET(@RequestParam("n") int num, Model model) throws Exception {
         logger.info("product view");
 
-        ProductVO productVO = adminService.productView(Num);
+        ProductVO productVO = adminService.productView(num);
         model.addAttribute("product", productVO);
 
         List<CategoryVO> category;
         category = adminService.category();
         model.addAttribute("category", JSONArray.fromObject(category));
+    }
+
+    /* 상품 수정 */
+    @RequestMapping(value = "/product/update", method = RequestMethod.GET)
+    public void productUpdateGET(@RequestParam("n") int num, Model model) throws Exception {
+        logger.info("product Update");
+
+        ProductVO productVO = adminService.productView(num);
+        model.addAttribute("product", productVO);
+
+        List<CategoryVO> category;
+        category = adminService.category();
+        model.addAttribute("category", JSONArray.fromObject(category));
+    }
+
+    @RequestMapping(value = "/product/update.do", method = RequestMethod.POST)
+    public String productUpdatePOST(ProductVO productVO) throws Exception {
+        adminService.productUpdate(productVO);
+
+        return "redirect:/admin/product/list";
+    }
+
+    /* 상품 삭제 */
+    @RequestMapping(value = "/product/delete", method = RequestMethod.POST)
+    public String productDelete(@RequestParam("n") int num) throws Exception {
+        logger.info("product Delete");
+        adminService.productDelete(num);
+
+        return "redirect:/admin/product/list";
     }
 }

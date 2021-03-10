@@ -26,4 +26,19 @@
         select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName, productPrice, productStock, productDescription, regdate
         from product p inner join product_category c on p.categoryCode = c.categoryCode where p.productNum = #{productNum}
     </select>
+
+    <!-- 상품 수정 -->
+    <update id="productUpdate">
+        update product set productName = #{productName},
+                           categoryCode = #{categoryCode},
+                           productPrice = #{productPrice},
+                           productStock = #{productStock},
+                           productDescription = #{productDescription}
+                where productNum = #{productNum}
+    </update>
+
+    <!-- 상품 삭제 -->
+    <delete id="productDelete">
+        delete from product where productNum = #{productNum}
+    </delete>
 </mapper>
