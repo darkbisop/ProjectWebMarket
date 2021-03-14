@@ -16,7 +16,7 @@
     <div class="wrap">
         <div class="top_gnb_area">
             <ul class="list">
-                <c:if test="${member == null}">
+                <c:if test="${member == null or kakaoMember == null}">
                     <li>
                         <a href="/member/login">Login</a>
                     </li>
@@ -26,12 +26,13 @@
                     </li>
                 </c:if>
 
-                <c:if test="${member != null}">
+                <c:if test="${member != null or kakaoMember != null}">
                     <c:if test="${member.adminCk == 1}">
                         <li><a href="/admin/main">관리자 페이지</a> </li>
                     </c:if>
                     <li>
                         <a id="gnb_logout_button">Logout</a>
+                        <%--<a href="https://kauth.kakao.com/oauth/logout?client_id=27455cf079b38009ee0184c422408895&logout_redirect_uri=http://localhost:8080/kakao/kakaoLogout">Logout</a>--%>
                     </li>
 
                     <li>
@@ -55,7 +56,7 @@
 
             <div class="login_area">
                 <!-- 로그인 하지 않았을때 -->
-                <c:if test="${member == null}">
+                <c:if test="${member == null or kakaoMember == null}">
                     <div class="login_button"><a href="/member/login">Login</a></div>
                     <span><a href="/member/signUp">SignUp</a></span>
                 </c:if>
@@ -67,6 +68,11 @@
                         <span>충전금액 : <fmt:formatNumber value = "${member.money}" pattern="\#,###,##" /></span>
                         <span>포인트 : <fmt:formatNumber value = "${member.point}" pattern="\#,###" /></span>
                         <%--<a href="/member/logout.do">Logout</a>--%>
+                    </div>
+                </c:if>
+                <c:if test="${kakaoMember != null}">
+                    <div class="login_success_area">
+                        <span>회원 : ${kakaoMember}</span>
                     </div>
                 </c:if>
             </div>
@@ -85,14 +91,16 @@
 
 <script type="text/javascript">
     $("#gnb_logout_button").click(function() {
+        location.href="https://kauth.kakao.com/oauth/logout?client_id=27455cf079b38009ee0184c422408895&logout_redirect_uri=http://localhost:8080/kakao/kakaoLogout";
+
         $.ajax({
             type: "post",
-            url: "/member/logout.do",
+            url: "/kakao/kakaoLogout",
             success:function (data) {
-                alert("로그아웃 성공");
                 document.location.reload();
             }
         });
+
     });
 </script>
 </body>
