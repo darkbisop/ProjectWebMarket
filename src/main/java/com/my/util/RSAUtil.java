@@ -56,6 +56,7 @@ public class RSAUtil {
 
     public String getDecryptTest(PrivateKey privateKey, String encryptedText) throws Exception {
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
+        System.out.println(encryptedText);
         byte[] decryptedBytes = cipher.doFinal(hexToByteArray(encryptedText));
         return new String(decryptedBytes, "UTF-8");
     }

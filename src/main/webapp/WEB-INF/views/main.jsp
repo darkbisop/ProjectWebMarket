@@ -16,7 +16,7 @@
     <div class="wrap">
         <div class="top_gnb_area">
             <ul class="list">
-                <c:if test="${member == null or kakaoMember == null}">
+                <c:if test="${member == null and kakaoMember == null}">
                     <li>
                         <a href="/member/login">Login</a>
                     </li>
@@ -27,14 +27,17 @@
                 </c:if>
 
                 <c:if test="${member != null or kakaoMember != null}">
-                    <c:if test="${member.adminCk == 1}">
-                        <li><a href="/admin/main">관리자 페이지</a> </li>
-                    </c:if>
-                    <li>
-                        <a id="gnb_logout_button">Logout</a>
-                        <%--<a href="https://kauth.kakao.com/oauth/logout?client_id=27455cf079b38009ee0184c422408895&logout_redirect_uri=http://localhost:8080/kakao/kakaoLogout">Logout</a>--%>
-                    </li>
+                    <c:choose>
+                        <c:when test="${member.adminCk == 1}">
+                            <li><a href="/admin/main">관리자 페이지</a> </li>
+                            <li><a id="gnb_logout_button">Logout</a></li>
+                        </c:when>
 
+                        <c:when test="${kakaoMember != null}">
+                            <li><a id="gnb_kakaoLogout_button">Logout</a></li>
+                        </c:when>
+
+                    </c:choose>
                     <li>
                         장바구니
                     </li>
@@ -56,25 +59,27 @@
 
             <div class="login_area">
                 <!-- 로그인 하지 않았을때 -->
-                <c:if test="${member == null or kakaoMember == null}">
+                <c:if test="${member == null and kakaoMember == null}">
                     <div class="login_button"><a href="/member/login">Login</a></div>
                     <span><a href="/member/signUp">SignUp</a></span>
                 </c:if>
 
                 <!-- 로그인 했을때 -->
-                <c:if test="${member != null}">
-                    <div class="login_success_area">
-                        <span>회원 : ${member.memberName}</span>
-                        <span>충전금액 : <fmt:formatNumber value = "${member.money}" pattern="\#,###,##" /></span>
-                        <span>포인트 : <fmt:formatNumber value = "${member.point}" pattern="\#,###" /></span>
-                        <%--<a href="/member/logout.do">Logout</a>--%>
-                    </div>
-                </c:if>
-                <c:if test="${kakaoMember != null}">
-                    <div class="login_success_area">
-                        <span>회원 : ${kakaoMember}</span>
-                    </div>
-                </c:if>
+                <c:choose>
+                    <c:when test="${member != null}">
+                        <div class="login_success_area">
+                            <span>회원 : ${member.memberName}</span>
+                            <span>충전금액 : <fmt:formatNumber value = "${member.money}" pattern="\#,###,##" /></span>
+                            <span>포인트 : <fmt:formatNumber value = "${member.point}" pattern="\#,###" /></span>
+                                <%--<a href="/member/logout.do">Logout</a>--%>
+                        </div>
+                    </c:when>
+                    <c:when test="${kakaoMember != null}">
+                        <div class="login_success_area">
+                            <span>회원 : ${kakaoMember}</span>
+                        </div>
+                    </c:when>
+                </c:choose>
             </div>
             <div class="clearfix">
             </div>
@@ -91,16 +96,27 @@
 
 <script type="text/javascript">
     $("#gnb_logout_button").click(function() {
-        location.href="https://kauth.kakao.com/oauth/logout?client_id=27455cf079b38009ee0184c422408895&logout_redirect_uri=http://localhost:8080/kakao/kakaoLogout";
-
         $.ajax({
             type: "post",
-            url: "/kakao/kakaoLogout",
-            success:function (data) {
+            async:false,
+            url: "/member/logout.do",
+            success:function () {
+                alert("로그아웃에 성공하였습니다");
                 document.location.reload();
             }
         });
+    });
 
+    $("#gnb_kakaoLogout_button").click(function () {
+        location.href="https://kauth.kakao.com/oauth/logout?client_id=27455cf079b38009ee0184c422408895&logout_redirect_uri=http://localhost:8080/kakao/kakaoLogout";
+        $.ajax({
+            type: "post",
+            async:false,
+            url: "/kakao/kakaoLogout",
+            success:function () {
+                document.location.reload();
+            }
+        });
     });
 </script>
 </body>

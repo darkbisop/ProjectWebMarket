@@ -1,16 +1,19 @@
 package com.my.controller;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
@@ -48,45 +51,17 @@ public class KaKaoController {
         HashMap<String, Object> userInfo = getUserInfo(access_Token);
         System.out.println("login Controller : " + userInfo);
 
-        if (userInfo.get("email") != null) {
-            session.setAttribute("kakaoMember", userInfo.get("email"));
+        if (userInfo.get("nickname") != null) {
+            session.setAttribute("kakaoMember", userInfo.get("nickname"));
             session.setAttribute("access_Token", access_Token);
         }
-
-       /* JsonNode node = getAccessToken(code);
-        JsonNode accessToken = node.get("access_token");
-        JsonNode userInfo = getKakaoUserInfo(access_Token);
-
-        String email = null;
-        String name = null;
-        String gender = null;
-        String birthDay = null;
-        String age = null;
-        String image = null;
-
-        JsonNode properties = userInfo.path("properties");
-        JsonNode kakao_account = userInfo.path("kakao_account");
-
-        email = kakao_account.path("email").asText();
-        name = properties.path("nickname").asText();
-        image = properties.path("profile_image").asText();
-        gender = kakao_account.path("gender").asText();
-        birthDay = kakao_account.path("birthday").asText();
-        age = kakao_account.path("age_range").asText();
-
-        session.setAttribute("email", email);
-        session.setAttribute("name", name);
-        session.setAttribute("image", image);
-        session.setAttribute("gender", gender);
-        session.setAttribute("birthday", birthDay);
-        session.setAttribute("age", age);*/
 
         return "redirect:/main";
     }
 
     @RequestMapping(value = "kakaoLogout", method = {RequestMethod.GET, RequestMethod.POST})
     public String kakaoLogoutPOST(HttpSession session) throws Exception {
-        logOut((String)session.getAttribute("access_Token"));
+        logOut((String) session.getAttribute("access_Token"));
         session.removeAttribute("access_Token");
         session.removeAttribute("kakaoMember");
 
@@ -167,7 +142,7 @@ public class KaKaoController {
             conn.setRequestMethod("POST");
 
             //    요청에 필요한 Header에 포함될 내용
-            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+            conn.setRequestProperty("Authorization", "Bearer [" + access_Token + "]");
 
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
@@ -185,13 +160,13 @@ public class KaKaoController {
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result.toString());
 
-            //JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+            JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-            //String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
             String email = kakao_account.getAsJsonObject().get("email").getAsString();
 
-            //userInfo.put("nickname", nickname);
+            userInfo.put("nickname", nickname);
             userInfo.put("email", email);
 
         } catch (IOException e) {
@@ -202,53 +177,25 @@ public class KaKaoController {
         return userInfo;
     }
 
-    public void logOut(String access_Token) {
-        String reqURL = "https://kapi.kakao.com/v1/user/unlink";
-
-        try {
-            URL url = new URL(reqURL);
-            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
-
-            int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String result = "";
-            String line = "";
-
-            while ((line = br.readLine()) != null) {
-                result += line;
-            }
-            System.out.println(result);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /*public static JsonNode getAccessToken(String autorize_code) throws IOException {
-        final String requestUrl = "https://kauth.kakao.com/oauth.token";
-        final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-        postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
-        postParams.add(new BasicNameValuePair("client_id", "27455cf079b38009ee0184c422408895"));
-        postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8080/kakao/kakaoLogin.do"));
-        postParams.add(new BasicNameValuePair("code", autorize_code));
+    public JsonNode logOut(String access_Token) {
+        final String RequestUrl = "https://kapi.kakao.com/v1/user/unlink";
         final HttpClient client = HttpClientBuilder.create().build();
-        final HttpPost post = new HttpPost(requestUrl);
+        final HttpPost post = new HttpPost(RequestUrl);
+        post.addHeader("Authorization", "Bearer " + access_Token);
         JsonNode returnNode = null;
 
         try {
-            post.setEntity(new UrlEncodedFormEntity(postParams));
             final HttpResponse response = client.execute(post);
             ObjectMapper mapper = new ObjectMapper();
             returnNode = mapper.readTree(response.getEntity().getContent());
-        } catch (UnsupportedEncodingException | ClientProtocolException e) {
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return returnNode;
-    }*/
+    }
 }

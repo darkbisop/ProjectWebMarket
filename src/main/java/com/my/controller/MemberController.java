@@ -105,9 +105,8 @@ public class MemberController {
 
        try {
            String email = rsaUtil.getDecryptTest(privateKey, memberVO.getMemberId());
-           memberVO.setMemberId(email);
            String password = rsaUtil.getDecryptTest(privateKey, memberVO.getMemberPw());
-
+           memberVO.setMemberId(email);
            memberVO.setMemberPw(password);
        } catch (Exception e) {
            rttr.addFlashAttribute("resultMsg", "비정상적인 접근");
@@ -145,7 +144,7 @@ public class MemberController {
         logger.info("logout Method 진입");
 
         HttpSession session = request.getSession();
-        session.invalidate();
+        session.removeAttribute("member");
 
         return "redirect:/main";
     }
@@ -155,7 +154,7 @@ public class MemberController {
     public void logoutPOST(HttpServletRequest request) throws  Exception {
         logger.info("비동기 로그아웃 메서드 진입");
         HttpSession session = request.getSession();
-        session.invalidate();
+        session.removeAttribute("member");
     }
 
     // 아이디 중복 검사
