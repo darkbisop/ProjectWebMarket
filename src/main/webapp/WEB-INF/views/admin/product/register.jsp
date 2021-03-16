@@ -10,13 +10,14 @@
         label[for='productDescription'] { display:block; }
         input { width:150px; }
         textarea#productDescription { width:400px; height:180px; }
+        .select_img img {margin: 20px 0;}
     </style>
 </head>
 <body>
 <div id="container">
     <h2>상품등록</h2>
 
-    <form role="form" action="${pageContext.request.contextPath}/admin/product/register.do" method="post" autocomplete="off">
+    <form role="form" action="${pageContext.request.contextPath}/admin/product/register.do" method="post" autocomplete="off" enctype="multipart/form-data">
         <label>1차 분류</label>
         <label>
             <select id="category1" name="">
@@ -49,6 +50,13 @@
         <div class="input_Area">
             <label for="productDescription">상품소개</label>
             <textarea rows="5" cols="50" id="productDescription" name="productDescription"></textarea>
+        </div>
+
+        <div class="input_Area">
+            <label for="productImage">이미지</label>
+            <input type="file" id="productImage" name="file" />
+            <div class="select_img"><img src="" alt=""></div>
+            <%= request.getSession().getServletContext().getRealPath("/")%>
         </div>
 
         <div class="input_Area">
@@ -103,6 +111,16 @@
                 }
             }
         });
+    });
+
+    $("#productImage").change(function () {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (data) {
+                $(".select_img img").attr("src", data.target.result).width(500);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
     });
 
 </script>

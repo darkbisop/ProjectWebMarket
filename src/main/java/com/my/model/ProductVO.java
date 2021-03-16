@@ -14,11 +14,11 @@ public class ProductVO {
     private String productDescription;
     private String productImage;
     private Date regDate;
+    private String productThumbnail;
 
     public int getProductNum() {
         return productNum;
     }
-
     public void setProductNum(int productNum) {
         this.productNum = productNum;
     }
@@ -26,7 +26,6 @@ public class ProductVO {
     public String getProductName() {
         return productName;
     }
-
     public void setProductName(String productName) {
         this.productName = productName;
     }
@@ -34,7 +33,6 @@ public class ProductVO {
     public String getCategoryCode() {
         return categoryCode;
     }
-
     public void setCategoryCode(String categoryCode) {
         this.categoryCode = categoryCode;
     }
@@ -42,7 +40,6 @@ public class ProductVO {
     public String getCategoryName() {
         return categoryName;
     }
-
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
@@ -50,7 +47,6 @@ public class ProductVO {
     public String getCategoryCodeRef() {
         return categoryCodeRef;
     }
-
     public void setCategoryCodeRef(String categoryCodeRef) {
         this.categoryCodeRef = categoryCodeRef;
     }
@@ -58,7 +54,6 @@ public class ProductVO {
     public int getProductPrice() {
         return productPrice;
     }
-
     public void setProductPrice(int productPrice) {
         this.productPrice = productPrice;
     }
@@ -66,7 +61,6 @@ public class ProductVO {
     public int getProductStock() {
         return productStock;
     }
-
     public void setProductStock(int productStock) {
         this.productStock = productStock;
     }
@@ -74,7 +68,6 @@ public class ProductVO {
     public String getProductDescription() {
         return productDescription;
     }
-
     public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
     }
@@ -82,7 +75,6 @@ public class ProductVO {
     public String getProductImage() {
         return productImage;
     }
-
     public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
@@ -90,8 +82,10 @@ public class ProductVO {
     public Date getRegDate() {
         return regDate;
     }
-
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
+
+    public String getProductThumbnail() { return productThumbnail; }
+    public void setProductThumbnail(String productThumbnail) { this.productThumbnail = productThumbnail; }
 }

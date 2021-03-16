@@ -11,6 +11,8 @@
         label[for='productDescription'] { display:block; }
         input { width:150px; }
         textarea#productDescription { width:400px; height:180px; }
+        .origImg {width: 200px; height: auto;}
+        .thumbImg{width: 100px; height: auto;}
     </style>
 </head>
 <body>
@@ -52,6 +54,15 @@
         <div class="input_Area">
             <label>상품소개</label>
             <span>${product.productDescription}</span>
+        </div>
+
+        <div class="input_Area">
+            <label for="productImg">이미지</label>
+            <p>원본 이미지</p>
+            <img src="${product.productImage}" class="origImg" />
+
+            <p>섬네일</p>
+            <img src="${product.productThumbnail}" class="thumbImg"/>
         </div>
 
         <div class="input_Area">

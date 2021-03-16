@@ -16,7 +16,7 @@
 <div id="container">
     <h2>상품 수정</h2>
 
-    <form role="form" action="${pageContext.request.contextPath}/admin/product/update.do" method="post" autocomplete="off">
+    <form role="form" action="${pageContext.request.contextPath}/admin/product/update.do" method="post" autocomplete="off" enctype="multipart/form-data">
         <input type="hidden" name="productNum" value="${product.productNum}" />
 
         <label>1차 분류</label>
@@ -51,6 +51,13 @@
         <div class="input_Area">
             <label for="productDescription">상품소개</label>
             <textarea rows="5" cols="50" id="productDescription" name="productDescription">${product.productDescription}</textarea>
+        </div>
+
+        <div class="input_Area">
+            <label for="productImage">이미지</label>
+            <input type="file" id="productImage" name="file" />
+            <div class="select_img"><img src="" alt=""></div>
+            <%= request.getSession().getServletContext().getRealPath("/")%>
         </div>
 
         <div class="input_Area">
@@ -121,6 +128,16 @@
                 }
             }
         });
+    });
+
+    $("#productImage").change(function () {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (data) {
+                $(".select_img img").attr("src", data.target.result).width(500);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
     });
 
     $("#cancel_Btn").click(function () {

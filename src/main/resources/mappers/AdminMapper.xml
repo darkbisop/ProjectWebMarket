@@ -11,8 +11,8 @@
 
     <!-- 상품 등록 -->
     <insert id="register">
-        insert into product (productName, categoryCode, productPrice, productStock, productDescription, regdate)
-                    values (#{productName}, #{categoryCode}, #{productPrice}, #{productStock}, #{productDescription}, sysdate())
+        insert into product (productName, categoryCode, productPrice, productStock, productDescription, regdate, productImage, productThumbnail)
+                    values (#{productName}, #{categoryCode}, #{productPrice}, #{productStock}, #{productDescription}, sysdate(), #{productImage}, #{productThumbnail})
     </insert>
 
     <!-- 상품 목록 -->
@@ -23,7 +23,7 @@
 
     <!-- 상품 조회 -->
     <select id="productView" resultType="com.my.model.ProductVO">
-        select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName, productPrice, productStock, productDescription, regdate
+        select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName, productPrice, productStock, productDescription, regdate, p.productImage, p.productThumbnail
         from product p inner join product_category c on p.categoryCode = c.categoryCode where p.productNum = #{productNum}
     </select>
 
@@ -33,7 +33,9 @@
                            categoryCode = #{categoryCode},
                            productPrice = #{productPrice},
                            productStock = #{productStock},
-                           productDescription = #{productDescription}
+                           productDescription = #{productDescription},
+                           productImage = #{productImage},
+                           productThumbnail = #{productThumbnail}
                 where productNum = #{productNum}
     </update>
 

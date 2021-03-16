@@ -3,6 +3,7 @@ package com.my.controller;
 import com.my.model.CategoryVO;
 import com.my.model.ProductVO;
 import com.my.service.AdminService;
+import com.my.util.UploadFileUtil;
 import net.sf.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
+import java.io.File;
 import java.util.List;
 
 @Controller
@@ -23,6 +27,9 @@ public class AdminController {
 
     @Autowired
     AdminService adminService;
+
+    @Resource(name = "uploadPath")
+    private String uploadPath;
 
     @RequestMapping(value = "main", method = RequestMethod.GET)
     public void adminMainGET() throws Exception {
@@ -40,7 +47,22 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/product/register.do", method = RequestMethod.POST)
-    public String productRegisterPOST(ProductVO productVO) throws Exception {
+    public String productRegisterPOST(ProductVO productVO, MultipartFile file) throws Exception {
+        String imgUploadPath = uploadPath + File.separator + "img";
+        String ymdPath = UploadFileUtil.calcPath(imgUploadPath);
+        String fileName;
+
+        if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
+            fileName = UploadFileUtil.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+            productVO.setProductImage(File.separator + "img" + ymdPath + File.separator + fileName);
+            productVO.setProductThumbnail(File.separator + "img" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+
+        } else {
+            fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+            productVO.setProductImage(fileName);
+            productVO.setProductThumbnail(fileName);
+        }
+
         adminService.register(productVO);
 
         return "redirect:/admin/main";
@@ -82,7 +104,23 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/product/update.do", method = RequestMethod.POST)
-    public String productUpdatePOST(ProductVO productVO) throws Exception {
+    public String productUpdatePOST(ProductVO productVO, MultipartFile file) throws Exception {
+
+        String imgUploadPath = uploadPath + File.separator + "img";
+        String ymdPath = UploadFileUtil.calcPath(imgUploadPath);
+        String fileName;
+
+        if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
+            fileName = UploadFileUtil.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+            productVO.setProductImage(File.separator + "img" + ymdPath + File.separator + fileName);
+            productVO.setProductThumbnail(File.separator + "img" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+
+        } else {
+            fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+            productVO.setProductImage(fileName);
+            productVO.setProductThumbnail(fileName);
+        }
+
         adminService.productUpdate(productVO);
 
         return "redirect:/admin/product/list";
