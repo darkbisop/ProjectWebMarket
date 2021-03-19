@@ -57,7 +57,7 @@
         </div>
 
         <div class="input_Area">
-            <label for="productImg">이미지</label>
+            <label>이미지</label>
             <p>원본 이미지</p>
             <img src="${product.productImage}" class="origImg" />
 

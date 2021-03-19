@@ -56,7 +56,11 @@
         <div class="input_Area">
             <label for="productImage">이미지</label>
             <input type="file" id="productImage" name="file" />
-            <div class="select_img"><img src="" alt=""></div>
+            <div class="select_img">
+                <img src="${product.productImage}" alt="">
+                <input type="hidden" name="productImage" value="${product.productImage}" />
+                <input type="hidden" name="productThumbnail" value="${product.productThumbnail}" />
+            </div>
             <%= request.getSession().getServletContext().getRealPath("/")%>
         </div>
 
@@ -134,7 +138,7 @@
         if (this.files && this.files[0]) {
             const reader = new FileReader();
             reader.onload = function (data) {
-                $(".select_img img").attr("src", data.target.result).width(500);
+                $(".select_img img").attr("src", data.target.result).width(300);
             }
             reader.readAsDataURL(this.files[0]);
         }
@@ -143,6 +147,18 @@
     $("#cancel_Btn").click(function () {
        location.href = "/admin/product/view?n=" + ${product.productNum};
     });
+
+    const regExp = /[^0-9]/gi;
+    $("#productPrice").keyup(function () {numCheck($(this));});
+    $("#productStock").keyup(function () {numCheck($(this));});
+
+    function numCheck(selector) {
+        const tempVal = selector.val();
+        if (isNaN(tempVal)) {
+            alert("숫자만 입력 가능합니다!");
+            selector.val(tempVal.replace(regExp, ""));
+        }
+    }
 
 </script>
 </body>

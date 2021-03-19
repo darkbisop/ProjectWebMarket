@@ -39,15 +39,7 @@
             </div>
 
             <div class="login_area">
-                <!-- 로그인 했을때 -->
-                <c:if test="${member != null}">
-                    <div class="login_success_area">
-                        <span>회원 : ${member.memberName}</span>
-                        <span>충전금액 : <fmt:formatNumber value = "${member.money}" pattern="\#,###,##" /></span>
-                        <span>포인트 : <fmt:formatNumber value = "${member.point}" pattern="\#,###" /></span>
-                            <%--<a href="/member/logout.do">Logout</a>--%>
-                    </div>
-                </c:if>
+                <%@include file="../include/loginArea.jsp"%>
             </div>
             <div class="clearfix">
             </div>
@@ -61,16 +53,4 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $("#gnb_logout_button").click(function() {
-        $.ajax({
-            type: "post",
-            url: "/member/logout.do",
-            success:function (data) {
-                alert("로그아웃 성공");
-                document.location.reload();
-            }
-        });
-    });
-</script>
+<%@include file="../include/logOut.jsp"%>

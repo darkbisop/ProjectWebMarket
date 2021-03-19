@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class AdminController {
         String imgUploadPath = uploadPath + File.separator + "img";
         String ymdPath = UploadFileUtil.calcPath(imgUploadPath);
         String fileName;
+        System.out.println("OrigFileName : " + file.getOriginalFilename());
 
         if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
             fileName = UploadFileUtil.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
@@ -104,21 +106,22 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/product/update.do", method = RequestMethod.POST)
-    public String productUpdatePOST(ProductVO productVO, MultipartFile file) throws Exception {
-
-        String imgUploadPath = uploadPath + File.separator + "img";
-        String ymdPath = UploadFileUtil.calcPath(imgUploadPath);
-        String fileName;
-
+    public String productUpdatePOST(ProductVO productVO, MultipartFile file, HttpServletRequest request) throws Exception {
+        System.out.println("OrigFileName : " + file.getOriginalFilename());
         if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
-            fileName = UploadFileUtil.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+            new File(uploadPath + request.getParameter("productImage")).delete();
+            new File(uploadPath + request.getParameter("productThumbnail")).delete();
+
+            String imgUploadPath = uploadPath + File.separator + "img";
+            String ymdPath = UploadFileUtil.calcPath(imgUploadPath);
+            String fileName = UploadFileUtil.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+
             productVO.setProductImage(File.separator + "img" + ymdPath + File.separator + fileName);
             productVO.setProductThumbnail(File.separator + "img" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 
         } else {
-            fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
-            productVO.setProductImage(fileName);
-            productVO.setProductThumbnail(fileName);
+            productVO.setProductImage(request.getParameter("productImage"));
+            productVO.setProductThumbnail(request.getParameter("productThumbnail"));
         }
 
         adminService.productUpdate(productVO);

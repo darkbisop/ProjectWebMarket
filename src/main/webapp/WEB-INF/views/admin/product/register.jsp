@@ -123,6 +123,18 @@
         }
     });
 
+    const regExp = /[^0-9]/gi;
+    $("#productPrice").keyup(function () {numCheck($(this));});
+    $("#productStock").keyup(function () {numCheck($(this));});
+
+    function numCheck(selector) {
+        const tempVal = selector.val();
+        if (isNaN(tempVal)) {
+            alert("숫자만 입력 가능합니다!");
+            selector.val(tempVal.replace(regExp, ""));
+        }
+    }
+
 </script>
 </body>
 </html>

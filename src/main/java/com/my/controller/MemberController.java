@@ -113,8 +113,14 @@ public class MemberController {
            return "redirect:/member/login";
        }
         MemberVO member = memberService.memberLogin(memberVO);
-        session.setAttribute("member", member);
-        return "redirect:/main";
+
+       if (memberVO.getMemberPw().equals(member.getMemberPw())) {
+           session.setAttribute("member", member);
+           return "redirect:/main";
+       } else {
+           return "redirect:/member/login";
+       }
+
         /*HttpSession session = request.getSession();
         String pw;
         String encodePw;
@@ -203,5 +209,11 @@ public class MemberController {
         }
 
         return Integer.toString(checkNum);
+    }
+
+    @RequestMapping(value = "/aside", method = RequestMethod.GET)
+    public void listGET() throws Exception {
+        logger.info("list");
+
     }
 }

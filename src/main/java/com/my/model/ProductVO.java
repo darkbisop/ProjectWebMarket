@@ -72,9 +72,7 @@ public class ProductVO {
         this.productDescription = productDescription;
     }
 
-    public String getProductImage() {
-        return productImage;
-    }
+    public String getProductImage() { return productImage; }
     public void setProductImage(String productImage) {
         this.productImage = productImage;
     }

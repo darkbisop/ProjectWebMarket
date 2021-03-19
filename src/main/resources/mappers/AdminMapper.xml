@@ -17,7 +17,7 @@
 
     <!-- 상품 목록 -->
     <select id="productList" resultType="com.my.model.ProductVO">
-        select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName, productPrice, productStock, productDescription, regdate
+        select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName, productPrice, productStock, productDescription, regdate, p.productImage, p.productThumbnail
         from product p inner join product_category c on p.categoryCode = c.categoryCode order by p.productNum desc
     </select>
 
