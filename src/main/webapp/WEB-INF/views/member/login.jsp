@@ -60,12 +60,12 @@
 
                 <div class="social-auth-links text-center mb-3">
                     <p>- OR -</p>
+                    <p><a href="/google/googleLogin">
+                        <img src="/resources/dist/img/btn_google_signin_dark_normal_web.png"  alt=""/>
+                    </a></p>
                     <a href="/kakao/kakaoLogin">
-                        <img src="/resources/dist/img/kakao_login_medium_wide.png"  alt=""/>
+                        <img src="/resources/dist/img/kakao_login_medium_narrow.png"  alt=""/>
                     </a>
-                   <%-- <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                    </a>--%>
                 </div>
 
                 <p class="mb-1">

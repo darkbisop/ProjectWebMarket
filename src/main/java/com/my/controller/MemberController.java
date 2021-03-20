@@ -72,7 +72,7 @@ public class MemberController {
     }
 
     // 로그인 페이지 이동
-    @RequestMapping(value = "login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginGET(HttpSession session, Model model) throws Exception {
         logger.info("RSA Processing");
         PrivateKey key = (PrivateKey)session.getAttribute("__RSAPrivateKey__");
@@ -90,7 +90,7 @@ public class MemberController {
     }
 
     /* 로그인 */
-    @RequestMapping(value = "login.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     public String loginPOST(HttpServletRequest request, MemberVO memberVO, HttpSession session, RedirectAttributes rttr) throws Exception {
         logger.info("Login Processing");
 
@@ -145,7 +145,7 @@ public class MemberController {
         }*/
     }
 
-    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutMainGET(HttpServletRequest request) throws Exception {
         logger.info("logout Method 진입");
 
@@ -155,7 +155,7 @@ public class MemberController {
         return "redirect:/main";
     }
 
-    @RequestMapping(value = "logout.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/logout.do", method = RequestMethod.POST)
     @ResponseBody
     public void logoutPOST(HttpServletRequest request) throws  Exception {
         logger.info("비동기 로그아웃 메서드 진입");

@@ -6,7 +6,7 @@
 </head>
 <body>
     <!-- 로그인 하지 않았을때 -->
-    <c:if test="${member == null and kakaoMember == null}">
+    <c:if test="${member == null and kakaoMember == null and googleMember == null}">
         <div class="login_button"><a href="/member/login">Login</a></div>
         <span><a href="/member/signUp">SignUp</a></span>
     </c:if>
@@ -24,6 +24,12 @@
         <c:when test="${kakaoMember != null}">
             <div class="login_success_area">
                 <span>회원 : ${kakaoMember}</span>
+            </div>
+        </c:when>
+
+        <c:when test="${googleMember != null}">
+            <div class="login_success_area">
+                <span>회원 : ${googleMember}</span>
             </div>
         </c:when>
     </c:choose>

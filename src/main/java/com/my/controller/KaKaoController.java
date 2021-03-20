@@ -33,7 +33,7 @@ public class KaKaoController {
     private final static String K_CLIENT_ID ="27455cf079b38009ee0184c422408895";
     private final static String K_REDIRECT_URI = "http://localhost:8080/kakao/kakaoLogin.do";
 
-    @RequestMapping(value = "kakaoLogin", method = RequestMethod.GET)
+    @RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
     public ModelAndView kakaoLoginGET(HttpSession session) throws Exception {
         ModelAndView mav = new ModelAndView();
         String kakaoUrl = getAuthorizationUrl(session);
@@ -45,7 +45,6 @@ public class KaKaoController {
 
     @RequestMapping(value = "/kakaoLogin.do")
     public String kakaoLoginPOST(@RequestParam("code") String code, HttpSession session) throws Exception {
-        ModelAndView mav = new ModelAndView();
         String access_Token = getAccessToken(code);
         System.out.println("controller access_token : " + access_Token);
         HashMap<String, Object> userInfo = getUserInfo(access_Token);
@@ -59,7 +58,7 @@ public class KaKaoController {
         return "redirect:/main";
     }
 
-    @RequestMapping(value = "kakaoLogout", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/kakaoLogout", method = {RequestMethod.GET, RequestMethod.POST})
     public String kakaoLogoutPOST(HttpSession session) throws Exception {
         logOut((String) session.getAttribute("access_Token"));
         session.removeAttribute("access_Token");

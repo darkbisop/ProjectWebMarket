@@ -29,6 +29,18 @@
             }
         });
     });
+
+    $("#gnb_googleLogout_button").click(function () {
+        location.href="https://accounts.google.com/logout";
+        $.ajax({
+            type: "post",
+            async:false,
+            url: "/google/googleLogout",
+            success:function () {
+                document.location.reload();
+            }
+        });
+    });
 </script>
 </body>
 </html>

@@ -43,5 +43,17 @@
         <property name="maxUploadSize" value="10485760"/>
     </bean>
 
+    <bean id="googleConnectionFactory"
+          class="org.springframework.social.google.connect.GoogleConnectionFactory">
+        <constructor-arg value="253718818115-618288pgjbi00noh1fbdl69hve9bfhko.apps.googleusercontent.com" />
+        <constructor-arg value="-7sdRkfJ0o7Qgb6-U2Uss6jU" />
+    </bean>
+
+    <!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
+    <bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+        <property name="scope" value="https://www.googleapis.com/auth/plus.login" />
+        <property name="redirectUri" value="localhost:8080/google/googleLogin.do" />
+    </bean>
+
 
 </beans>
