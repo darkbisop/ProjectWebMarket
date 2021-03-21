@@ -19,4 +19,16 @@
         select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName, productPrice, productStock, productDescription, regdate, p.productImage, p.productThumbnail
         from product p inner join product_category c on p.categoryCode = c.categoryCode where p.productNum = #{productNum}
     </select>
+
+    <!-- 댓글 -->
+    <insert id="registReply">
+        insert into product_reply (productNum, memberId, replyContent, replyDate)
+                values (#{productNum}, #{memberId}, #{replyContent}, sysdate())
+    </insert>
+
+    <!-- 댓글 리스트 -->
+    <select id="replyList" resultType="com.my.model.ReplyVO">
+        select productNum, memberId, replyContent, replyDate
+             from product_reply where productNum = #{productNum} order by replyNum desc;
+    </select>
 </mapper>
