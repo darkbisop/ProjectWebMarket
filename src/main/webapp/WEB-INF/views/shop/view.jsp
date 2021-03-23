@@ -106,7 +106,7 @@
             <div id="container_box">
                 <section id="content">
                     <form role="form" method="post">
-                        <input type="hidden" name="productNum" value="${view.productNum}"
+                        <input type="hidden" name="productNum" value="${view.productNum}">
                     </form>
 
                     <div class="product">
@@ -170,6 +170,9 @@
                             </div>
 
                             <section class="replyList">
+                                <input type="hidden" id="currMember" name="currLoginId" value="${member.memberId}">
+                                <input type="hidden" id="currGoogle" name="currLoginId" value="${googleMember}">
+                                <input type="hidden" id="currKakao" name="currLoginId" value="${kakaoMember}">
                                 <ol>
                                     <%--<c:forEach items="${replyList}" var="reply">
                                         <li>
@@ -188,13 +191,25 @@
 
                                 <script>
                                     $(document).on("click", ".update", function(){
-                                        $(".replyModal").fadeIn(200);
+                                        let currId;
+                                        $("input[name='currLoginId']").each(function () {
+                                            if ($(this).val() !== "") {
+                                                currId = $(this).val();
+                                            }
+                                        });
 
-                                        var replyNum = $(this).attr("data-replyNum");
-                                        var replyContent = $(this).parent().parent().children(".replyContent").text();
+                                        var spanID = $(this).parent().parent().find(".userName").text();
 
-                                        $(".modal_replyContent").val(replyContent);
-                                        $(".modal_update_btn").attr("data-replyNum", replyNum);
+                                        if (currId === spanID) {
+                                            $(".replyModal").fadeIn(200);
+                                            var replyNum = $(this).attr("data-replyNum");
+                                            var replyContent = $(this).parent().parent().children(".replyContent").text();
+                                            $(".modal_replyContent").val(replyContent);
+                                            $(".modal_update_btn").attr("data-replyNum", replyNum);
+                                        } else {
+                                            alert("본인만 가능");
+                                        }
+
                                     });
 
                                     $(document).on("click", ".delete", function () {
