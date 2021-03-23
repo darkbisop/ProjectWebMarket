@@ -16,4 +16,10 @@ public interface ShopMapper {
     void registReply(ReplyVO replyVO) throws Exception;
 
     List<ReplyVO> replyList(int productNum) throws Exception;
+
+    void updateReply(ReplyVO replyVO) throws Exception;
+
+    void deleteReply(ReplyVO replyVO) throws Exception;
+
+    String idCheck(int replyNum) throws Exception;
 }

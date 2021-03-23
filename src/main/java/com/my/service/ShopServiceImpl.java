@@ -30,4 +30,16 @@ public class ShopServiceImpl implements ShopService{
     public List<ReplyVO> replyList(int productNum) throws Exception {
         return shopMapper.replyList(productNum);
     }
+
+    public void updateReply(ReplyVO replyVO) throws Exception {
+        shopMapper.updateReply(replyVO);
+    }
+
+    public void deleteReply(ReplyVO replyVO) throws Exception {
+        shopMapper.deleteReply(replyVO);
+    }
+
+    public String idCheck(int replyNum) throws Exception {
+        return shopMapper.idCheck(replyNum);
+    }
 }

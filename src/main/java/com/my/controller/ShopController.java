@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -40,13 +41,21 @@ public class ShopController {
         logger.info("product View");
         ProductVO view = shopService.productView(productNum);
         model.addAttribute("view", view);
-
-        List<ReplyVO> replyList = shopService.replyList(productNum);
-        model.addAttribute("replyList", replyList);
     }
 
-    @RequestMapping(value = "/view", method = RequestMethod.POST)
-    public String registReplyPOST(ReplyVO replyVO, HttpSession session) throws Exception {
+    @ResponseBody
+    @RequestMapping(value = "/view/replyList", method = RequestMethod.GET)
+    public List<ReplyVO> replyListGET(@RequestParam("n") int productNum) throws Exception {
+        logger.info("replyListGET");
+
+        List<ReplyVO> replyList = shopService.replyList(productNum);
+
+        return replyList;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/view/registReply", method = RequestMethod.POST)
+    public void registReplyPOST(ReplyVO replyVO, HttpSession session) throws Exception {
         logger.info("reply Regist");
         if (session.getAttribute("member") != null) {
             MemberVO memberVO = (MemberVO) session.getAttribute("member");
@@ -62,7 +71,117 @@ public class ShopController {
         }
 
         shopService.registReply(replyVO);
+    }
 
-        return "redirect:/shop/view?n=" + replyVO.getProductNum();
+    @ResponseBody
+    @RequestMapping(value = "/view/updateReply", method = RequestMethod.POST)
+    public int updateReplyPOST (ReplyVO replyVO, HttpSession session) throws Exception {
+        logger.info("update reply");
+        int result = 0;
+        String userId = shopService.idCheck(replyVO.getReplyNum());
+
+        if (session.getAttribute("member") != null) {
+            MemberVO memberVO = (MemberVO) session.getAttribute("member");
+
+            if (memberVO.getMemberId().equals(userId)) {
+                replyVO.setMemberId(memberVO.getMemberId());
+                shopService.updateReply(replyVO);
+                result = 1;
+            }
+
+
+        } else if (session.getAttribute("googleMember") != null) {
+            String member = (String)session.getAttribute("googleMember");
+
+            if (member.equals(userId)) {
+                replyVO.setMemberId(member);
+                shopService.updateReply(replyVO);
+                result = 1;
+            }
+
+        } else if (session.getAttribute("kakaoMember") != null) {
+            String member = (String)session.getAttribute("kakaoMember");
+
+            if (member.equals(userId)) {
+                replyVO.setMemberId(member);
+                shopService.updateReply(replyVO);
+                result = 1;
+            }
+        }
+
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/view/deleteReply", method = RequestMethod.POST)
+    public int deleteReplyPOST(ReplyVO replyVO, HttpSession session) throws Exception {
+        logger.info("post delete reply");
+        int result = 0;
+        String userId = shopService.idCheck(replyVO.getReplyNum());
+
+        if (session.getAttribute("member") != null) {
+            MemberVO memberVO = (MemberVO) session.getAttribute("member");
+
+            if (memberVO.getMemberId().equals(userId)) {
+                replyVO.setMemberId(memberVO.getMemberId());
+                shopService.deleteReply(replyVO);
+                result = 1;
+            }
+
+        } else if (session.getAttribute("googleMember") != null) {
+            String member = (String)session.getAttribute("googleMember");
+
+            if (member.equals(userId)) {
+                replyVO.setMemberId(member);
+                shopService.deleteReply(replyVO);
+                result = 1;
+            }
+
+        } else if (session.getAttribute("kakaoMember") != null) {
+            String member = (String)session.getAttribute("kakaoMember");
+
+            if (member.equals(userId)) {
+                replyVO.setMemberId(member);
+                shopService.deleteReply(replyVO);
+                result = 1;
+            }
+        }
+
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/view/idCheck", method = RequestMethod.POST)
+    public int idCheckPOST(ReplyVO replyVO, HttpSession session) throws Exception {
+        logger.info("post delete reply");
+        int result = 0;
+        String userId = shopService.idCheck(replyVO.getReplyNum());
+
+        if (session.getAttribute("member") != null) {
+            MemberVO memberVO = (MemberVO) session.getAttribute("member");
+
+            if (memberVO.getMemberId().equals(userId)) {
+                replyVO.setMemberId(memberVO.getMemberId());
+                result = 1;
+            }
+
+        } else if (session.getAttribute("googleMember") != null) {
+            String member = (String)session.getAttribute("googleMember");
+
+            if (member.equals(userId)) {
+                replyVO.setMemberId(member);
+                result = 1;
+            }
+
+        } else if (session.getAttribute("kakaoMember") != null) {
+            String member = (String)session.getAttribute("kakaoMember");
+
+            if (member.equals(userId)) {
+                replyVO.setMemberId(member);
+                result = 1;
+            }
+        }
+
+        return result;
     }
 }

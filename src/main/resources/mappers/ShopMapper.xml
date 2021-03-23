@@ -28,7 +28,24 @@
 
     <!-- 댓글 리스트 -->
     <select id="replyList" resultType="com.my.model.ReplyVO">
-        select productNum, memberId, replyContent, replyDate
+        select replyNum, productNum, memberId, replyContent, replyDate
              from product_reply where productNum = #{productNum} order by replyNum desc;
     </select>
+
+    <!-- 상품 소감(댓글) 수정 -->
+    <update id="updateReply">
+        update product_reply set replyContent = #{replyContent}
+        where replyNum = #{replyNum} and memberId = #{memberId}
+    </update>
+
+    <!-- 댓글 삭제 -->
+    <delete id="deleteReply">
+        delete from product_reply where replyNum = #{replyNum} and memberId = #{memberId}
+    </delete>
+
+    <!-- 아이디 체크 -->
+    <select id="idCheck" resultType="String">
+        select memberId from product_reply where replyNum = #{replyNum}
+    </select>
+
 </mapper>
