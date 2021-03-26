@@ -21,7 +21,9 @@
                 <li><a href="/admin/main">관리자 페이지</a> </li>
             </c:if>
             <li>상품목록</li>
-            <li>장바구니</li>
+            <li>
+                <a href="/shop/cartList">장바구니</a>
+            </li>
             <li>고객센터</li>
             <c:choose>
                 <c:when test="${googleMember != null}">

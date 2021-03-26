@@ -1,5 +1,6 @@
 package com.my.controller;
 
+import com.my.model.CartVO;
 import com.my.model.MemberVO;
 import com.my.model.ProductVO;
 import com.my.model.ReplyVO;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,7 +31,7 @@ public class ShopController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public void listGET(@RequestParam("c") int cateCode, @RequestParam("l") int level, Model model) throws Exception {
         logger.info("get list");
-        List<ProductVO> list = null;
+        List<ProductVO> list;
         list = shopService.list(cateCode);
 
         model.addAttribute("list", list);
@@ -183,5 +184,42 @@ public class ShopController {
         }
 
         return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/view/addCart", method = RequestMethod.POST)
+    public int addCartPOST(CartVO cartVO, HttpSession session, ProductVO productVO) throws Exception {
+        logger.info("add Cart");
+        int result = 0;
+
+        if (session.getAttribute("member") != null || session.getAttribute("googleMember") != null
+            || session.getAttribute("kakaoMember") != null) {
+            result = 1;
+        }
+
+        ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
+        if (cartList == null) {
+            cartList = new ArrayList<>();
+            session.setAttribute("cartList", cartList);
+            session.setMaxInactiveInterval(60 * 5);
+        }
+
+        if (productVO.getProductName().equals(cartVO.getProductName())) {
+            cartList.add(cartVO);
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/cartList", method = RequestMethod.GET)
+    public void cartListGET(HttpSession session, Model model) throws Exception {
+        logger.info("cartList");
+
+        ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
+        if (cartList == null) {
+            cartList = new ArrayList<>();
+        }
+
+        model.addAttribute("cartList", cartList);
     }
 }

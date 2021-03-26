@@ -1,12 +1,12 @@
 package com.my.service;
 
 import com.my.mapper.ShopMapper;
+import com.my.model.CartVO;
 import com.my.model.ProductVO;
 import com.my.model.ReplyVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Service("ShopService")

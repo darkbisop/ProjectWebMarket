@@ -1,5 +1,6 @@
 package com.my.service;
 
+import com.my.model.CartVO;
 import com.my.model.ProductVO;
 import com.my.model.ReplyVO;
 import org.springframework.stereotype.Repository;

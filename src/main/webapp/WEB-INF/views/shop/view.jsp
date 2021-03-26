@@ -42,8 +42,8 @@
         div.replyModal { position:relative; z-index:1; display: none; }
         div.modalBackground { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.8); z-index:-1; }
         div.modalContent { position:fixed; top:20%; left:calc(50% - 250px); width:500px; height:250px; padding:20px 10px; background:#fff; border:2px solid #666; }
-        div.modalContent textarea { font-size:16px; font-family:'맑은 고딕', verdana; padding:10px; width:500px; height:200px; }
-        div.modalContent button { font-size:20px; padding:5px 10px; margin:10px 0; background:#fff; border:1px solid #ccc; }
+        div.modalContent textarea { font-size:16px; font-family:'맑은 고딕', verdana; padding:10px; width:480px; height:200px; }
+        div.modalContent button { font-size:18px; padding:5px; margin:2px 0; background:#fff; border:1px solid #ccc; }
         div.modalContent button.modal_cancel_btnl { margin-left:20px; }
     </style>
 
@@ -107,6 +107,9 @@
                 <section id="content">
                     <form role="form" method="post">
                         <input type="hidden" name="productNum" value="${view.productNum}">
+                        <input type="hidden" class="productName" value="${view.productName}">
+                        <input type="hidden" class="productPrice" value="${view.productPrice}">
+                        <input type="hidden" class="productThumbnail" value="${view.productThumbnail}">
                     </form>
 
                     <div class="product">
@@ -121,9 +124,46 @@
                             <p class="productStock"><span>재고</span>${view.productStock}EA</p>
                             <p class="productDescription"><span>상품설명</span>${view.productDescription}</p>
                             <p class="cartStock"><span>구매 수량</span>
-                                <input type="number" min="1" maxlength="${view.productStock}" value="1" />
+                                <input type="number" class="inputStock" min="1" maxlength="${view.productStock}" value="1" />
                             </p>
-                            <p class="addToCart"><button type="button">카트에 담기</button></p>
+                            <p class="addToCart">
+                                <button type="button" class="addCart_btn">카트에 담기</button>
+
+                                <script>
+                                    $(".addCart_btn").click(function () {
+                                        const productNum = $("#productNum").val();
+                                        const productName = $(".productName").val();
+                                        const productPrice = $(".productPrice").val();
+                                        const productThumbnail = $(".productThumbnail").val();
+                                        const cartStock = $(".inputStock").val();
+
+                                        const data = {
+                                            productNum : productNum,
+                                            productName : productName,
+                                            productPrice : productPrice,
+                                            productThumbnail : productThumbnail,
+                                            cartStock : cartStock
+                                        };
+
+                                        $.ajax({
+                                            url : "/shop/view/addCart",
+                                            type : "post",
+                                            data : data,
+                                            success : function (result) {
+                                                if (result === 1) {
+                                                    alert("장바구니에 담았습니다.");
+                                                    $(".inputStock").val();
+                                                } else {
+                                                    alert("회원만 사용할 수 있습니다.")
+                                                }
+                                            },
+                                            error : function () {
+                                                alert("장바구니에 담는데 실패하였습니다.")
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </p>
                             <br>
 
                             <div id="reply">
@@ -142,27 +182,35 @@
                                             <div class="input_area">
                                                 <button type="button" id="reply_btn">소감 남기기기</button>
 
-                                                    <script>
-                                                        $("#reply_btn").click (function () {
-                                                           const productNum = $("#productNum").val();
-                                                           const replyContent = $("#replyContent").val();
+                                                <script>
+                                                    $("#reply_btn").click (function () {
 
-                                                           const data = {
-                                                               productNum : productNum,
-                                                               replyContent : replyContent
-                                                           };
+                                                        const productNum = $("#productNum").val();
+                                                        const replyContent = $("#replyContent").val();
+                                                        const replyConfirm = confirm("등록하시겠습니까?");
 
-                                                           $.ajax({
-                                                               url : "/shop/view/registReply",
-                                                               type : "post",
-                                                               data : data,
-                                                               success : function () {
-                                                                   replyList();
-                                                                   $("#replyContent").val("");
-                                                               }
-                                                           });
-                                                        });
-                                                    </script>
+                                                        const data = {
+                                                            productNum : productNum,
+                                                            replyContent : replyContent
+                                                        };
+
+                                                        if (replyConfirm) {
+                                                            if (replyContent !== "") {
+                                                                $.ajax({
+                                                                    url : "/shop/view/registReply",
+                                                                    type : "post",
+                                                                    data : data,
+                                                                    success : function () {
+                                                                        replyList();
+                                                                        $("#replyContent").val("");
+                                                                    }
+                                                                });
+                                                            } else {
+                                                                alert("공백은 입력할 수 없습니다.");
+                                                            }
+                                                        }
+                                                    });
+                                                </script>
                                            </div>
                                         </form>
                                     </section>
@@ -207,7 +255,7 @@
                                             $(".modal_replyContent").val(replyContent);
                                             $(".modal_update_btn").attr("data-replyNum", replyNum);
                                         } else {
-                                            alert("본인만 가능");
+                                            alert("작성자 본인만 수정 가능합니다");
                                         }
 
                                     });
