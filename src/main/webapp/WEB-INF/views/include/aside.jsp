@@ -40,19 +40,19 @@
             </ul>
          </li>
 
-         <li><a href="">머핀</a>
+         <li><a href="/shop/list?c=200&l=1">머핀</a>
              <ul class="low">
-                 <li><a href="#"></a>초콜릿 머핀</li>
-                 <li><a href="#"></a>딸기 머핀</li>
-                 <li><a href="#"></a>허니 머핀</li>
+                 <li><a href="/shop/list?c=201&l=2">초콜릿 머핀</a></li>
+                 <li><a href="/shop/list?c=202&l=2">딸기 머핀</a></li>
+                 <li><a href="/shop/list?c=203&l=2">허니 머핀</a></li>
              </ul>
          </li>
 
-         <li><a href="">브레드</a>
+         <li><a href="/shop/list?c=300&l=1">브레드</a>
              <ul class="low">
-                 <li><a href="#">초콜릿 브레드</a></li>
-                 <li><a href="#"></a>딸기 브레드</li>
-                 <li><a href="#"></a>허니 브레드</li>
+                 <li><a href="/shop/list?c=301&l=2">초콜릿 브레드</a></li>
+                 <li><a href="/shop/list?c=302&l=2">딸기 브레드</a></li>
+                 <li><a href="/shop/list?c=303&l=2">허니 브레드</a></li>
              </ul>
          </li>
      </ul>

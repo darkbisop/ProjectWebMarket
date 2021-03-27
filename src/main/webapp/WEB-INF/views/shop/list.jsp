@@ -19,7 +19,7 @@
 <div class="wrapper">
     <div class="wrap">
         <div class="top_gnb_area">
-            <%@include file="../include/nav.jsp"%>>
+            <%@include file="../include/nav.jsp"%>
         </div>
 
         <div class="top_area">

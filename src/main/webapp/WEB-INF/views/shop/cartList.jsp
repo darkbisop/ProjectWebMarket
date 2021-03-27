@@ -20,12 +20,37 @@
         section#content div.productInfo .delete button { font-size:22px;
             padding:5px 10px; border:1px solid #eee; background:#eee;}
     </style>
+
+    <script>
+        $(document).on("click", ".delete_btn", function(){
+            const productName = $(this).parent().parent().find(".goodsName").val();
+                console.log(productName);
+            const data = {
+                productName : productName
+            };
+
+            $.ajax({
+                url : "/shop/view/deleteCart?pN=" + productName,
+                type : "post",
+                data : data,
+                success : function (result) {
+                    if (result === 1) {
+                        alert("해당 상품을 삭제하였습니다");
+                        window.location.reload();
+                    }
+                },
+                error : function () {
+                    alert("삭제 하는데 실패하였습니다.")
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="wrapper">
     <div class="wrap">
         <div class="top_gnb_area">
-            <%@include file="../include/nav.jsp"%>>
+            <%@include file="../include/nav.jsp"%>
         </div>
 
         <div class="top_area">
@@ -59,6 +84,7 @@
                                 <div class="productInfo">
                                     <p>
                                         <span>상품명 : </span>${cartList.productName}<br />
+                                        <input type="hidden" class="goodsName" name="goodsName" value="${cartList.productName}">
                                         <span>개당 가격 : </span>
                                         <fmt:formatNumber pattern="###,###,###" value="${cartList.productPrice}"/> 원<br/>
                                         <span>구입 수량 : </span>${cartList.cartStock} 개<br/>

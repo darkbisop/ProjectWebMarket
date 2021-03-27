@@ -5,6 +5,8 @@ import com.my.model.MemberVO;
 import com.my.model.ProductVO;
 import com.my.model.ReplyVO;
 import com.my.service.ShopService;
+import com.mysql.cj.PreparedQuery;
+import org.apache.http.HttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -188,7 +191,7 @@ public class ShopController {
 
     @ResponseBody
     @RequestMapping(value = "/view/addCart", method = RequestMethod.POST)
-    public int addCartPOST(CartVO cartVO, HttpSession session, ProductVO productVO) throws Exception {
+    public int addCartPOST(@RequestParam("pN") String pN, CartVO cartVO, HttpSession session, ProductVO productVO) throws Exception {
         logger.info("add Cart");
         int result = 0;
 
@@ -204,7 +207,7 @@ public class ShopController {
             session.setMaxInactiveInterval(60 * 5);
         }
 
-        if (productVO.getProductName().equals(cartVO.getProductName())) {
+        if (pN.equals(cartVO.getProductName())) {
             cartList.add(cartVO);
         }
 
@@ -221,5 +224,26 @@ public class ShopController {
         }
 
         model.addAttribute("cartList", cartList);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/view/deleteCart", method = RequestMethod.POST)
+    public int deleteCart(@RequestParam("pN") String pN, HttpSession session) throws Exception {
+        logger.info("delete Cart");
+        int result = 0;
+        ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
+
+        if (cartList != null) {
+            for (int i = 0; i < cartList.size(); i++) {
+                CartVO product = cartList.get(i);
+
+                if (pN.equals(product.getProductName())) {
+                    cartList.remove(cartList.get(i));
+                    result = 1;
+                }
+            }
+        }
+
+        return result;
     }
 }

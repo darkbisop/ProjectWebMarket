@@ -14,7 +14,7 @@
         section#content div.productName { padding:10px 0; text-align:center; }
         section#content div.productName a { color:#000; }
         div.product div.productImage { float:left; width:350px; }
-        div.product div.productImage img { width:350px; height:auto; }
+        div.product div.productImage img { width:350px; height:350px; padding-left: 20px; }
 
         div.product div.productInfo { float:left; width:330px; font-size:18px; padding-top: 20px; padding-left: 70px; }
         div.product div.productInfo p { margin:0 0 20px 0; }
@@ -50,7 +50,7 @@
     <script>
         function replyList() {
             const productNum = ${view.productNum};
-            $.getJSON("/shop/view/replyList" + "?n=" + productNum, function (data) {
+            $.getJSON("/shop/view/replyList?n=" + productNum, function (data) {
                 let str = "";
                 $(data).each(function () {
                     console.log(data);
@@ -146,7 +146,7 @@
                                         };
 
                                         $.ajax({
-                                            url : "/shop/view/addCart",
+                                            url : "/shop/view/addCart?pN=" + productName,
                                             type : "post",
                                             data : data,
                                             success : function (result) {
@@ -246,7 +246,7 @@
                                             }
                                         });
 
-                                        var spanID = $(this).parent().parent().find(".userName").text();
+                                        const spanID = $(this).parent().parent().find(".userName").text();
 
                                         if (currId === spanID) {
                                             $(".replyModal").fadeIn(200);
