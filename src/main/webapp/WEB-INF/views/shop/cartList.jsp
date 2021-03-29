@@ -79,7 +79,7 @@
                         <c:forEach items="${cartList}" var="cartList">
                             <li>
                                 <div class="productThumb">
-                                   <img src="${cartList.productThumbnail}" alt=""></a>
+                                   <img src="${cartList.productThumbnail}" alt="">
                                 </div>
                                 <div class="productInfo">
                                     <p>
@@ -98,6 +98,9 @@
                             </li>
                         </c:forEach>
                     </ul>
+                    <br />
+                    <span>총 금액 :</span>
+                        <fmt:formatNumber pattern="###,###,###" value="${total}"/>
                 </section>
             </div>
         </section>

@@ -12,13 +12,14 @@ public class CartVO {
 
     private int num;
     private String productName;
+
     private int productPrice;
     private String productThumbnail;
+    private int totalPrice;
 
     public int getCartNum() {
         return cartNum;
     }
-
     public void setCartNum(int cartNum) {
         this.cartNum = cartNum;
     }
@@ -26,7 +27,6 @@ public class CartVO {
     public String getMemberId() {
         return memberId;
     }
-
     public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
@@ -34,7 +34,6 @@ public class CartVO {
     public int getProductNum() {
         return productNum;
     }
-
     public void setProductNum(int productNum) {
         this.productNum = productNum;
     }
@@ -42,7 +41,6 @@ public class CartVO {
     public int getCartStock() {
         return cartStock;
     }
-
     public void setCartStock(int cartStock) {
         this.cartStock = cartStock;
     }
@@ -50,7 +48,6 @@ public class CartVO {
     public Date getAddDate() {
         return addDate;
     }
-
     public void setAddDate(Date addDate) {
         this.addDate = addDate;
     }
@@ -58,7 +55,6 @@ public class CartVO {
     public int getNum() {
         return num;
     }
-
     public void setNum(int num) {
         this.num = num;
     }
@@ -66,7 +62,6 @@ public class CartVO {
     public String getProductName() {
         return productName;
     }
-
     public void setProductName(String productName) {
         this.productName = productName;
     }
@@ -74,7 +69,6 @@ public class CartVO {
     public int getProductPrice() {
         return productPrice;
     }
-
     public void setProductPrice(int productPrice) {
         this.productPrice = productPrice;
     }
@@ -82,8 +76,10 @@ public class CartVO {
     public String getProductThumbnail() {
         return productThumbnail;
     }
-
     public void setProductThumbnail(String productThumbnail) {
         this.productThumbnail = productThumbnail;
     }
+
+    public int getTotalPrice() { return totalPrice; }
+    public void setTotalPrice(int totalPrice) { this.totalPrice = totalPrice; }
 }

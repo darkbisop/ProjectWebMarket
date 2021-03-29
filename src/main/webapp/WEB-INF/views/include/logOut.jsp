@@ -3,8 +3,29 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        a:hover {
+            color: black;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+<c:if test="${member != null or kakaoMember != null or googleMember != null}">
+    <c:choose>
+        <c:when test="${googleMember != null}">
+            <a id="gnb_googleLogout_button">Logout</a>
+        </c:when>
+        <c:when test="${kakaoMember != null}">
+            <a id="gnb_kakaoLogout_button">Logout</a>
+        </c:when>
+        <c:when test="${member != null}">
+            <a id="gnb_logout_button">Logout</a>
+        </c:when>
+    </c:choose>
+</c:if>
+
 <script type="text/javascript">
     $("#gnb_logout_button").click(function() {
         $.ajax({

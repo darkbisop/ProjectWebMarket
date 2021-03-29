@@ -15,10 +15,7 @@
     <c:choose>
         <c:when test="${member != null}">
             <div class="login_success_area">
-                <span>회원 : ${member.memberName}</span>
-                <span>충전금액 : <fmt:formatNumber value = "${member.money}" pattern="\#,###,##" /></span>
-                <span>포인트 : <fmt:formatNumber value = "${member.point}" pattern="\#,###" /></span>
-                    <%--<a href="/member/logout.do">Logout</a>--%>
+                <span>회원 : ${member.memberName}</span><br/>
             </div>
         </c:when>
         <c:when test="${kakaoMember != null}">
@@ -26,12 +23,17 @@
                 <span>회원 : ${kakaoMember}</span>
             </div>
         </c:when>
-
         <c:when test="${googleMember != null}">
             <div class="login_success_area">
                 <span>회원 : ${googleMember}</span>
             </div>
         </c:when>
+
     </c:choose>
+    <c:if test="${member != null or kakaoMember != null or googleMember != null}">
+        <span>T : </span>
+        <fmt:formatNumber pattern="###,###,###" value="${total}"/>
+        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+    </c:if>
 </body>
 </html>

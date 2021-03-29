@@ -217,13 +217,20 @@ public class ShopController {
     @RequestMapping(value = "/cartList", method = RequestMethod.GET)
     public void cartListGET(HttpSession session, Model model) throws Exception {
         logger.info("cartList");
-
+        int sum = 0;
+        int total = 0;
         ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
         if (cartList == null) {
             cartList = new ArrayList<>();
         }
 
+        for (int i = 0; i < cartList.size(); i++) {
+            sum = cartList.get(i).getProductPrice() * cartList.get(i).getCartStock();
+            total = total + sum;
+        }
+
         model.addAttribute("cartList", cartList);
+        session.setAttribute("total", total);
     }
 
     @ResponseBody

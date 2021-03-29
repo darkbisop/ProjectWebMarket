@@ -116,7 +116,7 @@ public class MemberController {
 
        if (memberVO.getMemberPw().equals(member.getMemberPw())) {
            session.setAttribute("member", member);
-           return "redirect:/main";
+           return "redirect:/index";
        } else {
            return "redirect:/member/login";
        }
