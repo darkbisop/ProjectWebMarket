@@ -194,7 +194,8 @@ public class ShopController {
     public int addCartPOST(@RequestParam("pN") String pN, CartVO cartVO, HttpSession session, ProductVO productVO) throws Exception {
         logger.info("add Cart");
         int result = 0;
-
+        int total = 0;
+        int stock = 0;
         if (session.getAttribute("member") != null || session.getAttribute("googleMember") != null
             || session.getAttribute("kakaoMember") != null) {
             result = 1;
@@ -211,7 +212,32 @@ public class ShopController {
             cartList.add(cartVO);
         }
 
+        for (int i = 0; i < cartList.size(); i++) {
+            total = total + cartList.get(i).getProductPrice() * cartList.get(i).getCartStock();
+            stock =  stock + cartList.get(i).getCartStock();
+        }
+
+        session.setAttribute("total", total);
+        session.setAttribute("stock", stock);
+
         return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/view/calcCart", method = RequestMethod.POST)
+    public int calcCart(@RequestParam("pN") String pN, CartVO cartVO, HttpSession session, ProductVO productVO) throws Exception {
+        logger.info("calcCart");
+        int result = 0;
+        int total = 0;
+        int stock = 0;
+
+        ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
+        for (int i = 0; i < cartList.size(); i++) {
+            total = total + cartList.get(i).getProductPrice() * cartList.get(i).getCartStock();
+            stock =  stock + cartList.get(i).getCartStock();
+        }
+
+        return total;
     }
 
     @RequestMapping(value = "/cartList", method = RequestMethod.GET)
@@ -230,7 +256,6 @@ public class ShopController {
         }
 
         model.addAttribute("cartList", cartList);
-        session.setAttribute("total", total);
     }
 
     @ResponseBody

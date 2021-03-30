@@ -11,7 +11,7 @@
 <body>
 <!--header-->
 <script src="/resources/lighting/js/responsiveslides.min.js"></script>
-<script>
+<%--<script>
     $(function () {
         $("#slider").responsiveSlides({
             auto: true,
@@ -21,7 +21,7 @@
             pager: false,
         });
     });
-</script>
+</script>--%>
 
 <div class="header-top">
     <div class="header-bottom">

@@ -86,7 +86,7 @@ public class GoogleController {
             session.setAttribute("token", result.getAccessToken());
         }
 
-        return "redirect:/main";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/googleLogout", method = {RequestMethod.GET, RequestMethod.POST})
@@ -95,7 +95,7 @@ public class GoogleController {
         session.removeAttribute("googleMember");
         session.invalidate();
 
-        return "redirect:/main";
+        return "redirect:/index";
     }
 
     public static String getAuthorizationUrl(HttpSession session) {

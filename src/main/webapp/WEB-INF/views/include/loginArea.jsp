@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Title</title>
+
 </head>
 <body>
     <!-- 로그인 하지 않았을때 -->
@@ -31,9 +32,8 @@
 
     </c:choose>
     <c:if test="${member != null or kakaoMember != null or googleMember != null}">
-        <span>T : </span>
-        <fmt:formatNumber pattern="###,###,###" value="${total}"/>
-        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+        <span id="message"><img src="../resources/lighting/images/cartImg.png" alt="" width="30px" height="30px"> : </span>
+        <fmt:formatNumber pattern="###,###,###" value="${total}"/> (${stock})
     </c:if>
 </body>
 </html>

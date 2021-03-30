@@ -56,7 +56,7 @@ public class KaKaoController {
             session.setAttribute("access_Token", access_Token);
         }
 
-        return "redirect:/main";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/kakaoLogout", method = {RequestMethod.GET, RequestMethod.POST})
@@ -65,7 +65,7 @@ public class KaKaoController {
         session.removeAttribute("access_Token");
         session.removeAttribute("kakaoMember");
 
-        return "redirect:/main";
+        return "redirect:/index";
     }
 
     public static String getAuthorizationUrl(HttpSession session) {
