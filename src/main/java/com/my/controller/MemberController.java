@@ -68,7 +68,7 @@ public class MemberController {
         HttpSession session = request.getSession();
         MemberVO member = memberService.memberLogin(memberVO);
         session.setAttribute("member", member);
-        return "redirect:/main";
+        return "redirect:/index";
     }
 
     // 로그인 페이지 이동
@@ -152,7 +152,7 @@ public class MemberController {
         HttpSession session = request.getSession();
         session.removeAttribute("member");
 
-        return "redirect:/main";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/logout.do", method = RequestMethod.POST)

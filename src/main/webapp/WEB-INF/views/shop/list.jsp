@@ -27,17 +27,8 @@
         </div>
         <!---->
         <div class="cart box_1">
-            <script>
-                function calcTotal(total) {
-                    console.log(total);
-                    let calcTotal = "";
-
-                    calcTotal += "<span>" + " : " + total + "</span>";
-                    $("#message").html(calcTotal);
-                }
-            </script>
-            <img src="/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px">
-            <span id="message"></span>
+            <%@include file="../include/loginArea.jsp"%>
+            <%@include file="../include/logOut.jsp"%>
             <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
             <div class="clearfix"> </div>
         </div>
@@ -100,9 +91,9 @@
                             <div class="clearfix"> </div>
                         </ul>
                         <div class="single-bottom">
-                            <a href="#"><p>Chocolate Cake</p></a>
-                            <a href="#"><p>Strawberry Cake</p></a>
-                            <a href="#"><p>Honey Cake</p></a>
+                            <a href="/shop/list?c=101&l=2"><p>Chocolate Cake</p></a>
+                            <a href="/shop/list?c=102&l=2"><p>Strawberry Cake</p></a>
+                            <a href="/shop/list?c=103&l=2"><p>Honey Cake</p></a>
                         </div>
                     </div>
                     <div class="tab2">
@@ -112,9 +103,9 @@
                             <div class="clearfix"> </div>
                         </ul>
                         <div class="single-bottom">
-                            <a href="#"><p>Chocolate Muffin</p></a>
-                            <a href="#"><p>Strawberry Muffin</p></a>
-                            <a href="#"><p>Honey Muffin</p></a>
+                            <a href="/shop/list?c=201&l=2"><p>Chocolate Muffin</p></a>
+                            <a href="/shop/list?c=202&l=2"><p>Strawberry Muffin</p></a>
+                            <a href="/shop/list?c=203&l=2"><p>Honey Muffin</p></a>
                         </div>
                     </div>
                     <div class="tab3">
@@ -124,9 +115,9 @@
                             <div class="clearfix"> </div>
                         </ul>
                         <div class="single-bottom">
-                            <a href="#"><p>Chocolate Muffin</p></a>
-                            <a href="#"><p>Strawberry Muffin</p></a>
-                            <a href="#"><p>Honey Muffin</p></a>
+                            <a href="/shop/list?c=301&l=2"><p>Chocolate Muffin</p></a>
+                            <a href="/shop/list?c=302&l=2"><p>Strawberry Muffin</p></a>
+                            <a href="/shop/list?c=303&l=2"><p>Honey Muffin</p></a>
                         </div>
                     </div>
                     <!--script-->
@@ -170,60 +161,11 @@
 </div>
 <!---->
 <div class="footer">
-    <div class="container">
-        <div class="footer-grids">
-            <div class="col-md-3 about-us">
-                <h3>About Us</h3>
-                <p>Maecenas nec auctor sem. Vivamus porttitor tincidunt elementum nisi a, euismod rhoncus urna. Curabitur scelerisque vulputate arcu eu pulvinar. Fusce vel neque diam</p>
-            </div>
-            <div class="col-md-3 ftr-grid">
-                <h3>Information</h3>
-                <ul class="nav-bottom">
-                    <li><a href="#">Track Order</a></li>
-                    <li><a href="#">New Products</a></li>
-                    <li><a href="#">Location</a></li>
-                    <li><a href="#">Our Stores</a></li>
-                    <li><a href="#">Best Sellers</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 ftr-grid">
-                <h3>More Info</h3>
-                <ul class="nav-bottom">
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Membership</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 ftr-grid">
-                <h3>Categories</h3>
-                <ul class="nav-bottom">
-                    <li><a href="#">Car Lights</a></li>
-                    <li><a href="#">LED Lights</a></li>
-                    <li><a href="#">Decorates</a></li>
-                    <li><a href="#">Wall Lights</a></li>
-                    <li><a href="#">Protectors</a></li>
-                </ul>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
+    <%@ include file="../include/footer.jsp"%>
 </div>
+<!---->
 <div class="copywrite">
-    <div class="container">
-        <div class="copy">
-            <p>© 2015 Lighting. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
-        </div>
-        <div class="social">
-            <a href="#"><i class="facebook"></i></a>
-            <a href="#"><i class="twitter"></i></a>
-            <a href="#"><i class="dribble"></i></a>
-            <a href="#"><i class="google"></i></a>
-            <a href="#"><i class="youtube"></i></a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
+    <%@ include file="../include/copywrite.jsp"%>
 </div>
 <!---->
 </body>

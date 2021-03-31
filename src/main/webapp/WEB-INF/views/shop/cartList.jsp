@@ -4,27 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Welcome to BookMall</title>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/resources/css/main.css?after">
-    <style>
-        section#content ul li { margin:10px 0; }
-        section#content ul li img { width:250px; height:250px; }
-        section#content ul li::after { content:""; display:block; clear:both; }
-        section#content div.productThumb { float:left; width:250px; }
-        section#content div.productInfo { float:right; width:calc(100% - 270px); }
-        section#content div.productInfo { font-size:20px; line-height:2; }
-        section#content div.productInfo span { display:inline-block; width:100px; font-weight:bold; margin-right:10px; }
-        section#content div.productInfo .delete { text-align:right; }
-        section#content div.productInfo .delete button { font-size:22px;
-            padding:5px 10px; border:1px solid #eee; background:#eee;}
-    </style>
+    <%@ include file="../include/header.jsp"%>
 
     <script>
         $(document).on("click", ".delete_btn", function(){
             const productName = $(this).parent().parent().find(".goodsName").val();
-                console.log(productName);
+            console.log(productName);
             const data = {
                 productName : productName
             };
@@ -47,66 +32,116 @@
     </script>
 </head>
 <body>
-<div class="wrapper">
-    <div class="wrap">
-        <div class="top_gnb_area">
-            <%@include file="../include/nav.jsp"%>
+<!-- header -->
+<div class="header-top">
+    <div class="header-bottom">
+        <div class="logo">
+            <h1><a href="index.html">Lighting</a></h1>
         </div>
-
-        <div class="top_area">
-            <div class="logo_area">
-                <%@include file="../include/aside.jsp"%>
+        <!---->
+        <div class="top-nav">
+            <%@include file="../include/aside.jsp"%>
+        </div>
+        <!---->
+        <div class="cart box_1">
+            <a href="/shop/cartList">
+                <%@ include file="../include/loginArea.jsp"%>
+                <%@ include file="../include/logOut.jsp"%>
+            </a>
+            <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+        <!---->
+    </div>
+    <div class="clearfix"> </div>
+</div>
+<!-- check out -->
+<div class="container">
+    <div class="check-sec">
+        <div class="col-md-3 cart-total">
+            <a class="continue" href="/shop/list?c=100&l=1">Continue to basket</a>
+            <div class="price-details">
+                <h3>Price Details</h3>
+                <span>Total</span>
+                <span class="total1">${total}</span>
+                <span>Discount</span>
+                <span class="total1">10%(Festival Offer)</span>
+                <span>Delivery Charges</span>
+                <span class="total1">${total}</span>
+                <div class="clearfix"></div>
             </div>
-
-            <div class="search_area">
-                <h1>search area</h1>
-            </div>
-
-            <div class="login_area">
-                <%@include file="../include/loginArea.jsp"%>
-            </div>
-            <div class="clearfix">
+            <ul class="total_price">
+                <li class="last_price"> <h4>TOTAL</h4></li>
+                <li class="last_price"><span>${total}</span></li>
+            </ul>
+            <div class="clearfix"></div>
+            <div class="clearfix"></div>
+            <a class="order" href="#">Place Order</a>
+            <div class="total-item">
+                <h3>OPTIONS</h3>
+                <h4>COUPONS</h4>
+                <a class="cpns" href="#">Apply Coupons</a>
             </div>
         </div>
+        <div class="col-md-9 cart-items">
+            <h1>My Shopping Bag</h1>
+            <div class="cart-header">
+                <c:forEach items="${cartList}" var="cartList">
+                   <%-- <div class="close1 delete_btn"> </div>--%>
+                    <div class="delete close">
+                        <button type="button" class="delete_btn">X</button>
+                    </div>
+                    <div class="cart-sec simpleCart_shelfItem">
+                        <div class="cart-item cyc">
+                            <img src="${cartList.productThumbnail}" alt="" width="120" height="140">
+                        </div>
+                        <div class="cart-item-info">
+                            <span><h3>${cartList.productName}</h3></span>
+                            <input type="hidden" class="goodsName" name="goodsName" value="${cartList.productName}">
+                            <ul class="qty">
+                                <li><p>Size : 5</p></li>
+                                <li><p>Qty : ${cartList.cartStock}</p></li>
+                            </ul>
+                            <div class="delivery">
+                                <p>Service Charges : <fmt:formatNumber pattern="###,###,###" value="${cartList.productPrice * cartList.cartStock}"/></p>
+                                <span>Delivered in 2-3 bussiness days</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
 
-        <div class="navi_bar_area">
-            <h1>navi bar</h1>
-        </div>
-        <section id="container">
-            <div id="container_box">
-                <section id="content">
-                    <ul>
-                        <c:forEach items="${cartList}" var="cartList">
-                            <li>
-                                <div class="productThumb">
-                                   <img src="${cartList.productThumbnail}" alt="">
-                                </div>
-                                <div class="productInfo">
-                                    <p>
-                                        <span>상품명 : </span>${cartList.productName}<br />
-                                        <input type="hidden" class="goodsName" name="goodsName" value="${cartList.productName}">
-                                        <span>개당 가격 : </span>
-                                        <fmt:formatNumber pattern="###,###,###" value="${cartList.productPrice}"/> 원<br/>
-                                        <span>구입 수량 : </span>${cartList.cartStock} 개<br/>
-                                        <span>최종 가격 : </span>
-                                        <fmt:formatNumber pattern="###,###,###" value="${cartList.productPrice * cartList.cartStock}"/> 원
-                                    </p>
-                                    <div class="delete">
-                                        <button type="button" class="delete_btn">삭제</button>
-                                    </div>
-                                </div>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                    <br />
-                    <span>총 금액 :</span>
-                        <fmt:formatNumber pattern="###,###,###" value="${total}"/>
-                </section>
+                        </div>
+                    </div>
+                    <%--<script>$(document).ready(function(c) {
+                        $('.close1').on('click', function(c){
+                            $('.cart-header').fadeOut('slow', function(c){
+                                $('.cart-header').remove();
+                            });
+                        });
+                    });
+                    </script>--%>
+                </c:forEach>
             </div>
-        </section>
+            </div>
+        </div>
+    </div>
+<div class="subscribe">
+    <div class="container">
+        <h3>Newsletter</h3>
+        <form>
+            <input type="text" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
+            <input type="submit" value="Subscribe">
+        </form>
     </div>
 </div>
-
-<%@include file="../include/logOut.jsp"%>
+<!---->
+<div class="footer">
+    <%@ include file="../include/footer.jsp"%>
+</div>
+<!---->
+<div class="copywrite">
+    <%@ include file="../include/copywrite.jsp"%>
+</div>
+<!---->
 </body>
 </html>

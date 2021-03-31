@@ -34,7 +34,7 @@
             url: "/member/logout.do",
             success:function () {
                 alert("로그아웃에 성공하였습니다");
-                document.location.reload();
+               window.location.href = "/index";
             }
         });
     });
@@ -46,7 +46,7 @@
             async:false,
             url: "/kakao/kakaoLogout",
             success:function () {
-                document.location.reload();
+                window.location.href = "/index";
             }
         });
     });
@@ -58,7 +58,7 @@
             async:false,
             url: "/google/googleLogout",
             success:function () {
-                document.location.reload();
+                window.location.href = "/index";
             }
         });
     });

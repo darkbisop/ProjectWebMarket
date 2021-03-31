@@ -39,8 +39,8 @@
             </div>
         </div>
     </li>
-    <li class="grid"><a href="typo.html">Typo</a></li>
-    <li class="grid"><a href="contact.html">Contact</a></li>
+    <li class="grid"><a href="#">Typo</a></li>
+    <li class="grid"><a href="#">Contact</a></li>
     <c:if test="${member != null and member.adminCk == 1}">
         <li class="grid active"><a href="/admin/main">관리자 페이지</a></li>
     </c:if>

@@ -3,9 +3,14 @@
 <html>
 <head>
     <title>Title</title>
-
+    <style type="text/css">
+        a:link { color: red; text-decoration: none;}
+        a:visited { color: black; text-decoration: none;}
+        a:hover { color: blue; text-decoration: none;}
+    </style>
 </head>
 <body>
+<a href="/shop/cartList">
     <!-- 로그인 하지 않았을때 -->
     <c:if test="${member == null and kakaoMember == null and googleMember == null}">
         <div class="login_button"><a href="/member/login">Login</a></div>
@@ -29,11 +34,12 @@
                 <span>회원 : ${googleMember}</span>
             </div>
         </c:when>
-
     </c:choose>
+
     <c:if test="${member != null or kakaoMember != null or googleMember != null}">
         <span id="message"><img src="../resources/lighting/images/cartImg.png" alt="" width="30px" height="30px"> : </span>
         <fmt:formatNumber pattern="###,###,###" value="${total}"/> (${stock})
     </c:if>
+</a>
 </body>
 </html>

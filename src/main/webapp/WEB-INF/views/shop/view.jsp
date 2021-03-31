@@ -9,6 +9,7 @@
     <link href="/resources/lighting/css/form.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="/resources/lighting/css/flexslider.css" type="text/css" media="screen" />
     <script>
+        let confirm;
         function replyList() {
             const productNum = ${view.productNum};
             $.getJSON("/shop/view/replyList?n=" + productNum, function (data) {
@@ -50,25 +51,39 @@
         </div>
         <!---->
         <div class="cart box_1">
-   <%--         <%@include file="../include/loginArea.jsp"%>
-            <%@include file="../include/logOut.jsp"%>--%>
-            <script>
-                function calcTotal(total) {
-                    console.log(total);
-                    let calcTotal = "";
+            <a href="/shop/cartList">
+                <c:choose>
+                    <c:when test="${member != null}">
+                        <div class="login_success_area">
+                            <span>회원 : ${member.memberName}</span><br/>
+                        </div>
+                    </c:when>
+                    <c:when test="${kakaoMember != null}">
+                        <div class="login_success_area">
+                            <span>회원 : ${kakaoMember}</span>
+                        </div>
+                    </c:when>
+                    <c:when test="${googleMember != null}">
+                        <div class="login_success_area">
+                            <span>회원 : ${googleMember}</span>
+                        </div>
+                    </c:when>
+                </c:choose>
 
-                    calcTotal += "<span>" + " : " + total + "</span>";
-                    $("#message").html(calcTotal);
-                }
-            </script>
-            <img src="/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px">
-            <span id="message"></span>
-          <%--  <fmt:formatNumber pattern="###,###,###" value="${total}"/> (${stock})--%>
-           <%-- <a href="checkout.html">
-                <div class="total">
-                    <span class="simpleCart_total"></span> (<span value=${".inputStock"}></span>)</div>
-                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-            </a>--%>
+                <script>
+                    function calcTotal(total, stock) {
+                        let calcTotal = "";
+                        calcTotal += "<span>" + " : " + total + " " + "(" + stock + ")" + "</span>";
+                        /*calcTotal += "<span>" + " : " + total + " " + "(" + stock + ")" + "</span>";*/
+                        $("#message").html(calcTotal);
+                    }
+                </script>
+                <img src="/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px">
+                <c:if test="${member != null or kakaoMember != null or googleMember != null}">
+                    <span id="message">${total}</span>
+                </c:if>
+            </a>
+            <%@include file="../include/logOut.jsp"%>
             <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
             <div class="clearfix"> </div>
         </div>
@@ -142,7 +157,6 @@
                                     const productPrice = $(".productPrice").val();
                                     const productThumbnail = $(".productThumbnail").val();
                                     const cartStock = $(".inputStock").val();
-
                                     const data = {
                                         productNum : productNum,
                                         productName : productName,
@@ -155,25 +169,17 @@
                                         url : "/shop/view/addCart?pN=" + productName,
                                         type : "post",
                                         data : data,
-                                        success : function (result) {
-                                            if (result === 1) {
+                                        success : function (retVal) {
+                                            if (retVal.result === 1) {
                                                 alert("장바구니에 담았습니다.");
                                                 $(".inputStock").val();
+                                                calcTotal(retVal.total, retVal.stock);
                                             } else {
                                                 alert("회원만 사용할 수 있습니다.")
                                             }
                                         },
                                         error : function () {
                                             alert("장바구니에 담는데 실패하였습니다.")
-                                        }
-                                    });
-                                    $.ajax({
-                                        url : "/shop/view/calcCart?pN=" + productName,
-                                        type : "post",
-                                        data : data,
-                                        async : true,
-                                        success : function (total) {
-                                            calcTotal(total);
                                         }
                                     });
                                 });
@@ -402,60 +408,11 @@
 </div>
 <!---->
 <div class="footer">
-    <div class="container">
-        <div class="footer-grids">
-            <div class="col-md-3 about-us">
-                <h3>About Us</h3>
-                <p>Maecenas nec auctor sem. Vivamus porttitor tincidunt elementum nisi a, euismod rhoncus urna. Curabitur scelerisque vulputate arcu eu pulvinar. Fusce vel neque diam</p>
-            </div>
-            <div class="col-md-3 ftr-grid">
-                <h3>Information</h3>
-                <ul class="nav-bottom">
-                    <li><a href="#">Track Order</a></li>
-                    <li><a href="#">New Products</a></li>
-                    <li><a href="#">Location</a></li>
-                    <li><a href="#">Our Stores</a></li>
-                    <li><a href="#">Best Sellers</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 ftr-grid">
-                <h3>More Info</h3>
-                <ul class="nav-bottom">
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Membership</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 ftr-grid">
-                <h3>Categories</h3>
-                <ul class="nav-bottom">
-                    <li><a href="#">Car Lights</a></li>
-                    <li><a href="#">LED Lights</a></li>
-                    <li><a href="#">Decorates</a></li>
-                    <li><a href="#">Wall Lights</a></li>
-                    <li><a href="#">Protectors</a></li>
-                </ul>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
+    <%@ include file="../include/footer.jsp"%>
 </div>
+<!---->
 <div class="copywrite">
-    <div class="container">
-        <div class="copy">
-            <p>© 2015 Lighting. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
-        </div>
-        <div class="social">
-            <a href="#"><i class="facebook"></i></a>
-            <a href="#"><i class="twitter"></i></a>
-            <a href="#"><i class="dribble"></i></a>
-            <a href="#"><i class="google"></i></a>
-            <a href="#"><i class="youtube"></i></a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
+    <%@ include file="../include/copywrite.jsp"%>
 </div>
 <!---->
 </body>

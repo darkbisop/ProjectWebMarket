@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/shop")
@@ -191,11 +193,12 @@ public class ShopController {
 
     @ResponseBody
     @RequestMapping(value = "/view/addCart", method = RequestMethod.POST)
-    public int addCartPOST(@RequestParam("pN") String pN, CartVO cartVO, HttpSession session, ProductVO productVO) throws Exception {
+    public Object addCartPOST(@RequestParam("pN") String pN, CartVO cartVO, HttpSession session, ProductVO productVO) throws Exception {
         logger.info("add Cart");
         int result = 0;
         int total = 0;
         int stock = 0;
+        Map<String, Object> retVal = new HashMap<String, Object>();
         if (session.getAttribute("member") != null || session.getAttribute("googleMember") != null
             || session.getAttribute("kakaoMember") != null) {
             result = 1;
@@ -214,45 +217,26 @@ public class ShopController {
 
         for (int i = 0; i < cartList.size(); i++) {
             total = total + cartList.get(i).getProductPrice() * cartList.get(i).getCartStock();
+            cartList.get(i).setTotalPrice(total);
             stock =  stock + cartList.get(i).getCartStock();
         }
+
+        retVal.put("total", total);
+        retVal.put("stock", stock);
+        retVal.put("result", result);
 
         session.setAttribute("total", total);
         session.setAttribute("stock", stock);
 
-        return result;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/view/calcCart", method = RequestMethod.POST)
-    public int calcCart(@RequestParam("pN") String pN, CartVO cartVO, HttpSession session, ProductVO productVO) throws Exception {
-        logger.info("calcCart");
-        int result = 0;
-        int total = 0;
-        int stock = 0;
-
-        ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
-        for (int i = 0; i < cartList.size(); i++) {
-            total = total + cartList.get(i).getProductPrice() * cartList.get(i).getCartStock();
-            stock =  stock + cartList.get(i).getCartStock();
-        }
-
-        return total;
+        return retVal;
     }
 
     @RequestMapping(value = "/cartList", method = RequestMethod.GET)
     public void cartListGET(HttpSession session, Model model) throws Exception {
         logger.info("cartList");
-        int sum = 0;
-        int total = 0;
         ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
         if (cartList == null) {
             cartList = new ArrayList<>();
-        }
-
-        for (int i = 0; i < cartList.size(); i++) {
-            sum = cartList.get(i).getProductPrice() * cartList.get(i).getCartStock();
-            total = total + sum;
         }
 
         model.addAttribute("cartList", cartList);
@@ -263,18 +247,27 @@ public class ShopController {
     public int deleteCart(@RequestParam("pN") String pN, HttpSession session) throws Exception {
         logger.info("delete Cart");
         int result = 0;
+        int total = 0;
+        int stock = 0;
+        Map<String, Object> retVal = new HashMap<String, Object>();
         ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
+        int totalPrice = (int) session.getAttribute("total");
+        int totalStock = (int) session.getAttribute("stock");
 
         if (cartList != null) {
             for (int i = 0; i < cartList.size(); i++) {
                 CartVO product = cartList.get(i);
-
                 if (pN.equals(product.getProductName())) {
+                    totalPrice = totalPrice - (cartList.get(i).getProductPrice() * cartList.get(i).getCartStock());
+                    totalStock = totalStock - cartList.get(i).getCartStock();
                     cartList.remove(cartList.get(i));
                     result = 1;
                 }
             }
         }
+
+        session.setAttribute("total", totalPrice);
+        session.setAttribute("stock", totalStock);
 
         return result;
     }
