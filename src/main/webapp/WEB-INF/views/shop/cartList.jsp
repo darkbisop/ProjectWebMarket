@@ -94,7 +94,7 @@
                     </div>
                     <div class="cart-sec simpleCart_shelfItem">
                         <div class="cart-item cyc">
-                            <img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${cartList.productThumbnail}" alt="" width="120" height="140">
+                            <img src="/ProjectWebMarket/resources${cartList.productThumbnail}" alt="" width="120" height="140">
                         </div>
                         <div class="cart-item-info">
                             <span><h3>${cartList.productName}</h3></span>

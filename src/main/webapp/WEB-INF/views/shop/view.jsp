@@ -50,14 +50,13 @@
         </div>
         <!---->
         <div class="cart box_1">
-            <c:if test="${member == null and kakaoMember == null and googleMember == null}">
-                <div class="login_button"><a href="${pageContext.request.contextPath}/member/login">Login</a></div>
-                <span><a href="${pageContext.request.contextPath}/member/signUp">SignUp</a></span>
-            </c:if>
+            <a href="${pageContext.request.contextPath}/shop/cartList">
+                <c:if test="${member == null and kakaoMember == null and googleMember == null}">
+                    <div class="login_button"><a href="${pageContext.request.contextPath}/member/login">Login</a></div>
+                    <span><a href="${pageContext.request.contextPath}/member/signUp">SignUp</a></span>
+                </c:if>
+
                 <c:choose>
-                    <c:when test="${member != null or kakaoMember != null or googleMember == null}">
-                     <a href="${pageContext.request.contextPath}/shop/cartList">
-                    </c:when>
                     <c:when test="${member != null}">
                         <div class="login_success_area">
                             <span>회원 : ${member.memberName}</span><br/>
@@ -75,16 +74,19 @@
                     </c:when>
                 </c:choose>
 
-                <script>
-                    function calcTotal(total, stock) {
-                        let calcTotal = "";
-                        calcTotal += "<span>" + " : " + total + " " + "(" + stock + ")" + "</span>";
-                        $("#message").html(calcTotal);
-                    }
-                </script>
-                <img src="${pageContext.request.contextPath}/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px">
                 <c:if test="${member != null or kakaoMember != null or googleMember != null}">
-                    <span id="message">${total}</span>
+                    <span id="message"><img src="${pageContext.request.contextPath}/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px"> : </span>
+                    <fmt:formatNumber pattern="###,###,###" value="${total}"/> (${stock})
+                    <script>
+                        function calcTotal(total, stock) {
+                            let calcTotal = "";
+                            calcTotal += "<span>" + " : " + total + " " + "(" + stock + ")" + "</span>";
+                            $("#message").html(calcTotal);
+                        }
+                    </script>
+                    <c:if test="${member != null or kakaoMember != null or googleMember != null}">
+                        <span id="message">${total}</span>
+                    </c:if>
                 </c:if>
             </a>
             <%@include file="../include/logOut.jsp"%>
@@ -111,7 +113,7 @@
                     <div class="productImage">
                         <ul class="slides">
                             <li data-thumb="${view.productImage}">
-                                <div class="thumb-image"> <img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${view.productImage}" data-imagezoom="true" <%--class="img-responsive"--%> alt=""/> </div>
+                                <div class="thumb-image"> <img src="/ProjectWebMarket/resources${view.productImage}" data-imagezoom="true" <%--class="img-responsive"--%> alt=""/> </div>
                             </li>
                         </ul>
                     </div>

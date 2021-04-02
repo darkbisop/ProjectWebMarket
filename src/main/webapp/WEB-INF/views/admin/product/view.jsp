@@ -64,10 +64,10 @@
         <div class="input_Area">
             <label>이미지</label>
             <p>원본 이미지</p>
-            <img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${product.productImage}" class="origImg" />
+            <img src="/ProjectWebMarket/resources${product.productImage}" class="origImg" />
 
             <p>섬네일</p>
-            <img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${product.productThumbnail}" class="thumbImg"/>
+            <img src="/ProjectWebMarket/resources${product.productThumbnail}" class="thumbImg"/>
         </div>
 
         <div class="input_Area">

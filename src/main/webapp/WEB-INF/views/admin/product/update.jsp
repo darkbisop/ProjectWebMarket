@@ -62,9 +62,9 @@
             <label for="productImage">이미지</label>
             <input type="file" id="productImage" name="file" />
             <div class="select_img">
-                <img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${product.productImage}" alt="">
-                <input type="hidden" name="productImage" value="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${product.productImage}" />
-                <input type="hidden" name="productThumbnail" value="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${product.productThumbnail}" />
+                <img src="/ProjectWebMarket/resources${product.productImage}" alt="">
+                <input type="hidden" name="productImage" value="${product.productImage}" />
+                <input type="hidden" name="productThumbnail" value="${product.productThumbnail}" />
             </div>
             <%= request.getSession().getServletContext().getRealPath("/")%>
         </div>
