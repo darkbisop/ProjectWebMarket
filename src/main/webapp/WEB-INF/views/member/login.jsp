@@ -8,9 +8,9 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="/resources/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/dist/css/adminlte.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/RSA/jsbn.js"></script>
@@ -27,7 +27,7 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form action="/member/login.do" method="post" id="loginForm">
+                <form action="${pageContext.request.contextPath}/member/login.do" method="post" id="loginForm">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
@@ -60,11 +60,11 @@
 
                 <div class="social-auth-links text-center mb-3">
                     <p>- OR -</p>
-                    <p><a href="/google/googleLogin">
-                        <img src="/resources/dist/img/btn_google_signin_dark_normal_web.png"  alt=""/>
+                    <p><a href="${pageContext.request.contextPath}/google/googleLogin">
+                        <img src="${pageContext.request.contextPath}/resources/dist/img/btn_google_signin_dark_normal_web.png"  alt=""/>
                     </a></p>
-                    <a href="/kakao/kakaoLogin">
-                        <img src="/resources/dist/img/kakao_login_medium_narrow.png"  alt=""/>
+                    <a href="${pageContext.request.contextPath}/kakao/kakaoLogin">
+                        <img src="${pageContext.request.contextPath}/resources/dist/img/kakao_login_medium_narrow.png"  alt=""/>
                     </a>
                 </div>
 
@@ -79,7 +79,7 @@
     </div>
 
     <!-- 실제 서버로 전송되는 form -->
-    <form action="/member/login.do" method="post" id="hiddenForm">
+    <form action="${pageContext.request.contextPath}/member/login.do" method="post" id="hiddenForm">
         <input type="hidden" name="memberId" />
         <input type="hidden" name="memberPw" />
     </form>

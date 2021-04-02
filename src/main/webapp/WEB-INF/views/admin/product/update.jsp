@@ -54,12 +54,17 @@
         </div>
 
         <div class="input_Area">
+            <label for="sale">세일</label>
+            <input type="text" id="sale" name="sale" value="${product.sale}"/>
+        </div>
+
+        <div class="input_Area">
             <label for="productImage">이미지</label>
             <input type="file" id="productImage" name="file" />
             <div class="select_img">
-                <img src="${product.productImage}" alt="">
-                <input type="hidden" name="productImage" value="${product.productImage}" />
-                <input type="hidden" name="productThumbnail" value="${product.productThumbnail}" />
+                <img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${product.productImage}" alt="">
+                <input type="hidden" name="productImage" value="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${product.productImage}" />
+                <input type="hidden" name="productThumbnail" value="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${product.productThumbnail}" />
             </div>
             <%= request.getSession().getServletContext().getRealPath("/")%>
         </div>

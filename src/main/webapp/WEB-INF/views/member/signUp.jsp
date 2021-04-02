@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Insert title here</title>
-    <link rel="stylesheet" href="/resources/css/member/signUp.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/signUp.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="/resources/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <link rel="stylesheet" href="/resources/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/dist/css/adminlte.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -113,7 +113,7 @@
 
                     $.ajax({
                         type: "post",
-                        url: "/member/memberIdCheck",
+                        url: "${pageContext.request.contextPath}/member/memberIdCheck",
                         data: data,
                         success : function(result) {
                             if (result !== "fail") {
@@ -228,7 +228,7 @@
 
                 $.ajax({
                     type: "get",
-                    url: "mailCheck?email=" + email,
+                    url: "${pageContext.request.contextPath}/member/mailCheck?email=" + email,
                     success: function(data) {
                         checkBox.attr("disabled", false);
                         boxWrap.attr("id", "mail_check_input_box_true");
@@ -326,7 +326,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="../../index2.html"><b>Admin</b>LTE</a>
+        <a href="${pageContext.request.contextPath}/index"><b>Admin</b>LTE</a>
     </div>
 
     <div class="card">
@@ -473,12 +473,12 @@
                 </a>
             </div>
 
-            <a href="/member/login" class="text-center">I already have a membership</a>
+            <a href="${pageContext.request.contextPath}/member/login" class="text-center">I already have a membership</a>
         </div>
         <!-- /.form-box -->
     </div><!-- /.card -->
 </div>
 </body>
-<script src="/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/resources/dist/js/adminlte.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/dist/js/adminlte.min.js"></script>
 </html>

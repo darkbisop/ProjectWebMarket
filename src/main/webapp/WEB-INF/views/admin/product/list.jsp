@@ -31,9 +31,9 @@
                 <c:forEach items="${list}" var="list">
                     <tr>
                         <td>${list.productNum}</td>
-                        <td><a href="/admin/product/view?n=${list.productNum}"><img src="${list.productThumbnail}" alt=""></a></td>
+                        <td><a href="${pageContext.request.contextPath}/admin/product/view?n=${list.productNum}"><img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${list.productImage}" alt=""></a></td>
                         <td>
-                            <a href="/admin/product/view?n=${list.productNum}">${list.productName}</a>
+                            <a href="${pageContext.request.contextPath}/admin/product/view?n=${list.productNum}">${list.productName}</a>
                         </td>
                         <td>${list.categoryName}</td>
                         <td>

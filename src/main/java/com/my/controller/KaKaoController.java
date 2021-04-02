@@ -31,7 +31,7 @@ import javax.servlet.http.HttpSession;
 public class KaKaoController {
 
     private final static String K_CLIENT_ID ="27455cf079b38009ee0184c422408895";
-    private final static String K_REDIRECT_URI = "http://localhost:8080/kakao/kakaoLogin.do";
+    private final static String K_REDIRECT_URI = "http://darkbisop.cafe24.com/ProjectWebMarket/kakao/kakaoLogin.do";
     public static String kakaoMember = null;
 
     @RequestMapping(value = "/kakaoLogin", method = RequestMethod.GET)
@@ -92,7 +92,7 @@ public class KaKaoController {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=27455cf079b38009ee0184c422408895");
-            sb.append("&redirect_uri=http://localhost:8080/kakao/kakaoLogin.do");
+            sb.append("&redirect_uri=http://darkbisop.cafe24.com/ProjectWebMarket/kakao/kakaoLogin.do");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();

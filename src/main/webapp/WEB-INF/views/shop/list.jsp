@@ -5,21 +5,21 @@
 <html>
 <head>
     <%@ include file="../include/header.jsp"%>
-
+<%--
     <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
     <script type="text/javascript" id="sourcecode">
         $(function()
         {
             $('.scroll-pane').jScrollPane();
         });
-    </script>
+    </script>--%>
 </head>
 <body>
 <!--header-->
 <div class="header-top">
     <div class="header-bottom">
         <div class="logo">
-            <h1><a href="/index">Lighting</a></h1>
+            <h1><a href="${pageContext.request.contextPath}/index">Lighting</a></h1>
         </div>
         <!---->
         <div class="top-nav">
@@ -27,10 +27,47 @@
         </div>
         <!---->
         <div class="cart box_1">
-            <%@include file="../include/loginArea.jsp"%>
+            <c:if test="${member == null and kakaoMember == null and googleMember == null}">
+                <div class="login_button"><a href="${pageContext.request.contextPath}/member/login">Login</a></div>
+                <span><a href="${pageContext.request.contextPath}/member/signUp">SignUp</a></span>
+            </c:if>
+            <c:choose>
+            <c:when test="${member != null or kakaoMember != null or googleMember == null}">
+            <a href="${pageContext.request.contextPath}/shop/cartList">
+                </c:when>
+                    <c:when test="${member != null}">
+                        <div class="login_success_area">
+                            <span>회원 : ${member.memberName}</span><br/>
+                        </div>
+                    </c:when>
+                    <c:when test="${kakaoMember != null}">
+                        <div class="login_success_area">
+                            <span>회원 : ${kakaoMember}</span>
+                        </div>
+                    </c:when>
+                    <c:when test="${googleMember != null}">
+                        <div class="login_success_area">
+                            <span>회원 : ${googleMember}</span>
+                        </div>
+                    </c:when>
+                </c:choose>
+
+                <script>
+                    function calcTotal(total, stock) {
+                        let calcTotal = "";
+                        calcTotal += "<span>" + " : " + total + " " + "(" + stock + ")" + "</span>";
+                        $("#message").html(calcTotal);
+                    }
+                </script>
+                <img src="${pageContext.request.contextPath}/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px">
+                <c:if test="${member != null or kakaoMember != null or googleMember != null}">
+                    <span id="message">${total}</span>
+                </c:if>
+            </a>
             <%@include file="../include/logOut.jsp"%>
             <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
             <div class="clearfix"> </div>
+        <!---->
         </div>
         <div class="clearfix"> </div>
         <!---->
@@ -41,23 +78,22 @@
 <div class="product-model">
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="/index">Home</a></li>
+            <li><a href="${pageContext.request.contextPath}/index">Home</a></li>
             <li class="active">Products</li>
         </ol>
         <h2>Our Products</h2>
         <div class="col-md-9 product-model-sec">
             <c:forEach items="${list}" var="list">
-                <a href="#"></a><div class="product-grid">
+                <div class="product-grid">
                     <div class="more-product"><span> </span></div>
                     <div class="product-img b-link-stripe b-animate-go  thickbox">
                         <div class="product-img b-link-stripe b-animate-go  thickbox">
-                            <a href="/shop/view?n=${list.productNum}"><img src="${list.productThumbnail}" alt="" width="200px" height="200px"></a>
+                            <a href="${pageContext.request.contextPath}/shop/view?n=${list.productNum}"><img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${list.productThumbnail}" alt="" width="200px" height="200px"></a>
                             <div class="b-wrapper">
                                 <h4 class="b-animate b-from-left  b-delay03">
-                                    <a href="/shop/view?n=${list.productNum}">
+                                    <a href="${pageContext.request.contextPath}/shop/view?n=${list.productNum}">
                                         <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View</button>
                                     </a>
-
                                 </h4>
                             </div>
                         </div>
@@ -65,15 +101,13 @@
 
                     <div class="product-info simpleCart_shelfItem">
                         <div class="product-info-cust prt_name">
-                            <a href="/shop/view?n=${list.productNum}"><h4>${list.productName}</h4></a>
-                            <span class="item_price productPrice"></span><fmt:formatNumber pattern="###,###,###" value="${list.productPrice}" />원
-                            <div class="ofr">
-                                <p class="pric1"><del>Rs 280</del></p>
-                                <p class="disc">[12% Off]</p>
-                            </div>
-                            <input type="text" class="item_quantity" value="1" />
-                            <input type="button" class="item_add items" value="ADD">
-                            <div class="clearfix"> </div>
+                            <h5 align="center"><b>${list.productName}</b></h5>
+                            <p></p>
+                            <h5 class="item_price productPrice" align="center"><fmt:formatNumber value="${list.productPrice - list.productPrice * (list.sale * 0.01)}" pattern="###,###,###" />원</h5>
+                            <br>
+                            <h5 align="center"><del>${list.productPrice}원</del>[${list.sale}% Off]
+<%--                            <input type="number" class="inputStock item_quantity productStock" min="1" maxlength="${list.productStock}" value="1" />
+                            <button type="button" class="addCart_btn add-cart item_add items">ADD</button>--%>
                         </div>
                     </div>
                 </div>
@@ -87,37 +121,37 @@
                     <div class="tab1">
                         <ul class="place">
                             <li class="sort">Cake</li>
-                            <li class="by"><img src="images/do.png" alt=""></li>
+                            <li class="by"><%--<img src="images/do.png" alt="">--%></li>
                             <div class="clearfix"> </div>
                         </ul>
                         <div class="single-bottom">
-                            <a href="/shop/list?c=101&l=2"><p>Chocolate Cake</p></a>
-                            <a href="/shop/list?c=102&l=2"><p>Strawberry Cake</p></a>
-                            <a href="/shop/list?c=103&l=2"><p>Honey Cake</p></a>
+                            <a href="${pageContext.request.contextPath}/shop/list?c=101&l=2"><p>Chocolate Cake</p></a>
+                            <a href="${pageContext.request.contextPath}/shop/list?c=102&l=2"><p>Strawberry Cake</p></a>
+                            <a href="${pageContext.request.contextPath}/shop/list?c=103&l=2"><p>Honey Cake</p></a>
                         </div>
                     </div>
                     <div class="tab2">
                         <ul class="place">
                             <li class="sort">Muffin</li>
-                            <li class="by"><img src="images/do.png" alt=""></li>
+                            <li class="by"><%--<img src="images/do.png" alt="">--%></li>
                             <div class="clearfix"> </div>
                         </ul>
                         <div class="single-bottom">
-                            <a href="/shop/list?c=201&l=2"><p>Chocolate Muffin</p></a>
-                            <a href="/shop/list?c=202&l=2"><p>Strawberry Muffin</p></a>
-                            <a href="/shop/list?c=203&l=2"><p>Honey Muffin</p></a>
+                            <a href="${pageContext.request.contextPath}/shop/list?c=201&l=2"><p>Chocolate Muffin</p></a>
+                            <a href="${pageContext.request.contextPath}/shop/list?c=202&l=2"><p>Strawberry Muffin</p></a>
+                            <a href="${pageContext.request.contextPath}/shop/list?c=203&l=2"><p>Honey Muffin</p></a>
                         </div>
                     </div>
                     <div class="tab3">
                         <ul class="place">
                             <li class="sort">Bread</li>
-                            <li class="by"><img src="images/do.png" alt=""></li>
+                            <li class="by"><%--<img src="images/do.png" alt="">--%></li>
                             <div class="clearfix"> </div>
                         </ul>
                         <div class="single-bottom">
-                            <a href="/shop/list?c=301&l=2"><p>Chocolate Muffin</p></a>
-                            <a href="/shop/list?c=302&l=2"><p>Strawberry Muffin</p></a>
-                            <a href="/shop/list?c=303&l=2"><p>Honey Muffin</p></a>
+                            <a href="${pageContext.request.contextPath}/shop/list?c=301&l=2"><p>Chocolate Bread</p></a>
+                            <a href="${pageContext.request.contextPath}/shop/list?c=302&l=2"><p>Strawberry Bread</p></a>
+                            <a href="${pageContext.request.contextPath}/shop/list?c=303&l=2"><p>Honey Bread</p></a>
                         </div>
                     </div>
                     <!--script-->

@@ -12,9 +12,9 @@
     <!-- MySQL connect -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/userInfo?useSSL=false&amp;serverTimezone=UTC&amp;useSSL=false&amp;allowPublicKeyRetrieval=true" />
-        <property name="username" value="root" />
-        <property name="password" value="wjsdudxo77" />
+        <property name="url" value="jdbc:mysql://localhost/darkbisop?useSSL=false&amp;serverTimezone=UTC&amp;useSSL=false&amp;allowPublicKeyRetrieval=true" />
+        <property name="username" value="darkbisop" />
+        <property name="password" value="webmarket77" />
     </bean>
 
     <!-- Mybatis connected -->
@@ -29,19 +29,23 @@
 
     <!-- naverMail 설정 -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="smtp.naver.com"></property>
-        <property name="port" value="465"></property>
-        <property name="username" value="darkbisop@naver.com"></property>
-        <property name="password" value="tmxkzlddlwhgdk7#"></property>
+        <property name="host" value="smtp.gmail.com"></property>
+        <property name="port" value="587"></property>
+        <property name="username" value="flyingwitch87@gmail.com"></property>
+        <property name="password" value="cdlxckqoyxiumqad"></property>
 
         <property name="javaMailProperties">
             <props>
+                <prop key="mail.transport.protocol">smtp</prop>
                 <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+               <!-- <prop key="mail.smtp.auth">true</prop>
                 <prop key="mail.smtp.starttls.enable">true</prop>
                 <prop key="mail.smtps.checkserveridentity">true</prop>
                 <prop key="mail.smtps.ssl.trust">*</prop>
                 <prop key="mail.debug">true</prop>
-                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>-->
             </props>
         </property>
     </bean>

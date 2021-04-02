@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>Welcome to BookMall</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/resources/css/main.css?after">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css?after">
 </head>
 <body>
 <div class="wrapper">
@@ -16,8 +16,8 @@
             <ul class="list">
                 <c:if test="${member != null}">
                     <c:if test="${member.adminCk == 1}">
-                        <li><a href="/admin/product/register">상품 등록</a> </li>
-                        <li><a href="/admin/product/list">상품 목록</a> </li>
+                        <li><a href="${pageContext.request.contextPath}/admin/product/register">상품 등록</a> </li>
+                        <li><a href="${pageContext.request.contextPath}/admin/product/list">상품 목록</a> </li>
                         <li>
                             <a id="gnb_logout_button">Logout</a>
                         </li>

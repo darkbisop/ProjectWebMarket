@@ -5,13 +5,12 @@
 <html>
 <head>
     <%@include file="include/header.jsp"%>
-    <title>Welcome to BookMall</title>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title></title>
 </head>
 <body>
 <!--header-->
-<script src="/resources/lighting/js/responsiveslides.min.js"></script>
-<%--<script>
+<script src="${pageContext.request.contextPath}/resources/lighting/js/responsiveslides.min.js"></script>
+<script>
     $(function () {
         $("#slider").responsiveSlides({
             auto: true,
@@ -21,12 +20,12 @@
             pager: false,
         });
     });
-</script>--%>
+</script>
 
 <div class="header-top">
     <div class="header-bottom">
         <div class="logo">
-            <h1><a href="index.html">Lighting</a></h1>
+            <h1><a href="${pageContext.request.contextPath}/index">Lighting</a></h1>
         </div>
         <!---->
         <div class="top-nav">
@@ -36,11 +35,11 @@
         <div class="cart box_1">
             <%@include file="include/loginArea.jsp"%>
             <%@include file="include/logOut.jsp"%>
-            <a href="/shop/cart">
-                <%--<div class="total">
+           <%-- <a href="/shop/cart">
+                <div class="total">
                     <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span>)</div>
-                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>--%>
-            </a>
+                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            </a>--%>
             <p><a href="javascript:" class="simpleCart_empty">Empty Cart</a></p>
             <div class="clearfix"> </div>
         </div>
@@ -51,37 +50,10 @@
 </div>
 <!---->
 <div class="slider">
-    <div class="callbacks_container">
-        <ul class="rslides" id="slider">
-            <li>
-                <div class="banner1">
-                    <div class="banner-info">
-                        <h3>Morbi lacus hendrerit efficitur.</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. consectetur adipiscing elit. consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="banner2">
-                    <div class="banner-info">
-                        <h3>Phasellus elementum tincidunt.</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. consectetur adipiscing elit. consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="banner3">
-                    <div class="banner-info">
-                        <h3>Maecenas interposuere volutpat.</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. consectetur adipiscing elit. consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <%@ include file="include/banner.jsp"%>
 </div>
 <!---->
-<script src="/resources/lighting/js/bootstrap.js"> </script>
+<script src="${pageContext.request.contextPath}/resources/lighting/js/bootstrap.js"> </script>
 
 <div class="items">
    <%@ include file="include/indexProductList.jsp"%>

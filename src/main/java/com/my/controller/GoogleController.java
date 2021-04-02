@@ -35,7 +35,7 @@ public class GoogleController {
 
     private final static String G_CLIENT_ID ="253718818115-618288pgjbi00noh1fbdl69hve9bfhko.apps.googleusercontent.com";
     private final static String G_CLIENT_SECRET = "-7sdRkfJ0o7Qgb6-U2Uss6jU";
-    private final static String G_REDIRECT_URI = "http://localhost:8080/google/googleLogin.do";
+    private final static String G_REDIRECT_URI = "https://darkbisop.cafe24.com/ProjectWebMarket/google/googleLogin.do";
 
     @RequestMapping(value = "googleLogin", method = RequestMethod.GET)
     public ModelAndView googleLoginGET(HttpSession session) throws Exception {

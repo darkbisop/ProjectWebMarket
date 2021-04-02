@@ -6,13 +6,12 @@
 <head>
     <%@ include file="../include/header.jsp"%>
     <%@ include file="../include/replyStyle.jsp"%>
-    <link href="/resources/lighting/css/form.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="stylesheet" href="/resources/lighting/css/flexslider.css" type="text/css" media="screen" />
+    <link href="${pageContext.request.contextPath}/resources/lighting/css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/lighting/css/flexslider.css" type="text/css" media="screen" />
     <script>
-        let confirm;
         function replyList() {
             const productNum = ${view.productNum};
-            $.getJSON("/shop/view/replyList?n=" + productNum, function (data) {
+            $.getJSON("${pageContext.request.contextPath}/shop/view/replyList?n=" + productNum, function (data) {
                 let str = "";
                 $(data).each(function () {
                     console.log(data);
@@ -43,7 +42,7 @@
 <div class="header-top">
     <div class="header-bottom">
         <div class="logo">
-            <h1><a href="/index">Lighting</a></h1>
+            <h1><a href="${pageContext.request.contextPath}/index">Lighting</a></h1>
         </div>
         <!---->
         <div class="top-nav">
@@ -51,8 +50,14 @@
         </div>
         <!---->
         <div class="cart box_1">
-            <a href="/shop/cartList">
+            <c:if test="${member == null and kakaoMember == null and googleMember == null}">
+                <div class="login_button"><a href="${pageContext.request.contextPath}/member/login">Login</a></div>
+                <span><a href="${pageContext.request.contextPath}/member/signUp">SignUp</a></span>
+            </c:if>
                 <c:choose>
+                    <c:when test="${member != null or kakaoMember != null or googleMember == null}">
+                     <a href="${pageContext.request.contextPath}/shop/cartList">
+                    </c:when>
                     <c:when test="${member != null}">
                         <div class="login_success_area">
                             <span>회원 : ${member.memberName}</span><br/>
@@ -74,11 +79,10 @@
                     function calcTotal(total, stock) {
                         let calcTotal = "";
                         calcTotal += "<span>" + " : " + total + " " + "(" + stock + ")" + "</span>";
-                        /*calcTotal += "<span>" + " : " + total + " " + "(" + stock + ")" + "</span>";*/
                         $("#message").html(calcTotal);
                     }
                 </script>
-                <img src="/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px">
+                <img src="${pageContext.request.contextPath}/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px">
                 <c:if test="${member != null or kakaoMember != null or googleMember != null}">
                     <span id="message">${total}</span>
                 </c:if>
@@ -107,7 +111,7 @@
                     <div class="productImage">
                         <ul class="slides">
                             <li data-thumb="${view.productImage}">
-                                <div class="thumb-image"> <img src="${view.productImage}" data-imagezoom="true" class="img-responsive" alt=""/> </div>
+                                <div class="thumb-image"> <img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${view.productImage}" data-imagezoom="true" <%--class="img-responsive"--%> alt=""/> </div>
                             </li>
                         </ul>
                     </div>
@@ -127,11 +131,15 @@
                 <div class="col-md-5 single-top-in simpleCart_shelfItem">
                     <div class="single-para ">
                         <h4 class="productName">${view.productName}</h4>
-                        <h5 class="item_price productPrice"><fmt:formatNumber value="${view.productPrice}" pattern="###,###,###" />원</h5>
+                        <h4><del>${view.productPrice}원</del> [${view.sale}% Off]</h4>
+                        <h5>
+                            <fmt:formatNumber value="${view.productPrice - view.productPrice * (view.sale * 0.01)}" pattern="###,###,###" />원
+
+                        </h5>
+
                         <p class="productDescription">${view.productDescription}</p>
                         <div class="prdt-info-grid">
                             <ul>
-                                <li class="productName">- <span>상품명 : </span>${view.productName}</li>
                                 <li class="categoryName">- <span>종류 : </span>${view.categoryName}</li>
                                 <li class="productStock">- <span>재고 : </span>${view.productStock}EA</li>
                                 <li class="cartStock">- <span>구매 수량 : </span>
@@ -139,15 +147,6 @@
                                 </li>
                             </ul>
                         </div>
-                       <%-- <div class="check">
-                            <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Enter pin code for delivery &amp; availability</p>
-                            <form class="navbar-form">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Enter Pin code">
-                                </div>
-                                <button type="submit" class="btn btn-default">Verify</button>
-                            </form>
-                        </div>--%>
                         <p class="addToCart">
                             <button type="button" class="addCart_btn add-cart item_add">ADD TO CART</button>
                             <script>
@@ -166,7 +165,7 @@
                                     };
 
                                     $.ajax({
-                                        url : "/shop/view/addCart?pN=" + productName,
+                                        url : "${pageContext.request.contextPath}/shop/view/addCart?pN=" + productName,
                                         type : "post",
                                         data : data,
                                         success : function (retVal) {
@@ -189,7 +188,7 @@
                         <hr>
                         <div id="reply">
                             <c:if test="${member == null and kakaoMember == null and googleMember == null}">
-                                <p>소감을 남기시려면 <a href="/member/login">로그인</a>해주세요</p>
+                                <p>소감을 남기시려면 <a href="${pageContext.request.contextPath}/member/login">로그인</a>해주세요</p>
                             </c:if>
 
                             <c:if test="${member != null or kakaoMember != null or googleMember != null}">
@@ -218,7 +217,7 @@
                                                     if (replyConfirm) {
                                                         if (replyContent !== "") {
                                                             $.ajax({
-                                                                url : "/shop/view/registReply",
+                                                                url : "${pageContext.request.contextPath}/shop/view/registReply",
                                                                 type : "post",
                                                                 data : data,
                                                                 success : function () {
@@ -288,7 +287,7 @@
                                         let data = { replyNum : $(this).attr("data-replyNum")};
 
                                         $.ajax({
-                                            url : "/shop/view/deleteReply",
+                                            url : "${pageContext.request.contextPath}/shop/view/deleteReply",
                                             type : "post",
                                             data : data,
                                             success : function (result) {
@@ -335,7 +334,7 @@
                         replyContent : $(".modal_replyContent").val()
                     };
                     $.ajax({
-                        url : "/shop/view/updateReply",
+                        url : "${pageContext.request.contextPath}/shop/view/updateReply",
                         type : "post",
                         data : data,
                         success : function(result){
@@ -362,13 +361,13 @@
         <div class="bottom-prdt">
             <div class="btm-grid-sec">
                 <div class="col-md-2 btm-grid">
-                    <a href="product.html">
+                    <a href="#">
                         <img src="images/p3.jpg" alt=""/>
                         <h4>Product#1</h4>
                         <span>$1200</span></a>
                 </div>
                 <div class="col-md-2 btm-grid">
-                    <a href="product.html">
+                    <a href="#">
                         <img src="images/p10.jpg" alt=""/>
                         <h4>Product#1</h4>
                         <span>$700</span></a>

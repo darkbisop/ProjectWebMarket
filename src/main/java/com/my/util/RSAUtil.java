@@ -46,6 +46,8 @@ public class RSAUtil {
             RSAPublicKeySpec publicKeySpec = keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
             String modulus = publicKeySpec.getModulus().toString(16);   // 16진수로 변환
             String exponent = publicKeySpec.getPublicExponent().toString(16);
+            System.out.println("modulus : " + modulus);
+            System.out.println("exponent : " + exponent);
             rsa = new RSA(privateKey, modulus, exponent);
         } catch (Exception e) {
             logger.warn("RSAUtil.createRSA()", e);

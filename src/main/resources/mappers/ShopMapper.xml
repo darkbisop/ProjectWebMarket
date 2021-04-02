@@ -4,9 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.my.mapper.ShopMapper">
 
+    <!-- 상품 카테고리 목록 -->
     <select id="list" resultType="com.my.model.ProductVO">
         select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName,
-               productPrice, productStock, productDescription, regdate, p.productImage, p.productThumbnail
+               productPrice, productStock, productDescription, regdate, p.productImage, p.productThumbnail, p.sale
         from product p
             inner join product_category c
                 on p.categoryCode = c.categoryCode
@@ -16,7 +17,8 @@
 
     <!-- 상품 조회 -->
     <select id="productView" resultType="com.my.model.ProductVO">
-        select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName, productPrice, productStock, productDescription, regdate, p.productImage, p.productThumbnail
+        select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName, productPrice,
+               productStock, productDescription, regdate, p.productImage, p.productThumbnail, p.sale
         from product p inner join product_category c on p.categoryCode = c.categoryCode where p.productNum = #{productNum}
     </select>
 

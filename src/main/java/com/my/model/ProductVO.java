@@ -16,6 +16,7 @@ public class ProductVO {
     private String productImage;
     private Date regDate;
     private String productThumbnail;
+    private int sale;
 
     public int getProductNum() {
         return productNum;
@@ -87,4 +88,7 @@ public class ProductVO {
 
     public String getProductThumbnail() { return productThumbnail; }
     public void setProductThumbnail(String productThumbnail) { this.productThumbnail = productThumbnail; }
+
+    public int getSale() { return sale; }
+    public void setSale(int sale) { this.sale = sale; }
 }

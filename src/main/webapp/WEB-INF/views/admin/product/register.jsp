@@ -53,6 +53,11 @@
         </div>
 
         <div class="input_Area">
+            <label for="sale">세일</label>
+            <input type="text" id="sale" name="sale" />
+        </div>
+
+        <div class="input_Area">
             <label for="productImage">이미지</label>
             <input type="file" id="productImage" name="file" />
             <div class="select_img"><img src="" alt=""></div>

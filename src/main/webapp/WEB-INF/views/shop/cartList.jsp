@@ -15,7 +15,7 @@
             };
 
             $.ajax({
-                url : "/shop/view/deleteCart?pN=" + productName,
+                url : "${pageContext.request.contextPath}/shop/view/deleteCart?pN=" + productName,
                 type : "post",
                 data : data,
                 success : function (result) {
@@ -36,7 +36,7 @@
 <div class="header-top">
     <div class="header-bottom">
         <div class="logo">
-            <h1><a href="index.html">Lighting</a></h1>
+            <h1><a href="${pageContext.request.contextPath}/index">Lighting</a></h1>
         </div>
         <!---->
         <div class="top-nav">
@@ -44,7 +44,7 @@
         </div>
         <!---->
         <div class="cart box_1">
-            <a href="/shop/cartList">
+            <a href="${pageContext.request.contextPath}/shop/cartList">
                 <%@ include file="../include/loginArea.jsp"%>
                 <%@ include file="../include/logOut.jsp"%>
             </a>
@@ -60,7 +60,7 @@
 <div class="container">
     <div class="check-sec">
         <div class="col-md-3 cart-total">
-            <a class="continue" href="/shop/list?c=100&l=1">Continue to basket</a>
+            <a class="continue" href="${pageContext.request.contextPath}/shop/list?c=100&l=1">Continue to basket</a>
             <div class="price-details">
                 <h3>Price Details</h3>
                 <span>Total</span>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="cart-sec simpleCart_shelfItem">
                         <div class="cart-item cyc">
-                            <img src="${cartList.productThumbnail}" alt="" width="120" height="140">
+                            <img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${cartList.productThumbnail}" alt="" width="120" height="140">
                         </div>
                         <div class="cart-item-info">
                             <span><h3>${cartList.productName}</h3></span>

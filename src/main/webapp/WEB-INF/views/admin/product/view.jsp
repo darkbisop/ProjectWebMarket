@@ -52,6 +52,11 @@
         </div>
 
         <div class="input_Area">
+            <label>세일</label>
+            <span>${product.sale}</span>
+        </div>
+
+        <div class="input_Area">
             <label>상품소개</label>
             <span>${product.productDescription}</span>
         </div>
@@ -59,10 +64,10 @@
         <div class="input_Area">
             <label>이미지</label>
             <p>원본 이미지</p>
-            <img src="${product.productImage}" class="origImg" />
+            <img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${product.productImage}" class="origImg" />
 
             <p>섬네일</p>
-            <img src="${product.productThumbnail}" class="thumbImg"/>
+            <img src="/darkbisop.cafe24.com/tomcat/webapps/ProjectWebMarket/resources/img/${product.productThumbnail}" class="thumbImg"/>
         </div>
 
         <div class="input_Area">
@@ -115,7 +120,7 @@
 
     const formObj = $("form[role='form']");
     $(".update_Btn").click(function() {
-        formObj.attr("action", "/admin/product/update");
+        formObj.attr("action", "${pageContext.request.contextPath}/admin/product/update");
         formObj.attr("method", "get");
         formObj.submit();
     });
@@ -124,7 +129,7 @@
         const con = confirm("정말로 삭제하시겠습니까?");
 
         if (con) {
-            formObj.attr("action", "/admin/product/delete");
+            formObj.attr("action", "${pageContext.request.contextPath}/admin/product/delete");
             formObj.submit();
         }
         alert("게시글을 삭제하였습니다.");

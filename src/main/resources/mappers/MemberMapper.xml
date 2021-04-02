@@ -4,18 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.my.mapper.MemberMapper">
     <insert id = "memberSignUp">
-        insert into book_member (MEMBERID, MEMBERPW, MEMBERNAME, MEMBERMAIL, MEMBERADDR1, MEMBERADDR2, MEMBERADDR3, ADMINCK, REGDATE, MONEY, POINT)
+        insert into member (MEMBERID, MEMBERPW, MEMBERNAME, MEMBERMAIL, MEMBERADDR1, MEMBERADDR2, MEMBERADDR3, ADMINCK, REGDATE, MONEY, POINT)
         values (#{memberId}, #{memberPw}, #{memberName}, #{memberMail}, #{memberAddr1}, #{memberAddr2}, #{memberAddr3}, 0, sysdate(), 100000, 5000)
     </insert>
 
     <!-- 아이디 중복 검사 -->
     <select id="idCheck" resultType="int">
-        select count(*) from book_member where memberId = #{memberId}
+        select count(*) from member where memberId = #{memberId}
     </select>
 
     <!-- 로그인 -->
     <select id="memberLogin" resultType="com.my.model.MemberVO">
-        select memberId, memberPw, memberName, adminCk, money, point from book_member where memberId = #{memberId}
+        select memberId, memberPw, memberName, adminCk, money, point from member where memberId = #{memberId}
         <!-- select memberid, membername, adminck, money, point from book_member where memberid = #{memberId} and memberPw = #{memberPw} -->
     </select>
 </mapper>

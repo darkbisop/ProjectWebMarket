@@ -1,12 +1,13 @@
 package com.my.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.my.model.CartVO;
 import com.my.model.MemberVO;
 import com.my.model.ProductVO;
 import com.my.model.ReplyVO;
 import com.my.service.ShopService;
-import com.mysql.cj.PreparedQuery;
-import org.apache.http.HttpRequest;
+import net.sf.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.Console;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,11 +36,10 @@ public class ShopController {
     ShopService shopService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public void listGET(@RequestParam("c") int cateCode, @RequestParam("l") int level, Model model) throws Exception {
+    public void listGET(@RequestParam("c") int cateCode, @RequestParam("l") int level, Model model, ProductVO productVO) throws Exception {
         logger.info("get list");
         List<ProductVO> list;
         list = shopService.list(cateCode);
-
         model.addAttribute("list", list);
     }
 
@@ -192,8 +193,8 @@ public class ShopController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/view/addCart", method = RequestMethod.POST)
-    public Object addCartPOST(@RequestParam("pN") String pN, CartVO cartVO, HttpSession session, ProductVO productVO) throws Exception {
+    @RequestMapping(value = "/view/addCart", method = {RequestMethod.GET, RequestMethod.POST})
+    public Object addCartPOST(@RequestParam("pN") String pN, CartVO cartVO, HttpSession session, ProductVO productVO, Map<String, Object> param) throws Exception {
         logger.info("add Cart");
         int result = 0;
         int total = 0;
@@ -247,12 +248,10 @@ public class ShopController {
     public int deleteCart(@RequestParam("pN") String pN, HttpSession session) throws Exception {
         logger.info("delete Cart");
         int result = 0;
-        int total = 0;
-        int stock = 0;
-        Map<String, Object> retVal = new HashMap<String, Object>();
-        ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
         int totalPrice = (int) session.getAttribute("total");
         int totalStock = (int) session.getAttribute("stock");
+
+        ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
 
         if (cartList != null) {
             for (int i = 0; i < cartList.size(); i++) {

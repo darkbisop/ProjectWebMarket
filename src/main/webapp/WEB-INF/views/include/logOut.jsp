@@ -31,22 +31,22 @@
         $.ajax({
             type: "post",
             async:false,
-            url: "/member/logout.do",
+            url: "${pageContext.request.contextPath}/member/logout.do",
             success:function () {
                 alert("로그아웃에 성공하였습니다");
-               window.location.href = "/index";
+               window.location.href = "${pageContext.request.contextPath}/index";
             }
         });
     });
 
     $("#gnb_kakaoLogout_button").click(function () {
-        location.href="https://kauth.kakao.com/oauth/logout?client_id=27455cf079b38009ee0184c422408895&logout_redirect_uri=http://localhost:8080/kakao/kakaoLogout";
+        location.href="https://kauth.kakao.com/oauth/logout?client_id=27455cf079b38009ee0184c422408895&logout_redirect_uri=http://darkbisop.cafe24.com/ProjectWebMarket/kakao/kakaoLogout";
         $.ajax({
             type: "post",
             async:false,
-            url: "/kakao/kakaoLogout",
+            url: "${pageContext.request.contextPath}/kakao/kakaoLogout",
             success:function () {
-                window.location.href = "/index";
+                window.location.href = "${pageContext.request.contextPath}/index";
             }
         });
     });
@@ -56,9 +56,9 @@
         $.ajax({
             type: "post",
             async:false,
-            url: "/google/googleLogout",
+            url: "${pageContext.request.contextPath}/google/googleLogout",
             success:function () {
-                window.location.href = "/index";
+                window.location.href = "${pageContext.request.contextPath}/index";
             }
         });
     });
