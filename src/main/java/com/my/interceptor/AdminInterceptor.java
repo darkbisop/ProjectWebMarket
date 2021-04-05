@@ -17,7 +17,7 @@ public class AdminInterceptor implements HandlerInterceptor {
         MemberVO memberVO = (MemberVO) session.getAttribute("member");
 
         if (memberVO == null || memberVO.getAdminCk() == 0) {
-            response.sendRedirect("/main");
+            response.sendRedirect("/ProjectWebMarket/index");
             return false;
         }
 

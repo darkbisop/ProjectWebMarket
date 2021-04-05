@@ -950,7 +950,7 @@ section.home.light .social-icons li a:hover {
   font-size: 20px;
 }
 .service-box img {
-  margin-bottom: 22px;
+  margin-bottom: 2px;
 }
 .service-box:hover {
   -webkit-transform: translateY(-10px);

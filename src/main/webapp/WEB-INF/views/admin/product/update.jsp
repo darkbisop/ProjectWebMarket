@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <title>Title</title>
@@ -14,52 +15,51 @@
 </head>
 <body>
 <div id="container">
-    <h2>상품 수정</h2>
-
+    <h2>Product Update</h2>
     <form role="form" action="${pageContext.request.contextPath}/admin/product/update.do" method="post" autocomplete="off" enctype="multipart/form-data">
         <input type="hidden" name="productNum" value="${product.productNum}" />
-
-        <label>1차 분류</label>
+        <br>
+        <label>1<spring:message code="message.admin.category" /></label>
         <label>
             <select id="category1" name="">
-                <option value="">전체</option>
+                <option value=""><spring:message code="message.admin.category.All" /></option>
             </select>
         </label>
 
-        <label>2차 분류</label>
+        <label>2<spring:message code="message.admin.category" /></label>
         <label>
             <select id="category2" name="categoryCode">
-                <option value="">전체</option>
+                <option value=""><spring:message code="message.admin.category.All" /></option>
             </select>
         </label>
 
         <div class="input_Area">
-            <label for="productName">상품명</label>
+            <label for="productName"><spring:message code="message.admin.ProductName" /></label>
             <input type="text" id="productName" name="productName" value="${product.productName}"/>
         </div>
 
         <div class="input_Area">
-            <label for="productPrice">상품 가격</label>
+            <label for="productPrice"><spring:message code="message.admin.ProductPrice" /></label>
             <input type="text" id="productPrice" name="productPrice" value="${product.productPrice}"/>
         </div>
 
         <div class="input_Area">
-            <label for="productStock">상품수량</label>
+            <label for="productStock"><spring:message code="message.admin.ProductStocks" /></label>
             <input type="text" id="productStock" name="productStock" value="${product.productStock}"/>
         </div>
 
         <div class="input_Area">
-            <label for="productDescription">상품소개</label>
+            <label for="productDescription"><spring:message code="message.admin.ProductDesc" /></label>
             <textarea rows="5" cols="50" id="productDescription" name="productDescription">${product.productDescription}</textarea>
         </div>
 
         <div class="input_Area">
-            <label for="sale">세일</label>
+            <label for="sale"><spring:message code="message.admin.ProductSales" /></label>
             <input type="text" id="sale" name="sale" value="${product.sale}"/>
         </div>
 
         <div class="input_Area">
-            <label for="productImage">이미지</label>
+            <label for="productImage"><spring:message code="message.admin.ProductImg" /></label>
             <input type="file" id="productImage" name="file" />
             <div class="select_img">
                 <img src="/ProjectWebMarket/resources${product.productImage}" alt="">
@@ -70,8 +70,8 @@
         </div>
 
         <div class="input_Area">
-            <button type="submit" id="update_Btn" class="btn btn-primary">완료</button>
-            <button type="button" id="cancel_Btn" class="btn btn-primary">취소</button>
+            <button type="submit" id="update_Btn" class="btn btn-primary"><spring:message code="message.admin.ProductUpdateBtn" /></button>
+            <button type="button" id="cancel_Btn" class="btn btn-primary"><spring:message code="message.admin.ProductCancelBtn" /></button>
         </div>
     </form>
 </div>
@@ -150,7 +150,7 @@
     });
 
     $("#cancel_Btn").click(function () {
-       location.href = "/admin/product/view?n=" + ${product.productNum};
+       location.href = "${pageContext.request.contextPath}/admin/product/view?n=" + ${product.productNum};
     });
 
     const regExp = /[^0-9]/gi;

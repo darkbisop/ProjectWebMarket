@@ -95,9 +95,9 @@
 
                 /* 최종 유효성 검사 */
                 if (idCheck && overlapIdCheck && pwCheck && pwConfirmCheck && nameCheck && mailCheck && mailNumCheck && addrCheck) {
-                    $("#signUp_form").attr("action", "/member/signUp")
+                    $("#signUp_form").attr("action", "${pageContext.request.contextPath}/member/signUp")
                     $("#signUp_form").submit();
-                    alert("회원이 되신것을 축하 합니다! 5000 포인트를 선물로 드립니다!");
+                    alert("회원이 되신것을 축하 합니다!");
                 }
 
                 return false;

@@ -26,6 +26,10 @@
             <%@include file="../include/aside.jsp"%>
         </div>
         <!---->
+        <div class="lang-box">
+            <a href="${pageContext.request.contextPath}/shop/list?c=100&l=1?lang=ko" style="color:red;">한국어</a> /
+            <a href="${pageContext.request.contextPath}/shop/list?c=100&l=1?lang=ja" style="color:red;">日本語</a>
+        </div>
         <div class="cart box_1">
             <a href="${pageContext.request.contextPath}/shop/cartList">
                 <c:if test="${member == null and kakaoMember == null and googleMember == null}">

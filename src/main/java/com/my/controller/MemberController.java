@@ -118,6 +118,7 @@ public class MemberController {
 
        if (memberVO.getMemberPw().equals(member.getMemberPw())) {
            session.setAttribute("member", member);
+           session.setMaxInactiveInterval(60 * 5);
            return "redirect:/index";
        } else {
            return "redirect:/member/login";
