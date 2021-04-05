@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <title>Title</title>
@@ -17,13 +18,13 @@
         <table>
             <thead>
                 <tr>
-                    <th>번호</th>
-                    <th>상품사진</th>
-                    <th>상품명</th>
-                    <th>카테고리</th>
-                    <th>가격</th>
-                    <th>수량</th>
-                    <th>등록날짜</th>
+                    <th><spring:message code="message.admin.Num" /></th>
+                    <th><spring:message code="message.admin.ProductImg" /></th>
+                    <th><spring:message code="message.admin.ProductName" /></th>
+                    <th><spring:message code="message.admin.category.1" /></th>
+                    <th><spring:message code="message.admin.ProductPrice" /></th>
+                    <th><spring:message code="message.admin.ProductStocks" /></th>
+                    <th><spring:message code="message.admin.ProductRegistDate" /></th>
                 </tr>
             </thead>
 

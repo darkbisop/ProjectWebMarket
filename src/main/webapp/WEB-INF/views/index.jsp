@@ -32,6 +32,10 @@
             <%@include file="include/aside.jsp"%>
         </div>
         <!---->
+        <div class="lang-box">
+            <a href="${pageContext.request.contextPath}/index?lang=ko" style="color:red;">한국어</a> /
+            <a href="${pageContext.request.contextPath}/index?lang=ja" style="color:red;">日本語</a>
+        </div>
         <div class="cart box_1">
             <%@include file="include/loginArea.jsp"%>
             <%@include file="include/logOut.jsp"%>

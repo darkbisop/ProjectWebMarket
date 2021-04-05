@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
-<html lang="en-US">
+<%--<html lang="en-US">--%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Bolby - Portfolio/CV/Resume HTML Template</title>
@@ -74,9 +75,9 @@
                     <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="#services" class="nav-link">Skills</a></li>
                     <li class="nav-item"><a href="#experience" class="nav-link">Experience</a></li>
-                    <li class="nav-item"><a href="#works" class="nav-link">Works</a></li>
-                    <li class="nav-item"><a href="#blog" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="#works" class="nav-link">Portfolio</a></li>
+                    <a href="${pageContext.request.contextPath}/mainPage?lang=ko">한국어</a> /
+                    <a href="${pageContext.request.contextPath}/mainPage?lang=ja">日本語</a>
                 </ul>
             </div>
         </nav>
@@ -98,22 +99,13 @@
                 <img src="${pageContext.request.contextPath}/resources/resume/images/me.png" alt="" class="mb-4" />
 
                 <!-- info -->
-                <h1 class="mb-2 mt-0">전 영 태</h1>
+                <h1 class="mb-2 mt-0"><spring:message code="message.mainPage.myName" /></h1>
                <%-- <span>I'm a <span class="text-rotating">UI/UX designer, Front-End developer, Photography lover</span></span>--%>
-                <span>포트폴리오를 바로 보시고 싶으시다면 아래 버튼을 통해 이동 가능합니다.</span>
-
-                <%--<!-- social icons -->
-                <ul class="social-icons light list-inline mb-0 mt-4">
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-behance"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                    <li class="list-inline-item"><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                </ul>--%>
+                <span><spring:message code="message.mainPage.simpleIntro" /></span>
 
                 <!-- buttons -->
                 <div class="mt-4">
-                    <a href="#works" class="btn btn-default">Works</a>
+                    <a href="#works" class="btn btn-default">Portfolio</a>
                 </div>
             </div>
 
@@ -182,14 +174,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <!-- about text -->
-                                <p>습득력과 이해력이 빠르다. 저에 대한 주위 사람들의 평가입니다. 실제로 작년에 일본에서 일할때
-                                    회사에 들어온지 반년도 안되어서 기본설계서와 상세설계서 작성을 담당해본 경험이 있습니다.
-
-                                    기본적으로 모르는게 있으면 혼자서 공부해서 습득하는 스타일이며, 현재 주력으로 공부하고 있는건
-                                    SpringFrameWork 입니다.
-
-                                    일본 ntt docomo에서 1년간 SFM 개발에 참여하여 개발한 프로젝트 경험을 바탕으로 업무에 신속히 적응하여
-                                    유의미한 결과를 창출하겠습니다.</p>
+                                <p><spring:message code="message.mainPage.PR" /></p>
                                 <div class="mt-3">
                                     <a href="#" class="btn btn-default">Download Resume</a>
                                 </div>
@@ -241,112 +226,23 @@
             </div>
             <!-- row end -->
 
-            <div class="spacer" data-height="70"></div>
-
-            <div class="row">
-
-                <div class="col-md-3 col-sm-6">
-                    <!-- fact item -->
-                    <div class="fact-item">
-                        <span class="icon icon-fire"></span>
-                        <div class="details">
-                            <h3 class="mb-0 mt-0 number"><em class="count">198</em></h3>
-                            <p class="mb-0">Projects completed</p>
-                        </div>
-                    </div>
-                    <div class="spacer d-md-none d-lg-none" data-height="30"></div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <!-- fact item -->
-                    <div class="fact-item">
-                        <span class="icon icon-cup"></span>
-                        <div class="details">
-                            <h3 class="mb-0 mt-0 number"><em class="count">5670</em></h3>
-                            <p class="mb-0">Cup of coffee</p>
-                        </div>
-                    </div>
-                    <div class="spacer d-md-none d-lg-none" data-height="30"></div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <!-- fact item -->
-                    <div class="fact-item">
-                        <span class="icon icon-people"></span>
-                        <div class="details">
-                            <h3 class="mb-0 mt-0 number"><em class="count">427</em></h3>
-                            <p class="mb-0">Satisfied clients</p>
-                        </div>
-                    </div>
-                    <div class="spacer d-md-none d-lg-none" data-height="30"></div>
-                </div>
-
-                <div class="col-md-3 col-sm-6">
-                    <!-- fact item -->
-                    <div class="fact-item">
-                        <span class="icon icon-badge"></span>
-                        <div class="details">
-                            <h3 class="mb-0 mt-0 number"><em class="count">35</em></h3>
-                            <p class="mb-0">Nominees winner</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
     <!-- section services -->
     <section id="services">
-
         <div class="container">
 
             <!-- section title -->
-            <h2 class="section-title wow fadeInUp">Services</h2>
-
-            <div class="spacer" data-height="60"></div>
-
+            <h2 class="section-title wow fadeInUp">Skills</h2>
+            <div class="spacer" data-height="30"></div>
             <div class="row">
-
-                <div class="col-md-4">
-                    <!-- service box -->
-                    <div class="service-box rounded data-background padding-30 text-center text-light shadow-blue" data-color="#6C6CE5">
-                        <img src="https://via.placeholder.com/80x80" alt="UI/UX design" />
-                        <h3 class="mb-3 mt-0">UI/UX design</h3>
-                        <p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.</p>
-                    </div>
-                    <div class="spacer d-md-none d-lg-none" data-height="30"></div>
+                <div class="service-box rounded data-background padding-30 text-center text-light shadow-blue">
+                    <img src="${pageContext.request.contextPath}/resources/img/lang.png" width="1544" height="211"/>
                 </div>
-
-                <div class="col-md-4">
-                    <!-- service box -->
-                    <div class="service-box rounded data-background padding-30 text-center shadow-yellow" data-color="#F9D74C">
-                        <img src="https://via.placeholder.com/80x80" alt="UI/UX design" />
-                        <h3 class="mb-3 mt-0">Web Development</h3>
-                        <p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.</p>
-                    </div>
-                    <div class="spacer d-md-none d-lg-none" data-height="30"></div>
-                </div>
-
-                <div class="col-md-4">
-                    <!-- service box -->
-                    <div class="service-box rounded data-background padding-30 text-center text-light shadow-pink" data-color="#F97B8B">
-                        <img src="https://via.placeholder.com/80x80" alt="UI/UX design" />
-                        <h3 class="mb-3 mt-0">Photography</h3>
-                        <p class="mb-0">Lorem ipsum dolor sit amet consectetuer adipiscing elit aenean commodo ligula eget.</p>
-                    </div>
-                </div>
-
+                <div class="spacer d-md-none d-lg-none" data-height="30"></div>
             </div>
-
             <div class="mt-5 text-center">
-                <p class="mb-0">Looking for a custom job? <a href="#contact">Click here</a> to contact me! 👋</p>
+                <p class="mb-0">Looking for an employee? <a href="#contact">Click here</a> to contact me! 👋</p>
             </div>
-
         </div>
-
     </section>
 
     <!-- section experience -->
@@ -364,32 +260,14 @@
                 <div class="col-md-6">
 
                     <!-- timeline wrapper -->
-                    <div class="timeline edu bg-dark rounded shadow-light padding-30 overflow-hidden">
+                    <div class="timeline exp bg-dark rounded shadow-light padding-30 overflow-hidden">
 
                         <!-- timeline item -->
                         <div class="timeline-container wow fadeInUp">
                             <div class="content">
-                                <span class="time">2019 - Present</span>
-                                <h3 class="title">Academic Degree</h3>
-                                <p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-                            </div>
-                        </div>
-
-                        <!-- timeline item -->
-                        <div class="timeline-container wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="content">
-                                <span class="time">2017 - 2013</span>
-                                <h3 class="title">Bachelor’s Degree</h3>
-                                <p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
-                            </div>
-                        </div>
-
-                        <!-- timeline item -->
-                        <div class="timeline-container wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="content">
-                                <span class="time">2013 - 2009</span>
-                                <h3 class="title">Honours Degree</h3>
-                                <p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
+                                <span class="time">2019.04 - 2020.03</span>
+                                <h3 class="title"><spring:message code="message.mainPage.EXP.Company" /></h3>
+                                <p><spring:message code="message.mainPage.EXP.job" /></p>
                             </div>
                         </div>
 
@@ -411,27 +289,41 @@
                         <!-- timeline item -->
                         <div class="timeline-container wow fadeInUp">
                             <div class="content">
-                                <span class="time">2019 - Present</span>
-                                <h3 class="title">Web Designer</h3>
-                                <p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
+                                <span class="time">2020.02 - 2020.03</span>
+                                <h3 class="title">Secure File Management System</h3>
+                                <p><spring:message code="message.mainPage.EXP.title1" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork.res" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork1.1" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork1.2" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork1.3" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork1.4" /></p>
                             </div>
                         </div>
 
                         <!-- timeline item -->
                         <div class="timeline-container wow fadeInUp" data-wow-delay="0.2s">
                             <div class="content">
-                                <span class="time">2017 - 2013</span>
-                                <h3 class="title">Front-End Developer</h3>
-                                <p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
+                                <span class="time">2019.09 - 2020.02</span>
+                                <h3 class="title">Secure File Management System</h3>
+                                <p><spring:message code="message.mainPage.EXP.title2" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork.res" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork2.1" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork2.2" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork2.3" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork2.4" /></p>
                             </div>
                         </div>
 
                         <!-- timeline item -->
                         <div class="timeline-container wow fadeInUp" data-wow-delay="0.4s">
                             <div class="content">
-                                <span class="time">2013 - 2009</span>
-                                <h3 class="title">Back-End Developer</h3>
-                                <p>Lorem ipsum dolor sit amet quo ei simul congue exerci ad nec admodum perfecto.</p>
+                                <span class="time">2019.05 - 2019.07</span>
+                                <h3 class="title">Secure File Management System</h3>
+                                <p><spring:message code="message.mainPage.EXP.title3" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork.res" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork3.1" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork3.2" /></p>
+                                <p><spring:message code="message.mainPage.EXP.myWork3.3" /></p>
                             </div>
                         </div>
 
@@ -454,27 +346,25 @@
         <div class="container">
 
             <!-- section title -->
-            <h2 class="section-title wow fadeInUp">Recent works</h2>
+            <h2 class="section-title wow fadeInUp">Portfolio</h2>
 
             <div class="spacer" data-height="60"></div>
 
             <!-- portfolio filter (desktop) -->
             <ul class="portfolio-filter list-inline wow fadeInUp">
                 <li class="current list-inline-item" data-filter="*">Everything</li>
-                <li class="list-inline-item" data-filter=".creative">Creative</li>
-                <li class="list-inline-item" data-filter=".art">Art</li>
-                <li class="list-inline-item" data-filter=".design">Design</li>
-                <li class="list-inline-item" data-filter=".branding">Branding</li>
+                <li class="list-inline-item" data-filter=".creative">SpringFrameWork</li>
+                <li class="list-inline-item" data-filter=".art">Document</li>
+                <li class="list-inline-item" data-filter=".design">Unity</li>
             </ul>
 
             <!-- portfolio filter (mobile) -->
             <div class="pf-filter-wrapper">
                 <select class="portfolio-filter-mobile">
                     <option value="*">Everything</option>
-                    <option value=".creative">Creative</option>
-                    <option value=".art">Art</option>
-                    <option value=".design">Design</option>
-                    <option value=".branding">Branding</option>
+                    <option value=".creative">SpringFrameWork</option>
+                    <option value=".art">Document</option>
+                    <option value=".design">Unity</option>
                 </select>
             </div>
 
@@ -482,450 +372,124 @@
             <div class="row portfolio-wrapper">
 
                 <!-- portfolio item -->
-                <div class="col-md-4 col-sm-6 grid-item art">
-                    <a href="https://via.placeholder.com/330x267" class="work-image">
+                <div class="col-md-4 col-sm-6 grid-item creative">
+                    <a href="#small-dialog" class="work-content">
                         <div class="portfolio-item rounded shadow-dark">
                             <div class="details">
-                                <span class="term">Art</span>
-                                <h4 class="title">Project Managment Illustration</h4>
-                                <span class="more-button"><i class="icon-magnifier-add"></i></span>
-                            </div>
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/330x267" alt="Portfolio-title" />
-                                <div class="mask"></div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- portfolio item -->
-                <div class="col-md-4 col-sm-6 grid-item creative design">
-                    <a href="/index" class="work-content">
-                        <div class="portfolio-item rounded shadow-dark">
-                            <div class="details">
-                                <span class="term">Creative</span>
-                                <h4 class="title">Guest App Walkthrough Screens</h4>
+                                <span class="term">SpringFrameWork</span>
+                                <h4 class="title">Project Web Market</h4>
                                 <span class="more-button"><i class="icon-options"></i></span>
                             </div>
                             <div class="thumb">
-                                <img src="https://via.placeholder.com/330x267" alt="Portfolio-title" />
+                                <img src="${pageContext.request.contextPath}/resources/img/thubm.png" alt="Portfolio-title" />
                                 <div class="mask"></div>
                             </div>
                         </div>
                     </a>
                     <div id="small-dialog" class="white-popup zoom-anim-dialog mfp-hide">
-                        <img src="https://via.placeholder.com/590x280" alt="Title" />
-                        <h2>Guest App Walkthrough Screens</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam hendrerit nibh in massa semper rutrum. In rhoncus eleifend mi id tempus.</p>
-                        <p>Donec consectetur, libero at pretium euismod, nisl felis lobortis urna, id tristique nisl lectus eget ligula.</p>
-                        <a href="#" class="btn btn-default">View on Dribbble</a>
+                        <img src="${pageContext.request.contextPath}/resources/img/introdu.png" alt="Title" />
+                        <h2>Project Web Market</h2>
+                        <p>
+                            <spring:message code="message.mainPage.IDE.title" /><br>
+                            - IDE : IntelliJ IDEA 2020.3.2<br>
+                            - jdk : 1.8.0_181<br>
+                            - Springframework : 5.2.3.RELEASE<br>
+                            - Tomcat : Apache Tomcat 9.0.38<br>
+                            - HTML, Java, JavaScript, JQuery, MySql, Ajax, Kakao Developers(Api), Google Developers(Api), Daum Address(Api) <spring:message code="message.mainPage.IDE.use" />
+
+                        </p>
+                        <p>
+                            - <spring:message code="message.mainPage.IDE.schedule" /><br>
+                            - <spring:message code="message.mainPage.IDE.template" /><br>
+                            - <spring:message code="message.mainPage.IDE.useSkill.1" /><br>
+                            - <spring:message code="message.mainPage.IDE.useSkill.2" /><br>
+                            - <spring:message code="message.mainPage.IDE.useSkill.3" /><br>
+                            - <spring:message code="message.mainPage.IDE.useSkill.4" /><br>
+                            - <spring:message code="message.mainPage.IDE.useSkill.5" /><br>
+                            - <spring:message code="message.mainPage.IDE.useSkill.6" /><br>
+                            - <spring:message code="message.mainPage.IDE.useSkill.7" /><br>
+                            - <spring:message code="message.mainPage.IDE.useSkill.8" /><br>
+                              <spring:message code="message.mainPage.IDE.useSkill.9" /><br>
+                        </p>
+                        <a href="${pageContext.request.contextPath}/index" class="btn btn-default">쇼핑몰 바로가기</a>
+                        <a href="https://github.com/darkbisop/ProjectWebMarket" class="btn btn-warning">GitHub</a>
                     </div>
                 </div>
 
-                <!-- portfolio item -->
-                <div class="col-md-4 col-sm-6 grid-item branding">
-                    <a href="https://www.youtube.com/watch?v=qf9z4ulfmYw" class="work-video">
+                <div class="col-md-4 col-sm-6 grid-item art">
+                    <a href="#small-dialog_2" class="work-content">
                         <div class="portfolio-item rounded shadow-dark">
                             <div class="details">
-                                <span class="term">Branding</span>
-                                <h4 class="title">Delivery App Wireframe</h4>
-                                <span class="more-button"><i class="icon-camrecorder"></i></span>
+                                <span class="term">Document</span>
+                                <h4 class="title">Unit Test Document</h4>
+                                <span class="more-button"><i class="icon-options"></i></span>
                             </div>
                             <div class="thumb">
-                                <img src="https://via.placeholder.com/330x267" alt="Portfolio-title" />
+                                <img src="${pageContext.request.contextPath}/resources/img/thubm.png" alt="Portfolio-title" />
                                 <div class="mask"></div>
                             </div>
                         </div>
                     </a>
+                    <div id="small-dialog_2" class="white-popup zoom-anim-dialog mfp-hide">
+                        <img src="${pageContext.request.contextPath}/resources/img/introdu.png" alt="Title" />
+                        <h2>Project Web Market</h2>
+                        <p>
+                            개발환경<br>
+                            - IDE : IntelliJ IDEA 2020.3.2<br>
+                            - jdk : 1.8.0_181<br>
+                            - Springframework : 5.2.3.RELEASE<br>
+                            - Tomcat : Apache Tomcat 9.0.38<br>
+                            - HTML, Java, JavaScript, JQuery, MySql, Ajax, Kakao Developers(Api), Google Developers(Api), Daum 주소(Api) 사용
+
+                        </p>
+                        <p>
+                            - 제작기간 : 약 5주<br>
+                            - RSA 암호화 로그인 및 소셜 연동 로그인 (구글, 카카오) 구현<br>
+                        </p>
+                        <a href="http://darkbisop.cafe24.com/ProjectWebMarket/index" class="btn btn-default">쇼핑몰 바로가기</a>
+                        <a href="https://github.com/darkbisop/ProjectWebMarket" class="btn btn-warning">GitHub</a>
+                    </div>
                 </div>
 
-                <!-- portfolio item -->
-                <div class="col-md-4 col-sm-6 grid-item creative">
-                    <a href="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/240233494&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true" class="work-video">
+                <div class="col-md-4 col-sm-6 grid-item design branding">
+                    <a href="#small-dialog_3" class="work-content">
                         <div class="portfolio-item rounded shadow-dark">
                             <div class="details">
-                                <span class="term">Creative</span>
-                                <h4 class="title">Onboarding Motivation</h4>
-                                <span class="more-button"><i class="icon-music-tone-alt"></i></span>
+                                <span class="term">Unity</span>
+                                <h4 class="title">Unity3D Game Programming</h4>
+                                <span class="more-button"><i class="icon-options"></i></span>
                             </div>
                             <div class="thumb">
-                                <img src="https://via.placeholder.com/330x267" alt="Portfolio-title" />
+                                <img src="${pageContext.request.contextPath}/resources/img/unity.png" alt="Portfolio-title" />
                                 <div class="mask"></div>
                             </div>
                         </div>
-                    </a>
-                </div>
-
-                <!-- portfolio item -->
-                <div class="col-md-4 col-sm-6 grid-item art branding">
-                    <a href="#gallery-1" class="gallery-link">
-                        <div class="portfolio-item rounded shadow-dark">
-                            <div class="details">
-                                <span class="term">Art, Branding</span>
-                                <h4 class="title">iMac Mockup Design</h4>
-                                <span class="more-button"><i class="icon-picture"></i></span>
-                            </div>
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/330x267" alt="Portfolio-title" />
-                                <div class="mask"></div>
-                            </div>
-                        </div>
-                    </a>
-                    <div id="gallery-1" class="gallery mfp-hide">
-                        <a href="https://via.placeholder.com/330x267"></a>
-                        <a href="https://via.placeholder.com/330x267"></a>
-                    </div>
-                </div>
-
-                <!-- portfolio item -->
-                <div class="col-md-4 col-sm-6 grid-item creative design">
-                    <a href="https://themeforest.net/user/pxlsolutions/portfolio" target="_blank">
-                        <div class="portfolio-item rounded shadow-dark">
-                            <div class="details">
-                                <span class="term">Creative, Design</span>
-                                <h4 class="title">Game Store App Concept</h4>
-                                <span class="more-button"><i class="icon-link"></i></span>
-                            </div>
-                            <div class="thumb">
-                                <img src="https://via.placeholder.com/330x267" alt="Portfolio-title" />
-                                <div class="mask"></div>
-                            </div>
+                        <div id="small-dialog_3" class="white-popup zoom-anim-dialog mfp-hide">
+                            <iframe width="590" height="314" src="https://www.youtube.com/embed/WDlz4JK-u1I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <a href="http://darkbisop.cafe24.com/ProjectWebMarket/index" class="btn btn-default">쇼핑몰 바로가기</a>
                         </div>
                     </a>
                 </div>
-
             </div>
-
-            <!-- more button -->
-            <div class="load-more text-center mt-4">
-                <a href="javascript:" class="btn btn-default"><i class="fas fa-spinner"></i> Load more</a>
-                <!-- numbered pagination (hidden for infinite scroll) -->
-                <ul class="portfolio-pagination list-inline d-none">
-                    <li class="list-inline-item">1</li>
-                    <li class="list-inline-item"><a href="works-2.html">2</a></li>
-                </ul>
-            </div>
-
         </div>
-
-    </section>
-
-    <!-- section prices -->
-    <section id="prices">
-
-        <div class="container">
-
-            <!-- section title -->
-            <h2 class="section-title wow fadeIn">Pricing Plans</h2>
-
-            <div class="spacer" data-height="60"></div>
-
-            <div class="row">
-
-                <div class="col-md-4 pr-md-0 mt-md-4 mt-0">
-                    <!-- price item -->
-                    <div class="price-item bg-dark rounded shadow-light text-center">
-                        <img src="https://via.placeholder.com/80x80" alt="Regular" />
-                        <h2 class="plan">Basic</h2>
-                        <p>A Simple option but powerful to manage your business</p>
-                        <p>Email support</p>
-                        <h3 class="price"><em>$</em>9<span>Month</span></h3>
-                        <a href="#" class="btn btn-default">Get Started</a>
-                    </div>
-                </div>
-
-                <div class="col-md-4 px-md-0 my-4 my-md-0">
-                    <!-- price item recommended-->
-                    <div class="price-item bg-dark rounded shadow-light text-center best">
-                        <span class="badge">Recommended</span>
-                        <img src="https://via.placeholder.com/80x80" alt="Premium" />
-                        <h2 class="plan">Premium</h2>
-                        <p>Unlimited product including apps integrations and more features</p>
-                        <p>Mon-Fri support</p>
-                        <h3 class="price"><em>$</em>49<span>Month</span></h3>
-                        <a href="#" class="btn btn-default">Get Started</a>
-                    </div>
-                </div>
-
-                <div class="col-md-4 pl-md-0 mt-md-4 mt-0">
-                    <!-- price item -->
-                    <div class="price-item bg-dark rounded shadow-light text-center">
-                        <img src="https://via.placeholder.com/80x80" alt="Ultimate" />
-                        <h2 class="plan">Ultimate</h2>
-                        <p>A wise option for large companies and individuals</p>
-                        <p>24/7 support</p>
-                        <h3 class="price"><em>$</em>99<span>Month</span></h3>
-                        <a href="#" class="btn btn-default">Get Started</a>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- section testimonials -->
-    <section id="testimonials">
-
-        <div class="container">
-
-            <!-- section title -->
-            <h2 class="section-title wow fadeInUp">Clients & Reviews</h2>
-
-            <div class="spacer" data-height="60"></div>
-
-            <!-- testimonials wrapper -->
-            <div class="testimonials-wrapper">
-
-                <!-- testimonial item -->
-                <div class="testimonial-item text-center mx-auto">
-                    <div class="thumb mb-3 mx-auto">
-                        <img src="https://via.placeholder.com/90x90" alt="customer-name" />
-                    </div>
-                    <h4 class="mt-3 mb-0">John Doe</h4>
-                    <span class="subtitle">Product designer at Dribbble</span>
-                    <div class="bg-dark padding-30 shadow-light rounded triangle-top position-relative mt-4">
-                        <p class="mb-0">I enjoy working with the theme and learn so much. You guys make the process fun and interesting. Good luck! 👍</p>
-                    </div>
-                </div>
-
-                <!-- testimonial item -->
-                <div class="testimonial-item text-center mx-auto">
-                    <div class="thumb mb-3 mx-auto">
-                        <img src="https://via.placeholder.com/90x90" alt="customer-name" />
-                    </div>
-                    <h4 class="mt-3 mb-0">John Doe</h4>
-                    <span class="subtitle">Product designer at Dribbble</span>
-                    <div class="bg-dark padding-30 shadow-light rounded triangle-top position-relative mt-4">
-                        <p class="mb-0">I enjoy working with the theme and learn so much. You guys make the process fun and interesting. Good luck! 🔥</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row">
-                <div class="col-md-3 col-6">
-                    <!-- client item -->
-                    <div class="client-item">
-                        <div class="inner">
-                            <img src="https://via.placeholder.com/100x30" alt="client-name" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <!-- client item -->
-                    <div class="client-item">
-                        <div class="inner">
-                            <img src="https://via.placeholder.com/100x30" alt="client-name" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <!-- client item -->
-                    <div class="client-item">
-                        <div class="inner">
-                            <img src="https://via.placeholder.com/100x30" alt="client-name" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <!-- client item -->
-                    <div class="client-item">
-                        <div class="inner">
-                            <img src="https://via.placeholder.com/100x30" alt="client-name" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <!-- client item -->
-                    <div class="client-item">
-                        <div class="inner">
-                            <img src="https://via.placeholder.com/100x30" alt="client-name" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <!-- client item -->
-                    <div class="client-item">
-                        <div class="inner">
-                            <img src="https://via.placeholder.com/100x30" alt="client-name" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <!-- client item -->
-                    <div class="client-item">
-                        <div class="inner">
-                            <img src="https://via.placeholder.com/100x30" alt="client-name" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <!-- client item -->
-                    <div class="client-item">
-                        <div class="inner">
-                            <img src="https://via.placeholder.com/100x30" alt="client-name" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- section blog -->
-    <section id="blog">
-
-        <div class="container">
-
-            <!-- section title -->
-            <h2 class="section-title wow fadeInUp">Latest Posts</h2>
-
-            <div class="spacer" data-height="60"></div>
-
-            <div class="row blog-wrapper">
-
-                <div class="col-md-4">
-                    <!-- blog item -->
-                    <div class="blog-item rounded bg-dark shadow-light wow fadeIn">
-                        <div class="thumb">
-                            <a href="#">
-                                <span class="category">Reviews</span>
-                            </a>
-                            <a href="#">
-                                <img src="https://via.placeholder.com/330x215" alt="blog-title" />
-                            </a>
-                        </div>
-                        <div class="details">
-                            <h4 class="my-0 title"><a href="#">5 Best App Development Tool for Your Project</a></h4>
-                            <ul class="list-inline meta mb-0 mt-2">
-                                <li class="list-inline-item">09 February, 2020</li>
-                                <li class="list-inline-item">Bolby</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <!-- blog item -->
-                    <div class="blog-item rounded bg-dark shadow-light wow fadeIn">
-                        <div class="thumb">
-                            <a href="#">
-                                <span class="category">Tutorial</span>
-                            </a>
-                            <a href="#">
-                                <img src="https://via.placeholder.com/330x215" alt="blog-title" />
-                            </a>
-                        </div>
-                        <div class="details">
-                            <h4 class="my-0 title"><a href="#">Common Misconceptions About Payment</a></h4>
-                            <ul class="list-inline meta mb-0 mt-2">
-                                <li class="list-inline-item">07 February, 2020</li>
-                                <li class="list-inline-item">Bolby</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <!-- blog item -->
-                    <div class="blog-item rounded bg-dark shadow-light wow fadeIn">
-                        <div class="thumb">
-                            <a href="#">
-                                <span class="category">Business</span>
-                            </a>
-                            <a href="#">
-                                <img src="https://via.placeholder.com/330x215" alt="blog-title" />
-                            </a>
-                        </div>
-                        <div class="details">
-                            <h4 class="my-0 title"><a href="#">3 Things To Know About Startup Business</a></h4>
-                            <ul class="list-inline meta mb-0 mt-2">
-                                <li class="list-inline-item">06 February, 2020</li>
-                                <li class="list-inline-item">Bolby</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
     </section>
 
     <!-- section contact -->
     <section id="contact">
-
         <div class="container">
 
             <!-- section title -->
             <h2 class="section-title wow fadeInUp">Get In Touch</h2>
-
             <div class="spacer" data-height="60"></div>
-
             <div class="row">
-
                 <div class="col-md-4">
                     <!-- contact info -->
                     <div class="contact-info">
-                        <h3 class="wow fadeInUp">Let's talk about everything!</h3>
-                        <p class="wow fadeInUp">Don't like forms? Send me an <a href="mailto:name@example.com">email</a>. 👋</p>
+                        <h3 class="wow fadeInUp">Let's talk about everything! Send me an <a href="mailto:name@example.com">email</a>. 👋</h3>
                     </div>
                 </div>
-
-                <div class="col-md-8">
-                    <!-- Contact Form -->
-                    <form id="contact-form" class="contact-form mt-6" method="post" action="form/contact.php">
-
-                        <div class="messages"></div>
-
-                        <div class="row">
-                            <div class="column col-md-6">
-                                <!-- Name input -->
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Your name" required="required" data-error="Name is required.">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="column col-md-6">
-                                <!-- Email input -->
-                                <div class="form-group">
-                                    <input type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="Email address" required="required" data-error="Email is required.">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="column col-md-12">
-                                <!-- Email input -->
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="InputSubject" name="InputSubject" placeholder="Subject" required="required" data-error="Subject is required.">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="column col-md-12">
-                                <!-- Message textarea -->
-                                <div class="form-group">
-                                    <textarea name="InputMessage" id="InputMessage" class="form-control" rows="5" placeholder="Message" required="required" data-error="Message is required."></textarea>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" name="submit" id="submit" value="Submit" class="btn btn-default">Send Message</button><!-- Send Button -->
-
-                    </form>
-                    <!-- Contact Form end -->
-                </div>
-
             </div>
-
         </div>
-
     </section>
 
     <div class="spacer" data-height="96"></div>
@@ -935,7 +499,8 @@
             <span class="copyright">© 2020 Bolby Template.</span>
         </div>
     </footer>
-
+        </div>
+    </section>
 </main>
 
 <!-- Go to top button -->

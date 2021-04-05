@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <title>Title</title>
@@ -17,67 +18,65 @@
 </head>
 <body>
 <div id="container">
-    <h2>상품 상세정보</h2>
-
+    <h2><spring:message code="message.admin.ProductDetailInfo" /></h2>
     <form role="form" action="${pageContext.request.contextPath}/admin/product/view" method="post" autocomplete="off">
-
         <input type="hidden" name="n" value="${product.productNum}" />
-        <label>1차 분류</label><span class="result1"></span>
-        <label>2차 분류</label><span class="result2"></span>
+        <label>1<spring:message code="message.admin.category" /></label><span class="result1"></span>
+        <label>2<spring:message code="message.admin.category" /></label><span class="result2"></span>
         <label>
             <select id="category1">
-                <option value="">전체</option>
+                <option value=""><spring:message code="message.admin.category.All" /></option>
             </select>
         </label>
 
         <label>
             <select id="category2">
-                <option value="">전체</option>
+                <option value=""><spring:message code="message.admin.category.All" /></option>
             </select>
         </label>
 
         <div class="input_Area">
-            <label>상품명</label>
+            <label><spring:message code="message.admin.ProductName" /></label>
             <span>${product.productName}</span>
         </div>
 
         <div class="input_Area">
-            <label>상품 가격</label>
+            <label><spring:message code="message.admin.ProductPrice" /></label>
             <span><fmt:formatNumber value="${product.productPrice}" pattern="###,###,###" /></span>
         </div>
 
         <div class="input_Area">
-            <label>상품수량</label>
+            <label><spring:message code="message.admin.ProductStocks" /></label>
             <span>${product.productStock}</span>
         </div>
 
         <div class="input_Area">
-            <label>세일</label>
+            <label><spring:message code="message.admin.ProductSales" /></label>
             <span>${product.sale}</span>
         </div>
 
         <div class="input_Area">
-            <label>상품소개</label>
+            <label><spring:message code="message.admin.ProductDesc" /></label>
             <span>${product.productDescription}</span>
         </div>
 
         <div class="input_Area">
-            <label>이미지</label>
-            <p>원본 이미지</p>
+            <label><spring:message code="message.admin.ProductImg" /></label>
+            <p>Original</p>
             <img src="/ProjectWebMarket/resources${product.productImage}" class="origImg" />
 
-            <p>섬네일</p>
+            <p>Thumbnail</p>
             <img src="/ProjectWebMarket/resources${product.productThumbnail}" class="thumbImg"/>
         </div>
 
         <div class="input_Area">
-            <label>등록 날짜</label>
+            <label><spring:message code="message.admin.ProductRegistDate" /></label>
             <span><fmt:formatDate value="${product.regDate}" pattern="yyyy-MM-dd" /></span>
         </div>
 
         <div class="input_Area">
-            <button type="submit" class="update_Btn btn-warning">수정</button>
-            <button type="submit" class="delete_Btn btn-danger">삭제</button>
+            <button type="button" class="update_Btn btn-warning"><spring:message code="message.admin.ProductUpdateBtn" /></button>
+            <button type="button" class="delete_Btn btn-danger"><spring:message code="message.admin.ProductDeleteBtn" /></button>
         </div>
     </form>
 </div>
@@ -128,11 +127,11 @@
     $(".delete_Btn").click(function() {
         const con = confirm("정말로 삭제하시겠습니까?");
 
-        if (con) {
+        if (con === true) {
             formObj.attr("action", "${pageContext.request.contextPath}/admin/product/delete");
             formObj.submit();
+            alert("게시글을 삭제하였습니다.");
         }
-        alert("게시글을 삭제하였습니다.");
     });
 
 </script>
