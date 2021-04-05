@@ -37,8 +37,8 @@
 }
 /* 로그인 버튼 영역 */
 .login_area{
-    width: 25%;
-    height: 100%;
+/*    width: 25%;
+    height: 100%;*/
     display: inline-block;
     text-align: center;
 } .login_button{
@@ -63,9 +63,9 @@
 }
 .login_success_area {
     width: 80%;
-    height: 62%;
-    border: 2px solid #7474ad;
-    border-radius: 15px;
+    height: 80%;
+/*    border: 2px solid #7474ad;
+    border-radius: 15px;*/
     margin: 5% auto;
     padding-top: 5%;
 }

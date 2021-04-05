@@ -290,7 +290,8 @@
                         <div class="timeline-container wow fadeInUp">
                             <div class="content">
                                 <span class="time">2020.02 - 2020.03</span>
-                                <h3 class="title">Secure File Management System</h3>
+                                <h3 class="title"><spring:message code="message.mainPage.EXP.mainTitle" /></h3>
+                                <h3 class="title"><spring:message code="message.mainPage.EXP.mainTitle.2" /></h3>
                                 <p><spring:message code="message.mainPage.EXP.title1" /></p>
                                 <p><spring:message code="message.mainPage.EXP.myWork.res" /></p>
                                 <p><spring:message code="message.mainPage.EXP.myWork1.1" /></p>
@@ -304,7 +305,8 @@
                         <div class="timeline-container wow fadeInUp" data-wow-delay="0.2s">
                             <div class="content">
                                 <span class="time">2019.09 - 2020.02</span>
-                                <h3 class="title">Secure File Management System</h3>
+                                <h3 class="title"><spring:message code="message.mainPage.EXP.mainTitle" /></h3>
+                                <h3 class="title"><spring:message code="message.mainPage.EXP.mainTitle.2" /></h3>
                                 <p><spring:message code="message.mainPage.EXP.title2" /></p>
                                 <p><spring:message code="message.mainPage.EXP.myWork.res" /></p>
                                 <p><spring:message code="message.mainPage.EXP.myWork2.1" /></p>
@@ -318,7 +320,8 @@
                         <div class="timeline-container wow fadeInUp" data-wow-delay="0.4s">
                             <div class="content">
                                 <span class="time">2019.05 - 2019.07</span>
-                                <h3 class="title">Secure File Management System</h3>
+                                <h3 class="title"><spring:message code="message.mainPage.EXP.mainTitle" /></h3>
+                                <h3 class="title"><spring:message code="message.mainPage.EXP.mainTitle.2" /></h3>
                                 <p><spring:message code="message.mainPage.EXP.title3" /></p>
                                 <p><spring:message code="message.mainPage.EXP.myWork.res" /></p>
                                 <p><spring:message code="message.mainPage.EXP.myWork3.1" /></p>
@@ -355,7 +358,6 @@
                 <li class="current list-inline-item" data-filter="*">Everything</li>
                 <li class="list-inline-item" data-filter=".creative">SpringFrameWork</li>
                 <li class="list-inline-item" data-filter=".art">Document</li>
-                <li class="list-inline-item" data-filter=".design">Unity</li>
             </ul>
 
             <!-- portfolio filter (mobile) -->
@@ -364,7 +366,6 @@
                     <option value="*">Everything</option>
                     <option value=".creative">SpringFrameWork</option>
                     <option value=".art">Document</option>
-                    <option value=".design">Unity</option>
                 </select>
             </div>
 
@@ -409,9 +410,11 @@
                             - <spring:message code="message.mainPage.IDE.useSkill.6" /><br>
                             - <spring:message code="message.mainPage.IDE.useSkill.7" /><br>
                             - <spring:message code="message.mainPage.IDE.useSkill.8" /><br>
+                            - <spring:message code="message.mainPage.IDE.useSkill.8.1" /><br>
+                            - <spring:message code="message.mainPage.IDE.useSkill.8.2" /><br>
                               <spring:message code="message.mainPage.IDE.useSkill.9" /><br>
                         </p>
-                        <a href="${pageContext.request.contextPath}/index" class="btn btn-default">쇼핑몰 바로가기</a>
+                        <a href="${pageContext.request.contextPath}/index" class="btn btn-default"><spring:message code="message.mainPage.Work.Move" /></a>
                         <a href="https://github.com/darkbisop/ProjectWebMarket" class="btn btn-warning">GitHub</a>
                     </div>
                 </div>
@@ -425,50 +428,31 @@
                                 <span class="more-button"><i class="icon-options"></i></span>
                             </div>
                             <div class="thumb">
-                                <img src="${pageContext.request.contextPath}/resources/img/thubm.png" alt="Portfolio-title" />
+                                <img src="${pageContext.request.contextPath}/resources/img/UT_thumb.png" alt="Portfolio-title" />
                                 <div class="mask"></div>
                             </div>
                         </div>
                     </a>
                     <div id="small-dialog_2" class="white-popup zoom-anim-dialog mfp-hide">
-                        <img src="${pageContext.request.contextPath}/resources/img/introdu.png" alt="Title" />
-                        <h2>Project Web Market</h2>
+                        <img src="${pageContext.request.contextPath}/resources/img/UTimg.png" alt="Title" />
+                        <h2>Unit Test Document</h2>
                         <p>
-                            개발환경<br>
-                            - IDE : IntelliJ IDEA 2020.3.2<br>
+                            <spring:message code="message.mainPage.IDE.title" /><br>
+                            - IDE : Eclipse IDE for Enterprise - 2020-09<br>
                             - jdk : 1.8.0_181<br>
-                            - Springframework : 5.2.3.RELEASE<br>
+                            - Springframework : 3.1.1.RELEASE<br>
                             - Tomcat : Apache Tomcat 9.0.38<br>
-                            - HTML, Java, JavaScript, JQuery, MySql, Ajax, Kakao Developers(Api), Google Developers(Api), Daum 주소(Api) 사용
+                            - HTML, Java, JavaScript, JQuery, Oracle, Ajax,
 
                         </p>
                         <p>
-                            - 제작기간 : 약 5주<br>
-                            - RSA 암호화 로그인 및 소셜 연동 로그인 (구글, 카카오) 구현<br>
+                            - <spring:message code="message.mainPage.IDE.schedule" /><br>
+                            - <spring:message code="message.mainPage.IDE.Desc" /><br>
+                            <spring:message code="message.mainPage.IDE.Desc.2" />
                         </p>
-                        <a href="http://darkbisop.cafe24.com/ProjectWebMarket/index" class="btn btn-default">쇼핑몰 바로가기</a>
-                        <a href="https://github.com/darkbisop/ProjectWebMarket" class="btn btn-warning">GitHub</a>
+                        <a href="https://drive.google.com/file/d/1PdIvt_MNBjsz9MLN1SkPFeR4Tvdq530s/view?usp=sharing" class="btn btn-default"><spring:message code="message.mainPage.Work.Down" /></a>
+                        <a href="https://github.com/darkbisop/SpringBoard" class="btn btn-warning">GitHub</a>
                     </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 grid-item design branding">
-                    <a href="#small-dialog_3" class="work-content">
-                        <div class="portfolio-item rounded shadow-dark">
-                            <div class="details">
-                                <span class="term">Unity</span>
-                                <h4 class="title">Unity3D Game Programming</h4>
-                                <span class="more-button"><i class="icon-options"></i></span>
-                            </div>
-                            <div class="thumb">
-                                <img src="${pageContext.request.contextPath}/resources/img/unity.png" alt="Portfolio-title" />
-                                <div class="mask"></div>
-                            </div>
-                        </div>
-                        <div id="small-dialog_3" class="white-popup zoom-anim-dialog mfp-hide">
-                            <iframe width="590" height="314" src="https://www.youtube.com/embed/WDlz4JK-u1I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <a href="http://darkbisop.cafe24.com/ProjectWebMarket/index" class="btn btn-default">쇼핑몰 바로가기</a>
-                        </div>
-                    </a>
                 </div>
             </div>
         </div>
