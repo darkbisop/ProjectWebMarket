@@ -4,7 +4,7 @@
 <%--<html lang="en-US">--%>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Bolby - Portfolio/CV/Resume HTML Template</title>
+    <title>JeonYongtae - Portfolio/Resume</title>
     <meta name="description" content="Bolby - Portfolio/CV/Resume HTML Template">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" type="/resources/resume/image/x-icon" href="https://via.placeholder.com/32x32">
@@ -101,7 +101,8 @@
                 <!-- info -->
                 <h1 class="mb-2 mt-0"><spring:message code="message.mainPage.myName" /></h1>
                <%-- <span>I'm a <span class="text-rotating">UI/UX designer, Front-End developer, Photography lover</span></span>--%>
-                <span><spring:message code="message.mainPage.simpleIntro" /></span>
+                <span><spring:message code="message.mainPage.simpleIntro" /></span><br>
+                <span><spring:message code="message.mainPage.simpleIntro.2" /></span>
 
                 <!-- buttons -->
                 <div class="mt-4">
@@ -176,7 +177,7 @@
                                 <!-- about text -->
                                 <p><spring:message code="message.mainPage.PR" /></p>
                                 <div class="mt-3">
-                                    <a href="#" class="btn btn-default">Download Resume</a>
+                                    <a href="https://drive.google.com/file/d/1nB0gpiC5_0KkwxIHiTmCh_-fZ1egFEdC/view?usp=sharing" class="btn btn-default">Download Resume</a>
                                 </div>
                                 <div class="spacer d-md-none d-lg-none" data-height="30"></div>
                             </div>
@@ -267,7 +268,11 @@
                             <div class="content">
                                 <span class="time">2019.04 - 2020.03</span>
                                 <h3 class="title"><spring:message code="message.mainPage.EXP.Company" /></h3>
-                                <p><spring:message code="message.mainPage.EXP.job" /></p>
+                                <p><spring:message code="message.mainPage.EXP.job" /></p><br>
+                                <p><spring:message code="message.mainPage.EXP.Detail" /></p>
+                                <div class="mt-3">
+                                    <a href="https://drive.google.com/file/d/1uufP9vXXeMPRaBf9bKhgHza3mIQc3JLZ/view?usp=sharing" class="btn btn-default">Download</a>
+                                </div>
                             </div>
                         </div>
 
