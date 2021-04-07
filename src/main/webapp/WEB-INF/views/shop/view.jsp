@@ -50,8 +50,8 @@
         </div>
         <!---->
         <div class="lang-box">
-            <a href="${pageContext.request.contextPath}/shop/view?n=${list.productNum}?lang=ko" style="color:red;">한국어</a> /
-            <a href="${pageContext.request.contextPath}/shop/view?n=${list.productNum}?lang=ja" style="color:red;">日本語</a>
+            <a href="${pageContext.request.contextPath}/shop/view?n=${view.productNum}&?lang=ko" style="color:red;">한국어</a> /
+            <a href="${pageContext.request.contextPath}/shop/view?n=${view.productNum}&?lang=ja" style="color:red;">日本語</a>
         </div>
         <div class="cart box_1">
             <a href="${pageContext.request.contextPath}/shop/cartList">
