@@ -31,8 +31,9 @@
             <a id="getURL_2" href="">日本語</a>
             <script>
                 const url = window.location.href;
+                const testUrl = url;
                 const subUrl = url.substr(0, 64);
-                console.log(subUrl);
+
                 document.getElementById("getURL").innerHTML = "<a href='" + subUrl + "&?lang=ko" + "' style='color: red'>한국어</a>";
                 document.getElementById("getURL_2").innerHTML = "<a href='" + subUrl + "&?lang=ja" + "' style='color: red'>日本語</a>";
             </script>
@@ -114,7 +115,19 @@
 
                     <div class="product-info simpleCart_shelfItem">
                         <div class="product-info-cust prt_name">
-                            <h5 align="center"><b>${list.productName}</b></h5>
+                            <h5 align="center">
+                                <%--<script>
+                                    if (window.location.href.indexOf("?lang=ko") > -1) {
+                                        alert("ko");
+                                        document.getElementById("langProduct").innerHTML = "<b>${list.productName}</b>";
+                                    } else  if (window.location.href.indexOf("?lang=ja") > -1) {
+                                        alert("ja");
+                                        document.getElementById("langProduct").innerHTML = "<b>チョコチョコケーキ</b>";
+                                    }
+                                </script>--%>
+                                <b id="langProduct">${list.productName}</b>
+
+                            </h5>
                             <p></p>
                             <h5 class="item_price productPrice" align="center"><fmt:formatNumber value="${list.productPrice - list.productPrice * (list.sale * 0.01)}" pattern="###,###,###" />원</h5>
                             <br>

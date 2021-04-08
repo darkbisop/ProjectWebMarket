@@ -121,18 +121,6 @@
                             </li>
                         </ul>
                     </div>
-                   <%-- <script src="/resources/lighting/js/imagezoom.js"></script>
-                    <script defer src="/resources/lighting/js/jquery.flexslider.js"></script>--%>
-                   <%-- <script>
-                        // Can also be used with $(document).ready()
-                        $(window).load(function() {
-                            $('.flexslider').flexslider({
-                                animation: "slide",
-                                controlNav: "thumbnails"
-                            });
-                        });
-                    </script>--%>
-
                 </div>
                 <div class="col-md-5 single-top-in simpleCart_shelfItem">
                     <div class="single-para ">
