@@ -123,15 +123,34 @@
                     </div>
                 </div>
                 <div class="col-md-5 single-top-in simpleCart_shelfItem">
-                    <div class="single-para ">
+                    <div class="single-para langProduct">
                         <h4 class="productName">${view.productName}</h4>
-                        <h4><del>${view.productPrice}원</del> [${view.sale}% Off]</h4>
+                        <h4 class=""><del>${view.productPrice}원</del> [${view.sale}% Off]</h4>
                         <h5>
                             <fmt:formatNumber value="${view.productPrice - view.productPrice * (view.sale * 0.01)}" pattern="###,###,###" />원
-
                         </h5>
-
                         <p class="productDescription">${view.productDescription}</p>
+                        <script>
+                            if (window.location.href.indexOf("?lang=ko") > -1) {
+                                let str = "";
+                                str += "<h4>${view.productName}</h4>"
+                                    + "<h4>" + "<del>" + ${view.productPrice} + "원" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
+                                    + "<h5>" +
+                                            "<fmt:formatNumber value="${view.productPrice - view.productPrice * (view.sale * 0.01)}" pattern="###,###,###" />원"
+                                    + "</h5>";
+
+                                $(".langProduct").html(str);
+                            } else  if (window.location.href.indexOf("?lang=ja") > -1) {
+                                let str = "";
+                                str += "<h4>チョコチョコケーキ</h4>"
+                                    + "<h4>" + "<del>" + ${view.productPrice} + "EN" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
+                                    + "<h5>" +
+                                    "<fmt:formatNumber value="${view.productPrice - view.productPrice * (view.sale * 0.01)}" pattern="###,###,###" />EN"
+                                    + "</h5>";
+                                $(".langProduct").html(str);
+                            }
+                        </script>
+
                         <div class="prdt-info-grid">
                             <ul>
                                 <li class="categoryName">- <span>종류 : </span>${view.categoryName}</li>
