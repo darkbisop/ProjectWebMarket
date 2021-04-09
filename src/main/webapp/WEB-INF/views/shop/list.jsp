@@ -116,17 +116,14 @@
                     <div class="product-info simpleCart_shelfItem">
                         <div class="product-info-cust prt_name">
                             <h5 align="center">
-                                <%--<script>
+                                <b class="langProduct">${list.productName}</b>
+                                <script>
                                     if (window.location.href.indexOf("?lang=ko") > -1) {
-                                        alert("ko");
-                                        document.getElementById("langProduct").innerHTML = "<b>${list.productName}</b>";
+                                        $(".langProduct").html("<b>${list.productName}</b>");
                                     } else  if (window.location.href.indexOf("?lang=ja") > -1) {
-                                        alert("ja");
-                                        document.getElementById("langProduct").innerHTML = "<b>チョコチョコケーキ</b>";
+                                        $(".langProduct").html("<b>チョコチョコケーキ</b>");
                                     }
-                                </script>--%>
-                                <b id="langProduct">${list.productName}</b>
-
+                                </script>
                             </h5>
                             <p></p>
                             <h5 class="item_price productPrice" align="center"><fmt:formatNumber value="${list.productPrice - list.productPrice * (list.sale * 0.01)}" pattern="###,###,###" />원</h5>
