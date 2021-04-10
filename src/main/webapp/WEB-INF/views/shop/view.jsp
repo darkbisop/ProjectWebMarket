@@ -137,16 +137,18 @@
                                     + "<h4>" + "<del>" + ${view.productPrice} + "원" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
                                     + "<h5>" +
                                             "<fmt:formatNumber value="${view.productPrice - view.productPrice * (view.sale * 0.01)}" pattern="###,###,###" />원"
-                                    + "</h5>";
+                                    + "</h5>"
+                                    + "<p>${view.productDescription}</p>";
 
                                 $(".langProduct").html(str);
                             } else  if (window.location.href.indexOf("?lang=ja") > -1) {
                                 let str = "";
-                                str += "<h4>チョコチョコケーキ</h4>"
-                                    + "<h4>" + "<del>" + ${view.productPrice} + "EN" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
+                                str += "<h4>${view.productName_ja}</h4>"
+                                    + "<h4>" + "<del>" + ${view.productPrice_ja} + "円" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
                                     + "<h5>" +
-                                    "<fmt:formatNumber value="${view.productPrice - view.productPrice * (view.sale * 0.01)}" pattern="###,###,###" />EN"
-                                    + "</h5>";
+                                    "<fmt:formatNumber value="${view.productPrice_ja - view.productPrice_ja * (view.sale * 0.01)}" pattern="###,###,###" />円"
+                                    + "</h5>"
+                                    + "<p>${view.productDescription_ja}</p>";
                                 $(".langProduct").html(str);
                             }
                         </script>

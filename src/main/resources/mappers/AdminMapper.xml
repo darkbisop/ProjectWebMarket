@@ -12,22 +12,26 @@
     <!-- 상품 등록 -->
     <insert id="register">
         insert into product (productName, categoryCode, productPrice, productStock,
-                             productDescription, regdate, productImage, productThumbnail, sale)
+                             productDescription, regdate, productImage, productThumbnail, sale,
+                             productName_ja, productPrice_ja, productDescription_ja)
                     values (#{productName}, #{categoryCode}, #{productPrice},
-                            #{productStock}, #{productDescription}, sysdate(), #{productImage}, #{productThumbnail}, #{sale})
+                            #{productStock}, #{productDescription}, sysdate(), #{productImage}, #{productThumbnail}, #{sale},
+                            #{productName_ja}, #{productPrice_ja}, #{productDescription_ja})
     </insert>
 
     <!-- 상품 목록 -->
     <select id="productList" resultType="com.my.model.ProductVO">
         select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef, c.categoryName,
-               productPrice, productStock, productDescription, regdate, p.productImage, p.productThumbnail, p.sale
+               productPrice, productStock, productDescription, regdate, p.productImage, p.productThumbnail, p.sale,
+               p.productName_ja, p.productPrice_ja, p.productDescription_ja
         from product p inner join product_category c on p.categoryCode = c.categoryCode order by p.productNum desc
     </select>
 
     <!-- 상품 조회 -->
     <select id="productView" resultType="com.my.model.ProductVO">
         select p.productNum, p.productName, c.categoryCode, c.categoryCodeRef,
-               c.categoryName, productPrice, productStock, productDescription, regdate, p.productImage, p.productThumbnail, p.sale
+               c.categoryName, productPrice, productStock, productDescription, regdate, p.productImage, p.productThumbnail, p.sale,
+               p.productName_ja, p.productPrice_ja, p.productDescription_ja
         from product p inner join product_category c on p.categoryCode = c.categoryCode where p.productNum = #{productNum}
     </select>
 
@@ -40,7 +44,10 @@
                            productDescription = #{productDescription},
                            productImage = #{productImage},
                            productThumbnail = #{productThumbnail},
-                           sale = #{sale}
+                           sale = #{sale},
+                           productName_ja = #{productName_ja},
+                           productPrice_ja = #{productPrice_ja},
+                           productDescription_ja = #{productDescription_ja}
                 where productNum = #{productNum}
     </update>
 

@@ -39,8 +39,18 @@
         </div>
 
         <div class="input_Area">
+            <label for="productName_ja"><spring:message code="message.admin.ProductName" /></label>
+            <input type="text" id="productName_ja" name="productName_ja" value="${product.productName_ja}"/>
+        </div>
+
+        <div class="input_Area">
             <label for="productPrice"><spring:message code="message.admin.ProductPrice" /></label>
             <input type="text" id="productPrice" name="productPrice" value="${product.productPrice}"/>
+        </div>
+
+        <div class="input_Area">
+            <label for="productPrice_ja"><spring:message code="message.admin.ProductPrice" /></label>
+            <input type="text" id="productPrice_ja" name="productPrice_ja" value="${product.productPrice_ja}"/>
         </div>
 
         <div class="input_Area">
@@ -51,6 +61,11 @@
         <div class="input_Area">
             <label for="productDescription"><spring:message code="message.admin.ProductDesc" /></label>
             <textarea rows="5" cols="50" id="productDescription" name="productDescription">${product.productDescription}</textarea>
+        </div>
+
+        <div class="input_Area">
+            <label for="productDescription_ja"><spring:message code="message.admin.ProductDesc" /></label>
+            <textarea rows="5" cols="50" id="productDescription_ja" name="productDescription_ja">${product.productDescription_ja}</textarea>
         </div>
 
         <div class="input_Area">

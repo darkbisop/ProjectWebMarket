@@ -121,7 +121,7 @@
                                     if (window.location.href.indexOf("?lang=ko") > -1) {
                                         $(".langProduct").html("<b>${list.productName}</b>");
                                     } else  if (window.location.href.indexOf("?lang=ja") > -1) {
-                                        $(".langProduct").html("<b>チョコチョコケーキ</b>");
+                                        $(".langProduct").html("<b>ddddddddddddd</b>");
                                     }
                                 </script>
                             </h5>
@@ -132,7 +132,7 @@
                                     if (window.location.href.indexOf("?lang=ko") > -1) {
                                         $(".productPrice").html("<fmt:formatNumber value="${list.productPrice - list.productPrice * (list.sale * 0.01)}" pattern="###,###,###" />원");
                                     } else  if (window.location.href.indexOf("?lang=ja") > -1) {
-                                        $(".productPrice").html("<fmt:formatNumber value="${list.productPrice - list.productPrice * (list.sale * 0.01)}" pattern="###,###,###" />円");
+                                        $(".productPrice").html("<fmt:formatNumber value="${list.productPrice_ja - list.productPrice_ja * (list.sale * 0.01)}" pattern="###,###,###" />円");
                                     }
                                 </script>
                             </h5>
@@ -144,7 +144,7 @@
                                     if (window.location.href.indexOf("?lang=ko") > -1) {
                                         $(".salePrice").html("<del>${list.productPrice}원</del>");
                                     } else  if (window.location.href.indexOf("?lang=ja") > -1) {
-                                        $(".salePrice").html("<del>${list.productPrice}円</del>");
+                                        $(".salePrice").html("<del>${list.productPrice_ja}円</del>");
                                     }
                                 </script>
                             </h5>

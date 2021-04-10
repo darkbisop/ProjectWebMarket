@@ -41,8 +41,18 @@
         </div>
 
         <div class="input_Area">
+            <label><spring:message code="message.admin.ProductName" /></label>
+            <span>${product.productName_ja}</span>
+        </div>
+
+        <div class="input_Area">
             <label><spring:message code="message.admin.ProductPrice" /></label>
             <span><fmt:formatNumber value="${product.productPrice}" pattern="###,###,###" /></span>
+        </div>
+
+        <div class="input_Area">
+            <label><spring:message code="message.admin.ProductPrice" /></label>
+            <span><fmt:formatNumber value="${product.productPrice_ja}" pattern="###,###,###" /></span>
         </div>
 
         <div class="input_Area">
@@ -58,6 +68,11 @@
         <div class="input_Area">
             <label><spring:message code="message.admin.ProductDesc" /></label>
             <span>${product.productDescription}</span>
+        </div>
+
+        <div class="input_Area">
+            <label><spring:message code="message.admin.ProductDesc" /></label>
+            <span>${product.productDescription_ja}</span>
         </div>
 
         <div class="input_Area">
