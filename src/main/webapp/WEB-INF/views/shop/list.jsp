@@ -128,25 +128,27 @@
                                 </script>
                             </h5>
                             <p></p>
-                            <h5 class="item_price productPrice" align="center">
-                                <fmt:formatNumber value="${list.productPrice - list.productPrice * (list.sale * 0.01)}" pattern="###,###,###" />円
+                            <h5 class="item_price" align="center">
+                                <b class="productPrice">
+                                    <fmt:formatNumber value="${list.productPrice - list.productPrice * (list.sale * 0.01)}" pattern="###,###,###" />円
+                                </b>
                                 <script>
                                     if (window.location.href.indexOf("?lang=ko") > -1) {
-                                        $(".productPrice").html("<fmt:formatNumber value="${list.productPrice - list.productPrice * (list.sale * 0.01)}" pattern="###,###,###" />원");
+                                        $(".productPrice").replaceWith("<fmt:formatNumber value="${list.productPrice - list.productPrice * (list.sale * 0.01)}" pattern="###,###,###" />원");
                                     } else  if (window.location.href.indexOf("?lang=ja") > -1) {
-                                        $(".productPrice").html("<fmt:formatNumber value="${list.productPrice_ja - list.productPrice_ja * (list.sale * 0.01)}" pattern="###,###,###" />円");
+                                        $(".productPrice").replaceWith("<fmt:formatNumber value="${list.productPrice_ja - list.productPrice_ja * (list.sale * 0.01)}" pattern="###,###,###" />円");
                                     }
                                 </script>
                             </h5>
                             <br>
-                            <h5 align="center" class="salePrice">
-                                <del>${list.productPrice}円</del>
+                            <h5 align="center">
+                                <del class="salePrice">${list.productPrice}円</del>
                                 [${list.sale}% Off]
                                 <script>
                                     if (window.location.href.indexOf("?lang=ko") > -1) {
-                                        $(".salePrice").html("<del>${list.productPrice}원</del>");
+                                        $(".salePrice").replaceWith("<del>${list.productPrice}원</del>");
                                     } else  if (window.location.href.indexOf("?lang=ja") > -1) {
-                                        $(".salePrice").html("<del>${list.productPrice_ja}円</del>");
+                                        $(".salePrice").replaceWith("<del>${list.productPrice_ja}円</del>");
                                     }
                                 </script>
                             </h5>
