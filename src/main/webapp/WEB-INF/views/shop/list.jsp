@@ -118,11 +118,13 @@
                             <h5 align="center">
                                 <b class="langProduct">${list.productName}</b>
                                 <script>
-                                    if (window.location.href.indexOf("?lang=ko") > -1) {
-                                        $(".langProduct").html("<b>${list.productName}</b>");
-                                    } else  if (window.location.href.indexOf("?lang=ja") > -1) {
-                                        $(".langProduct").html("<b>ddddddddddddd</b>");
-                                    }
+                                    $(".langProduct").each(function () {
+                                        if (window.location.href.indexOf("?lang=ko") > -1) {
+                                            $(".langProduct").replaceWith("<b>${list.productName}</b>");
+                                        } else if (window.location.href.indexOf("?lang=ja") > -1) {
+                                            $(".langProduct").replaceWith("<b>${list.productName_ja}</b>");
+                                        }
+                                    });
                                 </script>
                             </h5>
                             <p></p>
