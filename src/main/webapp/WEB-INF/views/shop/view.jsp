@@ -154,9 +154,9 @@
 
                         <div class="prdt-info-grid">
                             <ul>
-                                <li class="categoryName">- <span>종류 : </span>${view.categoryName}</li>
-                                <li class="productStock">- <span>재고 : </span>${view.productStock}EA</li>
-                                <li class="cartStock">- <span>구매 수량 : </span>
+                                <li class="categoryName">- <span><spring:message code="message.admin.category.1" /> : </span>${view.categoryName}</li>
+                                <li class="productStock">- <span><spring:message code="message.view.ProductStock" /> : </span>${view.productStock}EA</li>
+                                <li class="cartStock">- <span><spring:message code="message.view.ProductBuyNum" /> : </span>
                                     <input type="number" class="inputStock" min="1" maxlength="${view.productStock}" value="1" />
                                 </li>
                             </ul>
