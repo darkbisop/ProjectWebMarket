@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,17 +64,17 @@
                 <c:choose>
                     <c:when test="${member != null}">
                         <div class="login_success_area">
-                            <span>회원 : ${member.memberName}</span><br/>
+                            <span><spring:message code="message.view.userName" /> : ${member.memberName}</span><br/>
                         </div>
                     </c:when>
                     <c:when test="${kakaoMember != null}">
                         <div class="login_success_area">
-                            <span>회원 : ${kakaoMember}</span>
+                            <span><spring:message code="message.view.userName" /> : ${kakaoMember}</span>
                         </div>
                     </c:when>
                     <c:when test="${googleMember != null}">
                         <div class="login_success_area">
-                            <span>회원 : ${googleMember}</span>
+                            <span><spring:message code="message.view.userName" /> : ${googleMember}</span>
                         </div>
                     </c:when>
                 </c:choose>
@@ -137,27 +138,25 @@
                                     + "<h4>" + "<del>" + ${view.productPrice} + "원" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
                                     + "<h5>" +
                                             "<fmt:formatNumber value="${view.productPrice - view.productPrice * (view.sale * 0.01)}" pattern="###,###,###" />원"
-                                    + "</h5>"
-                                    + "<p>${view.productDescription}</p>";
+                                    + "</h5>";
 
                                 $(".langProduct").html(str);
                             } else  if (window.location.href.indexOf("?lang=ja") > -1) {
                                 let str = "";
-                                str += "<h4>${view.productName_ja}</h4>"
-                                    + "<h4>" + "<del>" + ${view.productPrice_ja} + "円" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
+                                str += "<h4>チョコチョコケーキ</h4>"
+                                    + "<h4>" + "<del>" + ${view.productPrice} + "EN" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
                                     + "<h5>" +
-                                    "<fmt:formatNumber value="${view.productPrice_ja - view.productPrice_ja * (view.sale * 0.01)}" pattern="###,###,###" />円"
-                                    + "</h5>"
-                                    + "<p>${view.productDescription_ja}</p>";
+                                    "<fmt:formatNumber value="${view.productPrice - view.productPrice * (view.sale * 0.01)}" pattern="###,###,###" />EN"
+                                    + "</h5>";
                                 $(".langProduct").html(str);
                             }
                         </script>
 
                         <div class="prdt-info-grid">
                             <ul>
-                                <li class="categoryName">- <span>종류 : </span>${view.categoryName}</li>
-                                <li class="productStock">- <span>재고 : </span>${view.productStock}EA</li>
-                                <li class="cartStock">- <span>구매 수량 : </span>
+                                <li class="categoryName">- <span><spring:message code="message.admin.category.1" /> : </span>${view.categoryName}</li>
+                                <li class="productStock">- <span><spring:message code="message.view.ProductBuyNum" /> : </span>${view.productStock}EA</li>
+                                <li class="cartStock">- <span><spring:message code="message.view.ProductStock" /> : </span>
                                     <input type="number" class="inputStock" min="1" maxlength="${view.productStock}" value="1" />
                                 </li>
                             </ul>

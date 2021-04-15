@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,17 +22,17 @@
     <c:choose>
         <c:when test="${member != null}">
             <div class="login_success_area">
-                <span>회원 : ${member.memberName}</span><br/>
+                <span><spring:message code="message.view.userName" /> : ${member.memberName}</span><br/>
             </div>
         </c:when>
         <c:when test="${kakaoMember != null}">
             <div class="login_success_area">
-                <span>회원 : ${kakaoMember}</span>
+                <span><spring:message code="message.view.userName" /> : ${kakaoMember}</span>
             </div>
         </c:when>
         <c:when test="${googleMember != null}">
             <div class="login_success_area">
-                <span>회원 : ${googleMember}</span>
+                <span><spring:message code="message.view.userName" /> : ${googleMember}</span>
             </div>
         </c:when>
     </c:choose>

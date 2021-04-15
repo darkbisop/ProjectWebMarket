@@ -40,7 +40,7 @@
         </div>
 
         <div class="input_Area">
-            <label for="productName_ja"><spring:message code="message.admin.ProductName" /></label>
+            <label for="productName_ja">商品名</label>
             <input type="text" id="productName_ja" name="productName_ja" />
         </div>
 
@@ -50,7 +50,7 @@
         </div>
 
         <div class="input_Area">
-            <label for="productPrice_ja"><spring:message code="message.admin.ProductPrice" /></label>
+            <label for="productPrice_ja">商品の値段</label>
             <input type="text" id="productPrice_ja" name="productPrice_ja" />
         </div>
 
@@ -65,7 +65,7 @@
         </div>
 
         <div class="input_Area">
-            <label for="productDescription_ja"><spring:message code="message.admin.ProductDesc" /></label>
+            <label for="productDescription_ja">商品のご紹介</label>
             <textarea rows="5" cols="50" id="productDescription_ja" name="productDescription_ja"></textarea>
         </div>
 
