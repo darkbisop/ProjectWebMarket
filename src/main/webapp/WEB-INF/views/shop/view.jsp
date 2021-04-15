@@ -24,7 +24,6 @@
                         + "<span class='date'>" + replyDate + "</span>"
                         + "</div>"
                         + "<div class='replyContent'>" + this.replyContent + "</div>"
-
                         + "<c:if test="${member != null or googleMember != null or kakaoMember != null}">"
                         + "<div class='replyFooter'>"
                         + "<button type='button' class='update' data-replyNum='" + this.replyNum + "'>수정</button>"
@@ -137,26 +136,27 @@
                                 str += "<h4>${view.productName}</h4>"
                                     + "<h4>" + "<del>" + ${view.productPrice} + "원" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
                                     + "<h5>" +
-                                            "<fmt:formatNumber value="${view.productPrice - view.productPrice * (view.sale * 0.01)}" pattern="###,###,###" />원"
-                                    + "</h5>";
-
+                                    "<fmt:formatNumber value="${view.productPrice - view.productPrice * (view.sale * 0.01)}" pattern="###,###,###" />원"
+                                    + "</h5>"
+                                    + "<p>${view.productDescription}</p>";
                                 $(".langProduct").html(str);
                             } else  if (window.location.href.indexOf("?lang=ja") > -1) {
                                 let str = "";
-                                str += "<h4>チョコチョコケーキ</h4>"
-                                    + "<h4>" + "<del>" + ${view.productPrice} + "EN" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
+                                str += "<h4>${view.productName_ja}</h4>"
+                                    + "<h4>" + "<del>" + ${view.productPrice_ja} + "円" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
                                     + "<h5>" +
-                                    "<fmt:formatNumber value="${view.productPrice - view.productPrice * (view.sale * 0.01)}" pattern="###,###,###" />EN"
-                                    + "</h5>";
+                                    "<fmt:formatNumber value="${view.productPrice_ja - view.productPrice_ja * (view.sale * 0.01)}" pattern="###,###,###" />円"
+                                    + "</h5>"
+                                    + "<p>${view.productDescription_ja}</p>";
                                 $(".langProduct").html(str);
                             }
                         </script>
 
                         <div class="prdt-info-grid">
                             <ul>
-                                <li class="categoryName">- <span><spring:message code="message.admin.category.1" /> : </span>${view.categoryName}</li>
-                                <li class="productStock">- <span><spring:message code="message.view.ProductBuyNum" /> : </span>${view.productStock}EA</li>
-                                <li class="cartStock">- <span><spring:message code="message.view.ProductStock" /> : </span>
+                                <li class="categoryName">- <span>종류 : </span>${view.categoryName}</li>
+                                <li class="productStock">- <span>재고 : </span>${view.productStock}EA</li>
+                                <li class="cartStock">- <span>구매 수량 : </span>
                                     <input type="number" class="inputStock" min="1" maxlength="${view.productStock}" value="1" />
                                 </li>
                             </ul>
@@ -177,7 +177,6 @@
                                         productThumbnail : productThumbnail,
                                         cartStock : cartStock
                                     };
-
                                     $.ajax({
                                         url : "${pageContext.request.contextPath}/shop/view/addCart?pN=" + productName,
                                         type : "post",
@@ -218,16 +217,13 @@
 
                                             <script>
                                                 $("#reply_btn").click (function () {
-
                                                     const productNum = $("#productNum").val();
                                                     const replyContent = $("#replyContent").val();
                                                     const replyConfirm = confirm("등록하시겠습니까?");
-
                                                     const data = {
                                                         productNum : productNum,
                                                         replyContent : replyContent
                                                     };
-
                                                     if (replyConfirm) {
                                                         if (replyContent !== "") {
                                                             $.ajax({
@@ -278,9 +274,7 @@
                                             currId = $(this).val();
                                         }
                                     });
-
                                     const spanID = $(this).parent().parent().find(".userName").text();
-
                                     if (currId === spanID) {
                                         $(".replyModal").fadeIn(200);
                                         var replyNum = $(this).attr("data-replyNum");
@@ -290,16 +284,11 @@
                                     } else {
                                         alert("작성자 본인만 수정 가능합니다");
                                     }
-
                                 });
-
                                 $(document).on("click", ".delete", function () {
-
                                     let deleteConfirm = confirm("정말로 삭제하시겠습니까?");
-
                                     if (deleteConfirm) {
                                         let data = { replyNum : $(this).attr("data-replyNum")};
-
                                         $.ajax({
                                             url : "${pageContext.request.contextPath}/shop/view/deleteReply",
                                             type : "post",
@@ -341,7 +330,6 @@
         <script>
             $(".modal_update_btn").click(function(){
                 var modifyConfirm = confirm("정말로 수정하시겠습니까?");
-
                 if(modifyConfirm) {
                     var data = {
                         replyNum : $(this).attr("data-replyNum"),
@@ -352,7 +340,6 @@
                         type : "post",
                         data : data,
                         success : function(result){
-
                             if(result === 1) {
                                 replyList();
                                 $(".replyModal").fadeOut(200);
@@ -366,7 +353,6 @@
                     });
                 }
             });
-
             $(".modal_cancel_btn").click(function () {
                 $(".replyModal").fadeOut(200);
             })
