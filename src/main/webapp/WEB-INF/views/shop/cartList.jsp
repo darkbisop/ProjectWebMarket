@@ -29,6 +29,33 @@
                 }
             });
         });
+
+        function deleteAllProduct() {
+            const productName = $(this).parent().parent().find(".goodsName").val();
+            console.log(productName);
+            const data = {
+                productName : productName
+            };
+
+            if (confirm("상품을 모두 삭제하시겠습니까?")) {
+                $.ajax({
+                    url : "${pageContext.request.contextPath}/shop/view/deleteAllCart",
+                    type : "post",
+                    data : data,
+                    success : function (result) {
+                        if (result === 1) {
+                            alert("모든 상품을 삭제하였습니다");
+                            window.location.reload();
+                        } else if (result === 2) {
+                            alert("상품이 존재 하지 않습니다.");
+                        }
+                    },
+                    error : function () {
+                        alert("삭제 하는데 실패하였습니다.")
+                    }
+                });
+            }
+        }
     </script>
 </head>
 <body>
@@ -49,11 +76,45 @@
         </div>
         <div class="cart box_1">
             <a href="${pageContext.request.contextPath}/shop/cartList">
-                <%@ include file="../include/loginArea.jsp"%>
-                <%@ include file="../include/logOut.jsp"%>
+                <c:if test="${member == null and kakaoMember == null and googleMember == null}">
+                    <div class="login_button"><a href="${pageContext.request.contextPath}/member/login">Login</a></div>
+                    <span><a href="${pageContext.request.contextPath}/member/signUp">SignUp</a></span>
+                </c:if>
+
+                <c:choose>
+                    <c:when test="${member != null}">
+                        <div class="login_success_area">
+                            <span><spring:message code="message.view.userName" /> : ${member.memberName}</span><br/>
+                        </div>
+                    </c:when>
+                    <c:when test="${kakaoMember != null}">
+                        <div class="login_success_area">
+                            <span><spring:message code="message.view.userName" /> : ${kakaoMember}</span>
+                        </div>
+                    </c:when>
+                    <c:when test="${googleMember != null}">
+                        <div class="login_success_area">
+                            <span><spring:message code="message.view.userName" /> : ${googleMember}</span>
+                        </div>
+                    </c:when>
+                </c:choose>
+
+                <c:if test="${member != null or kakaoMember != null or googleMember != null}">
+                    <span id="message"><img src="${pageContext.request.contextPath}/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px"> : </span>
+                    <fmt:formatNumber pattern="###,###,###" value="${total}"/> (${stock})
+                    <script>
+                        function calcTotal(total, stock) {
+                            let calcTotal = "";
+                            calcTotal += "<span>" + " : " + total + " " + "(" + stock + ")" + "</span>";
+                            $("#message").html(calcTotal);
+                        }
+                    </script>
+                </c:if>
             </a>
-            <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+            <%@include file="../include/logOut.jsp"%>
+            <p><a href="javascript:void(0);" onclick="deleteAllProduct(); return false">Empty Cart</a></p>
             <div class="clearfix"> </div>
+            <!---->
         </div>
         <div class="clearfix"> </div>
         <!---->

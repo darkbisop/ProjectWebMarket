@@ -85,16 +85,14 @@
                         function calcTotal(total, stock) {
                             let calcTotal = "";
                             calcTotal += "<span>" + " : " + total + " " + "(" + stock + ")" + "</span>";
-                            $("#message").html(calcTotal);
+                            $("#message").replaceWith(calcTotal);
                         }
                     </script>
-                    <c:if test="${member != null or kakaoMember != null or googleMember != null}">
-                        <span id="message">${total}</span>
-                    </c:if>
                 </c:if>
             </a>
             <%@include file="../include/logOut.jsp"%>
-            <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+            <p> <script type="text/javascript" src="cartList.jsp"></script>
+                <a href="javascript:void(0);" onclick="deleteAllProduct(); return false">Empty Cart</a></p>
             <div class="clearfix"> </div>
         </div>
         <div class="clearfix"> </div>
@@ -110,6 +108,7 @@
             <input type="hidden" class="productName" value="${view.productName}">
             <input type="hidden" class="productPrice" value="${view.productPrice}">
             <input type="hidden" class="productThumbnail" value="${view.productThumbnail}">
+            <input type="hidden" class="sale" value="${view.sale}">
         </form>
         <div class="product-price1">
             <div class="top-sing">
@@ -170,13 +169,16 @@
                                     const productPrice = $(".productPrice").val();
                                     const productThumbnail = $(".productThumbnail").val();
                                     const cartStock = $(".inputStock").val();
+                                    const sale = $(".sale").val();
                                     const data = {
                                         productNum : productNum,
                                         productName : productName,
                                         productPrice : productPrice,
                                         productThumbnail : productThumbnail,
-                                        cartStock : cartStock
+                                        cartStock : cartStock,
+                                        sale : sale
                                     };
+                                    console.log(data);
                                     $.ajax({
                                         url : "${pageContext.request.contextPath}/shop/view/addCart?pN=" + productName,
                                         type : "post",
@@ -186,6 +188,7 @@
                                                 alert("장바구니에 담았습니다.");
                                                 $(".inputStock").val();
                                                 calcTotal(retVal.total, retVal.stock);
+                                                window.location.load();
                                             } else {
                                                 alert("회원만 사용할 수 있습니다.")
                                             }
@@ -201,7 +204,7 @@
                         <hr>
                         <div id="reply">
                             <c:if test="${member == null and kakaoMember == null and googleMember == null}">
-                                <p>소감을 남기시려면 <a href="${pageContext.request.contextPath}/member/login">로그인</a>해주세요</p>
+                                <p><spring:message code="message.view.Comment.1" /> <a href="${pageContext.request.contextPath}/member/login"><spring:message code="message.view.Comment.2" /></a><spring:message code="message.view.Comment.3" /></p>
                             </c:if>
 
                             <c:if test="${member != null or kakaoMember != null or googleMember != null}">
@@ -213,7 +216,7 @@
                                         </div>
 
                                         <div class="input_area">
-                                            <button type="button" id="reply_btn">소감 남기기기</button>
+                                            <button type="button" id="reply_btn"><spring:message code="message.view.Comment.4" /></button>
 
                                             <script>
                                                 $("#reply_btn").click (function () {

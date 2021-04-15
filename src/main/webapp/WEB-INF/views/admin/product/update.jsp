@@ -34,22 +34,22 @@
         </label>
 
         <div class="input_Area">
-            <label for="productName"><spring:message code="message.admin.ProductName" /></label>
+            <label for="productName">상품명</label>
             <input type="text" id="productName" name="productName" value="${product.productName}"/>
         </div>
 
         <div class="input_Area">
-            <label for="productName_ja"><spring:message code="message.admin.ProductName" /></label>
+            <label for="productName_ja">商品名</label>
             <input type="text" id="productName_ja" name="productName_ja" value="${product.productName_ja}"/>
         </div>
 
         <div class="input_Area">
-            <label for="productPrice"><spring:message code="message.admin.ProductPrice" /></label>
+            <label for="productPrice">상품 가격</label>
             <input type="text" id="productPrice" name="productPrice" value="${product.productPrice}"/>
         </div>
 
         <div class="input_Area">
-            <label for="productPrice_ja"><spring:message code="message.admin.ProductPrice" /></label>
+            <label for="productPrice_ja">商品の値段</label>
             <input type="text" id="productPrice_ja" name="productPrice_ja" value="${product.productPrice_ja}"/>
         </div>
 
@@ -59,12 +59,12 @@
         </div>
 
         <div class="input_Area">
-            <label for="productDescription"><spring:message code="message.admin.ProductDesc" /></label>
+            <label for="productDescription">상품 설명</label>
             <textarea rows="5" cols="50" id="productDescription" name="productDescription">${product.productDescription}</textarea>
         </div>
 
         <div class="input_Area">
-            <label for="productDescription_ja"><spring:message code="message.admin.ProductDesc" /></label>
+            <label for="productDescription_ja">商品のご紹介</label>
             <textarea rows="5" cols="50" id="productDescription_ja" name="productDescription_ja">${product.productDescription_ja}</textarea>
         </div>
 

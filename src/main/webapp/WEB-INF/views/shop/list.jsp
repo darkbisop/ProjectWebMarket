@@ -74,13 +74,14 @@
                             $("#message").html(calcTotal);
                         }
                     </script>
-                    <c:if test="${member != null or kakaoMember != null or googleMember != null}">
-                        <span id="message">${total}</span>
-                    </c:if>
                 </c:if>
             </a>
             <%@include file="../include/logOut.jsp"%>
-            <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+            <script src="cartList.jsp"></script>
+            <script>
+                deleteAllProduct();
+            </script>
+            <p><a href="javascript:void(0);" onclick="deleteAllProduct(); return false">Empty Cart</a></p>
             <div class="clearfix"> </div>
         <!---->
         </div>

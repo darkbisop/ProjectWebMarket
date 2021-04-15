@@ -10,15 +10,15 @@
 </head>
 <body>
 <ul class="memenu skyblue"><li class="active"><a href="${pageContext.request.contextPath}/index">Home</a></li>
-    <li class="grid"><a href="${pageContext.request.contextPath}/shop/list?c=100&l=1">Products</a>
+    <li class="grid"><a href="${pageContext.request.contextPath}/shop/list?c=100&l=1&?lang=ja">Products</a>
         <div class="mepanel">
             <div class="row">
                 <div class="col1 me-one">
-                    <h4><a href="${pageContext.request.contextPath}/shop/list?c=100&l=1">Cake</a></h4>
+                    <h4><a href="${pageContext.request.contextPath}/shop/list?c=100&l=1&?lang=ja">Cake</a></h4>
                     <ul>
-                        <li><a href="${pageContext.request.contextPath}/shop/list?c=101&l=2"><spring:message code="message.aside.category.1" /></a></li>
-                        <li><a href="${pageContext.request.contextPath}/shop/list?c=102&l=2"><spring:message code="message.aside.category.2" /></a></li>
-                        <li><a href="${pageContext.request.contextPath}/shop/list?c=103&l=2"><spring:message code="message.aside.category.3" /></a></li>
+                        <li><a href="${pageContext.request.contextPath}/shop/list?c=101&l=2&?lang=ja"><spring:message code="message.aside.category.1" /></a></li>
+                        <li><a href="${pageContext.request.contextPath}/shop/list?c=102&l=2&?lang=ja"><spring:message code="message.aside.category.2" /></a></li>
+                        <li><a href="${pageContext.request.contextPath}/shop/list?c=103&l=2&?lang=ja"><spring:message code="message.aside.category.3" /></a></li>
                     </ul>
                 </div>
                 <div class="col1 me-one">

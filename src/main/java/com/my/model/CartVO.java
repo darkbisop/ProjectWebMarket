@@ -1,6 +1,5 @@
 package com.my.model;
 import java.util.Date;
-import java.util.List;
 
 public class CartVO {
 
@@ -15,6 +14,7 @@ public class CartVO {
 
     private int productPrice;
     private String productThumbnail;
+    private int sale;
     private int totalPrice;
 
     public int getCartNum() {
@@ -79,6 +79,9 @@ public class CartVO {
     public void setProductThumbnail(String productThumbnail) {
         this.productThumbnail = productThumbnail;
     }
+
+    public int getSale() { return sale; }
+    public void setSale(int sale) { this.sale = sale; }
 
     public int getTotalPrice() { return totalPrice; }
     public void setTotalPrice(int totalPrice) { this.totalPrice = totalPrice; }

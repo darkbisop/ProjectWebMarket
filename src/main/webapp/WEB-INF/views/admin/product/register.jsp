@@ -35,7 +35,7 @@
         </label>
 
         <div class="input_Area">
-            <label for="productName"><spring:message code="message.admin.ProductName" /></label>
+            <label for="productName">상품명</label>
             <input type="text" id="productName" name="productName" />
         </div>
 
@@ -45,7 +45,7 @@
         </div>
 
         <div class="input_Area">
-            <label for="productPrice"><spring:message code="message.admin.ProductPrice" /></label>
+            <label for="productPrice">상품 가격</label>
             <input type="text" id="productPrice" name="productPrice" />
         </div>
 
@@ -55,12 +55,12 @@
         </div>
 
         <div class="input_Area">
-            <label for="productStock"><spring:message code="message.admin.ProductStocks" /></label>
+            <label for="productStock">상품 재고</label>
             <input type="text" id="productStock" name="productStock" />
         </div>
 
         <div class="input_Area">
-            <label for="productDescription"><spring:message code="message.admin.ProductDesc" /></label>
+            <label for="productDescription">상품 설명</label>
             <textarea rows="5" cols="50" id="productDescription" name="productDescription"></textarea>
         </div>
 

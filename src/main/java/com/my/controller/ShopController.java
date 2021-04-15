@@ -1,13 +1,10 @@
 package com.my.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.my.model.CartVO;
 import com.my.model.MemberVO;
 import com.my.model.ProductVO;
 import com.my.model.ReplyVO;
 import com.my.service.ShopService;
-import net.sf.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -217,7 +214,9 @@ public class ShopController {
         }
 
         for (int i = 0; i < cartList.size(); i++) {
-            total = total + cartList.get(i).getProductPrice() * cartList.get(i).getCartStock();
+            double salePrice = cartList.get(i).getProductPrice() * (cartList.get(i).getSale() * 0.01);
+            int productPrice = (cartList.get(i).getProductPrice() - (int)salePrice) * cartList.get(i).getCartStock();
+            total = total + productPrice;
             cartList.get(i).setTotalPrice(total);
             stock =  stock + cartList.get(i).getCartStock();
         }
@@ -263,6 +262,31 @@ public class ShopController {
                     result = 1;
                 }
             }
+        }
+
+        session.setAttribute("total", totalPrice);
+        session.setAttribute("stock", totalStock);
+
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/view/deleteAllCart", method = {RequestMethod.POST, RequestMethod.GET})
+    public int deleteAllCart(HttpSession session) throws Exception {
+        logger.info("delete Cart");
+        int result = 0;
+        int totalPrice = (int) session.getAttribute("total");
+        int totalStock = (int) session.getAttribute("stock");
+
+        ArrayList<CartVO> cartList = (ArrayList<CartVO>) session.getAttribute("cartList");
+
+        if (cartList != null) {
+            cartList.clear();
+            result = 1;
+            totalPrice = 0;
+            totalStock = 0;
+        } else {
+            result = 2;
         }
 
         session.setAttribute("total", totalPrice);
