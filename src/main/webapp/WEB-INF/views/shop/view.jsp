@@ -50,8 +50,8 @@
         </div>
         <!---->
         <div class="lang-box">
-            <a href="${pageContext.request.contextPath}/shop/view?n=${view.productNum}&?lang=ko" style="color:red;">한국어</a> /
-            <a href="${pageContext.request.contextPath}/shop/view?n=${view.productNum}&?lang=ja" style="color:red;">日本語</a>
+            <a href="${pageContext.request.contextPath}/shop/view?n=${view.productNum}&lang=ko" style="color:red;">한국어</a> /
+            <a href="${pageContext.request.contextPath}/shop/view?n=${view.productNum}&lang=ja" style="color:red;">日本語</a>
         </div>
         <div class="cart box_1">
             <a href="${pageContext.request.contextPath}/shop/cartList">
@@ -79,8 +79,8 @@
                 </c:choose>
 
                 <c:if test="${member != null or kakaoMember != null or googleMember != null}">
-                    <span id="message"><img src="${pageContext.request.contextPath}/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px"> : </span>
-                    <fmt:formatNumber pattern="###,###,###" value="${total}"/> (${stock})
+                    <img src="${pageContext.request.contextPath}/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px"> :
+                    <span id="message"><fmt:formatNumber pattern="###,###,###" value="${total}"/> (${stock})</span>
                     <script>
                         function calcTotal(total, stock) {
                             let calcTotal = "";
@@ -130,7 +130,7 @@
                         </h5>
                         <p class="productDescription">${view.productDescription}</p>
                         <script>
-                            if (window.location.href.indexOf("?lang=ko") > -1) {
+                            if (window.location.href.indexOf("lang=ko") > -1) {
                                 let str = "";
                                 str += "<h4>${view.productName}</h4>"
                                     + "<h4>" + "<del>" + ${view.productPrice} + "원" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"
@@ -139,7 +139,7 @@
                                     + "</h5>"
                                     + "<p>${view.productDescription}</p>";
                                 $(".langProduct").html(str);
-                            } else  if (window.location.href.indexOf("?lang=ja") > -1) {
+                            } else  if (window.location.href.indexOf("lang=ja") > -1) {
                                 let str = "";
                                 str += "<h4>${view.productName_ja}</h4>"
                                     + "<h4>" + "<del>" + ${view.productPrice_ja} + "円" + "</del>" + " " + "[" + ${view.sale} + "% Off]" + "</h4>"

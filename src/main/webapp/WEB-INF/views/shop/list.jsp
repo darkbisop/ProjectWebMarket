@@ -35,8 +35,8 @@
                 const testUrl = url;
                 const subUrl = url.substr(0, 64);
 
-                document.getElementById("getURL").innerHTML = "<a href='" + subUrl + "&?lang=ko" + "' style='color: red'>한국어</a>";
-                document.getElementById("getURL_2").innerHTML = "<a href='" + subUrl + "&?lang=ja" + "' style='color: red'>日本語</a>";
+                document.getElementById("getURL").innerHTML = "<a href='" + subUrl + "&lang=ko" + "' style='color: red'>한국어</a>";
+                document.getElementById("getURL_2").innerHTML = "<a href='" + subUrl + "&lang=ja" + "' style='color: red'>日本語</a>";
             </script>
         </div>
         <div class="cart box_1">
@@ -121,9 +121,9 @@
                                 <b class="langProduct">${list.productName}</b>
                                 <script>
                                     $(".langProduct").each(function () {
-                                        if (window.location.href.indexOf("?lang=ko") > -1) {
+                                        if (window.location.href.indexOf("lang=ko") > -1) {
                                             $(".langProduct").replaceWith("<b>${list.productName}</b>");
-                                        } else if (window.location.href.indexOf("?lang=ja") > -1) {
+                                        } else if (window.location.href.indexOf("lang=ja") > -1) {
                                             $(".langProduct").replaceWith("<b>${list.productName_ja}</b>");
                                         }
                                     });
@@ -135,9 +135,9 @@
                                     <fmt:formatNumber value="${list.productPrice - list.productPrice * (list.sale * 0.01)}" pattern="###,###,###" />円
                                 </b>
                                 <script>
-                                    if (window.location.href.indexOf("?lang=ko") > -1) {
+                                    if (window.location.href.indexOf("lang=ko") > -1) {
                                         $(".productPrice").replaceWith("<fmt:formatNumber value="${list.productPrice - list.productPrice * (list.sale * 0.01)}" pattern="###,###,###" />원");
-                                    } else  if (window.location.href.indexOf("?lang=ja") > -1) {
+                                    } else  if (window.location.href.indexOf("lang=ja") > -1) {
                                         $(".productPrice").replaceWith("<fmt:formatNumber value="${list.productPrice_ja - list.productPrice_ja * (list.sale * 0.01)}" pattern="###,###,###" />円");
                                     }
                                 </script>
@@ -147,9 +147,9 @@
                                 <del class="salePrice">${list.productPrice}円</del>
                                 [${list.sale}% Off]
                                 <script>
-                                    if (window.location.href.indexOf("?lang=ko") > -1) {
+                                    if (window.location.href.indexOf("lang=ko") > -1) {
                                         $(".salePrice").replaceWith("<del>${list.productPrice}원</del>");
-                                    } else  if (window.location.href.indexOf("?lang=ja") > -1) {
+                                    } else  if (window.location.href.indexOf("lang=ja") > -1) {
                                         $(".salePrice").replaceWith("<del>${list.productPrice_ja}円</del>");
                                     }
                                 </script>

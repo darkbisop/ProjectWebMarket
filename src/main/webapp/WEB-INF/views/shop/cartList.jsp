@@ -169,7 +169,7 @@
                                 <li><p>Qty : ${cartList.cartStock}</p></li>
                             </ul>
                             <div class="delivery">
-                                <p>Service Charges : <fmt:formatNumber pattern="###,###,###" value="${cartList.productPrice * cartList.cartStock}"/></p>
+                                <p>Service Charges : <fmt:formatNumber pattern="###,###,###" value="${(cartList.productPrice - (cartList.productPrice * (cartList.sale * 0.01))) * cartList.cartStock}"/></p>
                                 <span>Delivered in 2-3 bussiness days</span>
                                 <div class="clearfix"></div>
                             </div>
