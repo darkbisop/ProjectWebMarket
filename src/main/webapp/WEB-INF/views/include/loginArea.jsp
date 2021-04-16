@@ -38,9 +38,38 @@
     </c:choose>
 
     <c:if test="${member != null or kakaoMember != null or googleMember != null}">
-        <span id="message"><img src="${pageContext.request.contextPath}/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px"> : </span>
-        <fmt:formatNumber pattern="###,###,###" value="${total}"/> (${stock})
+        <img src="${pageContext.request.contextPath}/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px"> :
+        <span id="message"><fmt:formatNumber pattern="###,###,###" value="${total}"/> (${stock})</span>
+        <a id="All_Delete_Btn">Empty</a>
     </c:if>
 </a>
+
+<script>
+    function resetTotal() {
+        let resetTotal = "";
+        resetTotal += "<span>" + 0 + " " + "(" + 0 + ")" + "</span>";
+        $("#message").html(resetTotal);
+    }
+
+    $("#All_Delete_Btn").click(function() {
+        if (confirm("상품을 모두 삭제하시겠습니까?")) {
+            $.ajax({
+                url : "${pageContext.request.contextPath}/shop/view/deleteAllCart",
+                type : "post",
+                success : function (result) {
+                    if (result === 1) {
+                        alert("모든 상품을 삭제하였습니다");
+                        resetTotal();
+                    } else if (result === 2) {
+                        alert("상품이 존재 하지 않습니다.");
+                    }
+                },
+                error : function () {
+                    alert("삭제 하는데 실패하였습니다.")
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>

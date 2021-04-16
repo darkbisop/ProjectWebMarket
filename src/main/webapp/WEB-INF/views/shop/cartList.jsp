@@ -75,44 +75,9 @@
             <a href="${pageContext.request.contextPath}/shop/cartList?lang=ja" style="color:red;">日本語</a>
         </div>
         <div class="cart box_1">
-            <a href="${pageContext.request.contextPath}/shop/cartList">
-                <c:if test="${member == null and kakaoMember == null and googleMember == null}">
-                    <div class="login_button"><a href="${pageContext.request.contextPath}/member/login">Login</a></div>
-                    <span><a href="${pageContext.request.contextPath}/member/signUp">SignUp</a></span>
-                </c:if>
-
-                <c:choose>
-                    <c:when test="${member != null}">
-                        <div class="login_success_area">
-                            <span><spring:message code="message.view.userName" /> : ${member.memberName}</span><br/>
-                        </div>
-                    </c:when>
-                    <c:when test="${kakaoMember != null}">
-                        <div class="login_success_area">
-                            <span><spring:message code="message.view.userName" /> : ${kakaoMember}</span>
-                        </div>
-                    </c:when>
-                    <c:when test="${googleMember != null}">
-                        <div class="login_success_area">
-                            <span><spring:message code="message.view.userName" /> : ${googleMember}</span>
-                        </div>
-                    </c:when>
-                </c:choose>
-
-                <c:if test="${member != null or kakaoMember != null or googleMember != null}">
-                    <span id="message"><img src="${pageContext.request.contextPath}/resources/lighting/images/cartImg.png" alt="" width="30px" height="30px"> : </span>
-                    <fmt:formatNumber pattern="###,###,###" value="${total}"/> (${stock})
-                    <script>
-                        function calcTotal(total, stock) {
-                            let calcTotal = "";
-                            calcTotal += "<span>" + " : " + total + " " + "(" + stock + ")" + "</span>";
-                            $("#message").html(calcTotal);
-                        }
-                    </script>
-                </c:if>
-            </a>
+            <%@include file="../include/loginArea.jsp"%>
+            <p></p>
             <%@include file="../include/logOut.jsp"%>
-            <p><a href="javascript:void(0);" onclick="deleteAllProduct(); return false">Empty Cart</a></p>
             <div class="clearfix"> </div>
             <!---->
         </div>

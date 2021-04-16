@@ -256,7 +256,9 @@ public class ShopController {
             for (int i = 0; i < cartList.size(); i++) {
                 CartVO product = cartList.get(i);
                 if (pN.equals(product.getProductName())) {
-                    totalPrice = totalPrice - (cartList.get(i).getProductPrice() * cartList.get(i).getCartStock());
+                    double salePrice = cartList.get(i).getProductPrice() * (cartList.get(i).getSale() * 0.01);
+                    int productPrice = (cartList.get(i).getProductPrice() - (int)salePrice) * cartList.get(i).getCartStock();
+                    totalPrice = totalPrice - productPrice;
                     totalStock = totalStock - cartList.get(i).getCartStock();
                     cartList.remove(cartList.get(i));
                     result = 1;
